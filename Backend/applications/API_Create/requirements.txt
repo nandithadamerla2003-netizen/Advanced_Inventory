@@ -1,4 +1,6 @@
-pandas
-scikit-learn
-joblib
+fastapi
+uvicorn
+mysql-connector-python
+kafka-python
 pytest
+python-multipart
