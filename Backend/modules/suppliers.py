@@ -1,49 +1,31 @@
-from database import get_connection
+from fastapi import APIRouter
+from database import cursor, db
 
-def get_suppliers():
+router = APIRouter()
 
-    conn = get_connection()
-
-    cursor = conn.cursor(
-        dictionary=True
-    )
+@router.post("/add-supplier")
+def add_supplier(
+        supplier_name: str,
+        contact: str,
+        location: str):
 
     cursor.execute(
-        "SELECT * FROM suppliers"
+        """
+        INSERT INTO suppliers
+        (supplier_name,contact,location)
+        VALUES(%s,%s,%s)
+        """,
+        (supplier_name, contact, location)
     )
 
-    data = cursor.fetchall()
+    db.commit()
 
-    conn.close()
-
-    return data
+    return {"message": "Supplier Added"}
 
 
-def add_supplier(
-        supplier_name,
-        phone,
-        email
-):
+@router.get("/suppliers")
+def get_suppliers():
 
-    conn = get_connection()
+    cursor.execute("SELECT * FROM suppliers")
 
-    cursor = conn.cursor()
-
-    cursor.execute("""
-    INSERT INTO suppliers
-    (
-        supplier_name,
-        phone,
-        email
-    )
-    VALUES(%s,%s,%s)
-    """,
-    (
-        supplier_name,
-        phone,
-        email
-    ))
-
-    conn.commit()
-
-    conn.close()
+    return cursor.fetchall()

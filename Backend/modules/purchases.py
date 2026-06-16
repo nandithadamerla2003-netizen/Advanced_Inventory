@@ -1,24 +1,32 @@
-from database import get_connection
+from fastapi import APIRouter
+from database import cursor, db
 
-def add_stock(
-        product_id,
-        quantity
-):
+router = APIRouter()
 
-    conn = get_connection()
+@router.post("/add-purchase")
+def add_purchase(
+        product_name: str,
+        quantity: int,
+        purchase_price: float):
 
-    cursor = conn.cursor()
+    cursor.execute(
+        """
+        INSERT INTO purchases
+        (product_name,quantity,purchase_price)
+        VALUES(%s,%s,%s)
+        """,
+        (product_name, quantity, purchase_price)
+    )
 
-    cursor.execute("""
-    UPDATE products
-    SET quantity = quantity + %s
-    WHERE product_id = %s
-    """,
-    (
-        quantity,
-        product_id
-    ))
+    cursor.execute(
+        """
+        UPDATE products
+        SET quantity = quantity+%s
+        WHERE product_name=%s
+        """,
+        (quantity, product_name)
+    )
 
-    conn.commit()
+    db.commit()
 
-    conn.close()
+    return {"message": "Purchase Added"}

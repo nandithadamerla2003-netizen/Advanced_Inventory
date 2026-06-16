@@ -5,6 +5,6 @@ client = TestClient(app)
 
 def test_inventory():
 
-    response = client.get("/")
+    response = client.get("/inventory")
 
     assert response.status_code == 200

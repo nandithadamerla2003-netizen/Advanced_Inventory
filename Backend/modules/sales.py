@@ -1,24 +1,32 @@
-from database import get_connection
+from fastapi import APIRouter
+from database import cursor, db
 
-def reduce_stock(
-        product_id,
-        quantity
-):
+router = APIRouter()
 
-    conn = get_connection()
+@router.post("/add-sale")
+def add_sale(
+        product_name: str,
+        quantity: int,
+        total_price: float):
 
-    cursor = conn.cursor()
+    cursor.execute(
+        """
+        INSERT INTO sales
+        (product_name,quantity,total_price)
+        VALUES(%s,%s,%s)
+        """,
+        (product_name, quantity, total_price)
+    )
 
-    cursor.execute("""
-    UPDATE products
-    SET quantity = quantity - %s
-    WHERE product_id = %s
-    """,
-    (
-        quantity,
-        product_id
-    ))
+    cursor.execute(
+        """
+        UPDATE products
+        SET quantity = quantity-%s
+        WHERE product_name=%s
+        """,
+        (quantity, product_name)
+    )
 
-    conn.commit()
+    db.commit()
 
-    conn.close()
+    return {"message": "Sale Added"}

@@ -1,21 +1,32 @@
-from database import get_connection
+from fastapi import APIRouter
+from database import cursor
 
-def low_stock():
+router = APIRouter()
 
-    conn = get_connection()
+@router.get("/inventory")
+def inventory():
 
-    cursor = conn.cursor(
-        dictionary=True
+    cursor.execute(
+        """
+        SELECT product_name,
+               quantity,
+               reorder_point
+        FROM products
+        """
     )
 
-    cursor.execute("""
-    SELECT *
-    FROM products
-    WHERE quantity <= reorder_level
-    """)
+    return cursor.fetchall()
 
-    data = cursor.fetchall()
 
-    conn.close()
+@router.get("/low-stock")
+def low_stock():
 
-    return data
+    cursor.execute(
+        """
+        SELECT *
+        FROM products
+        WHERE quantity < reorder_point
+        """
+    )
+
+    return cursor.fetchall()

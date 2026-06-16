@@ -1,60 +1,54 @@
-from database import get_connection
+from fastapi import APIRouter
+from database import cursor, db
 
-def get_products():
+router = APIRouter()
 
-    conn = get_connection()
-
-    cursor = conn.cursor(dictionary=True)
-
-    cursor.execute(
-        "SELECT * FROM products"
-    )
-
-    data = cursor.fetchall()
-
-    conn.close()
-
-    return data
-
-
+@router.post("/add-product")
 def add_product(
-        product_name,
-        category,
-        price,
-        quantity,
-        reorder_level,
-        supplier_id
-):
-
-    conn = get_connection()
-
-    cursor = conn.cursor()
+        sku_id: str,
+        product_name: str,
+        category: str,
+        quantity: int,
+        price: float,
+        reorder_point: int):
 
     query = """
     INSERT INTO products
-    (
-        product_name,
-        category,
-        price,
-        quantity,
-        reorder_level,
-        supplier_id
-    )
+    (sku_id,product_name,category,quantity,price,reorder_point)
     VALUES(%s,%s,%s,%s,%s,%s)
     """
 
-    cursor.execute(
-        query,
-        (
-            product_name,
-            category,
-            price,
-            quantity,
-            reorder_level,
-            supplier_id
-        )
+    values = (
+        sku_id,
+        product_name,
+        category,
+        quantity,
+        price,
+        reorder_point
     )
 
-    conn.commit()
+    cursor.execute(query, values)
+    db.commit()
 
-    conn.close()
+    return {"message": "Product Added"}
+
+
+@router.get("/products")
+def get_products():
+
+    cursor.execute("SELECT * FROM products")
+
+    return cursor.fetchall()
+
+
+@router.delete("/delete-product/{id}")
+def delete_product(id: int):
+
+    cursor.execute(
+        "DELETE FROM products WHERE id=%s",
+        (id,)
+    )
+
+    db.commit()
+
+    return {"message": "Deleted"}

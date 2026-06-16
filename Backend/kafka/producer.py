@@ -1,16 +1,17 @@
 from kafka import KafkaProducer
-from config import Config
+import json
 
 producer = KafkaProducer(
-    bootstrap_servers=
-    Config.KAFKA_SERVER
+    bootstrap_servers="localhost:9092",
+    value_serializer=lambda x:
+    json.dumps(x).encode("utf-8")
 )
 
-def send_event(message):
+def send_event(data):
 
     producer.send(
         "inventory_topic",
-        message.encode()
+        value=data
     )
 
     producer.flush()

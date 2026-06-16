@@ -1,26 +1,22 @@
 from fastapi import FastAPI
 
-from database import create_database
-from create_sqltables import create_tables
+from modules.products import router as product_router
+from modules.suppliers import router as supplier_router
+from modules.inventory import router as inventory_router
+from modules.sales import router as sales_router
+from modules.purchases import router as purchases_router
+from modules.reports import router as reports_router
 
-app = FastAPI(
-    title="Inventory Management System"
-)
+app = FastAPI()
 
-@app.on_event("startup")
-def startup():
-
-    create_database()
-
-    create_tables()
-
-    print("Database Ready")
+app.include_router(product_router)
+app.include_router(supplier_router)
+app.include_router(inventory_router)
+app.include_router(sales_router)
+app.include_router(purchases_router)
+app.include_router(reports_router)
 
 
 @app.get("/")
 def home():
-
-    return {
-        "message":
-        "Inventory System Running"
-    }
+    return {"message": "Inventory System Running"}

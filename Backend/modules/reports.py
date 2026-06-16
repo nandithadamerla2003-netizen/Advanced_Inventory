@@ -1,23 +1,20 @@
-from database import get_connection
+from fastapi import APIRouter
+from database import cursor
 
-def inventory_report():
+router = APIRouter()
 
-    conn = get_connection()
+@router.get("/inventory-value")
+def inventory_value():
 
-    cursor = conn.cursor(
-        dictionary=True
+    cursor.execute(
+        """
+        SELECT SUM(quantity*price)
+        FROM products
+        """
     )
 
-    cursor.execute("""
-    SELECT
-        product_name,
-        quantity,
-        price
-    FROM products
-    """)
+    result = cursor.fetchone()
 
-    data = cursor.fetchall()
-
-    conn.close()
-
-    return data
+    return {
+        "Inventory Value": result[0]
+    }
