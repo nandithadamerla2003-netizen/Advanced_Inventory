@@ -1,6 +1,7 @@
 import mysql.connector
 from config import *
 
+# Get Connection
 def get_connection():
     connection = mysql.connector.connect(
         host=DB_HOST,
@@ -11,7 +12,7 @@ def get_connection():
     )
     return connection
 
-
+# Execute Query
 def execute_query(query, values=None):
     connection = get_connection()
     cursor = connection.cursor(dictionary=True)
@@ -26,7 +27,7 @@ def execute_query(query, values=None):
     cursor.close()
     connection.close()
 
-
+# View All
 def fetch_all(query):
     connection = get_connection()
     cursor = connection.cursor(dictionary=True)
@@ -38,6 +39,7 @@ def fetch_all(query):
     cursor.close()
     connection.close()
     return data
+# Insert Data
 def insert_data(query, values):
     connection = get_connection()
     cursor = connection.cursor()
@@ -48,7 +50,7 @@ def insert_data(query, values):
     cursor.close()
     connection.close()
     
-
+# View One
 def fetch_one(query, values):
     connection = get_connection()
     cursor = connection.cursor(dictionary=True)
@@ -61,4 +63,50 @@ def fetch_one(query, values):
     connection.close()
 
     return data
-    
+# Update
+def update_data(query, values):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(query, values)
+    connection.commit()
+
+    affected_rows = cursor.rowcount
+
+    cursor.close()
+    connection.close()
+
+    return affected_rows
+
+# Delete
+def delete_data(query, values):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(query, values)
+    connection.commit()
+
+    affected_rows = cursor.rowcount
+
+    cursor.close()
+    connection.close()
+
+    return affected_rows
+# Transaction
+def execute_transaction(queries):
+    connection = get_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        for query, values in queries:
+            cursor.execute(query, values)
+
+        connection.commit()
+
+    except Exception:
+        connection.rollback()
+        raise
+
+    finally:
+        cursor.close()
+        connection.close()  

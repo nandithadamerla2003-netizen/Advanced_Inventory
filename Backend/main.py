@@ -1,5 +1,10 @@
 from fastapi import FastAPI
+
+from modules.suppliers import router as supplier_router
 from modules.products import router as product_router
+from modules.inventory import router as inventory_router
+from modules.sales import router as sales_router
+
 app = FastAPI(
     title="Advanced Inventory & Supplier Management System",
     version="1.0",
@@ -36,4 +41,6 @@ def about():
     }
 
 app.include_router(product_router)
-
+app.include_router(supplier_router)
+app.include_router(inventory_router)
+app.include_router(sales_router)
