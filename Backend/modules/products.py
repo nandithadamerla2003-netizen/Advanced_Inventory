@@ -1,54 +1,61 @@
-from fastapi import APIRouter
-from database import cursor, db
+from fastapi import APIRouter, HTTPException
 
-router = APIRouter()
+from schemas import ProductCreate
+from database import insert_data, fetch_all, fetch_one
 
-@router.post("/add-product")
-def add_product(
-        sku_id: str,
-        product_name: str,
-        category: str,
-        quantity: int,
-        price: float,
-        reorder_point: int):
+router = APIRouter(
+    prefix="/products",
+    tags=["Products"]
+)
+
+
+@router.post("/")
+def add_product(product: ProductCreate):
 
     query = """
     INSERT INTO products
-    (sku_id,product_name,category,quantity,price,reorder_point)
-    VALUES(%s,%s,%s,%s,%s,%s)
+    (product_name, category, unit_price, supplier_id)
+    VALUES (%s,%s,%s,%s)
     """
 
     values = (
-        sku_id,
-        product_name,
-        category,
-        quantity,
-        price,
-        reorder_point
+        product.product_name,
+        product.category,
+        product.unit_price,
+        product.supplier_id
     )
 
-    cursor.execute(query, values)
-    db.commit()
+    insert_data(query, values)
 
-    return {"message": "Product Added"}
-
-
-@router.get("/products")
-def get_products():
-
-    cursor.execute("SELECT * FROM products")
-
-    return cursor.fetchall()
+    return {
+        "message": "Product added successfully"
+    }
 
 
-@router.delete("/delete-product/{id}")
-def delete_product(id: int):
+@router.get("/")
+def view_products():
 
-    cursor.execute(
-        "DELETE FROM products WHERE id=%s",
-        (id,)
-    )
+    query = "SELECT * FROM products"
 
-    db.commit()
+    products = fetch_all(query)
 
-    return {"message": "Deleted"}
+    return products
+
+
+@router.get("/{product_id}")
+def view_product(product_id: int):
+
+    query = """
+    SELECT * FROM products
+    WHERE product_id=%s
+    """
+
+    product = fetch_one(query, (product_id,))
+
+    if product is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Product not found"
+        )
+
+    return product
