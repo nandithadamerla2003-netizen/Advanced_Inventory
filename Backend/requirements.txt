@@ -2,7 +2,11 @@ fastapi
 uvicorn
 mysql-connector-python
 python-dotenv
-jinja2
+pydantic
+email-validator
+python-jose
+passlib
+bcrypt
 python-multipart
 pytest
-kafka-python
+httpx

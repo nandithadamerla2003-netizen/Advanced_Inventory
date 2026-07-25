@@ -71,3 +71,11 @@ class SaleResponse(BaseModel):
     quantity: int
     selling_price: float
     sale_date: str
+
+# purchases
+class PurchaseCreate(BaseModel):
+    product_id: int = Field(..., gt=0)
+    quantity: int = Field(..., gt=0)
+    purchase_price: float = Field(..., gt=0)
+
+

@@ -3,7 +3,6 @@ from fastapi import APIRouter, HTTPException
 from schemas import InventoryCreate, InventoryUpdate
 from database import insert_data, fetch_all, fetch_one, update_data
 
-
 router = APIRouter(
     prefix="/inventory",
     tags=["Inventory"]
@@ -48,6 +47,7 @@ def add_inventory(inventory: InventoryCreate):
     return {
         "message": "Inventory added successfully"
     }
+
 # View All
 @router.get("/")
 def view_inventory():
