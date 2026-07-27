@@ -1,7 +1,9 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 
 from schemas import ProductCreate, ProductUpdate
 from database import insert_data, fetch_all, fetch_one, update_data, delete_data
+
+from auth import verify_token, admin_required
 
 router = APIRouter(
     prefix="/products",
@@ -10,7 +12,7 @@ router = APIRouter(
 
 # ADD
 @router.post("/")
-def add_product(product: ProductCreate):
+def add_product(product: ProductCreate,user=Depends(admin_required)):
 
     query = """
     INSERT INTO products
@@ -33,7 +35,7 @@ def add_product(product: ProductCreate):
 
 # View All
 @router.get("/")
-def view_products():
+def view_products( user=Depends(verify_token)):
 
     query = "SELECT * FROM products"
 
@@ -43,7 +45,7 @@ def view_products():
 
 # View One
 @router.get("/{product_id}")
-def view_product(product_id: int):
+def view_product(product_id: int,user=Depends(verify_token)):
 
     query = """
     SELECT * FROM products
@@ -63,7 +65,7 @@ def view_product(product_id: int):
 # Update
 
 @router.put("/{product_id}")
-def update_product(product_id: int, product: ProductUpdate):
+def update_product(product_id: int, product: ProductUpdate,user=Depends(admin_required)):
 
     check_query = "SELECT * FROM products WHERE product_id=%s"
 
@@ -102,7 +104,7 @@ def update_product(product_id: int, product: ProductUpdate):
 # Delete
 
 @router.delete("/{product_id}")
-def delete_product(product_id: int):
+def delete_product(product_id: int, user=Depends(admin_required)):
 
     check_query = "SELECT * FROM products WHERE product_id=%s"
 

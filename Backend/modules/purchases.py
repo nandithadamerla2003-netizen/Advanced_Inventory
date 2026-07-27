@@ -1,7 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 
 from schemas import PurchaseCreate
 from database import fetch_one, fetch_all, execute_transaction
+
+from auth import verify_token, admin_required
+
 
 router = APIRouter(
     prefix="/purchases",
@@ -10,7 +13,7 @@ router = APIRouter(
 
 # ADD
 @router.post("/")
-def add_purchase(purchase: PurchaseCreate):
+def add_purchase(purchase: PurchaseCreate,  user=Depends(admin_required)):
 
     product = fetch_one(
         "SELECT * FROM products WHERE product_id=%s",
@@ -58,7 +61,7 @@ def add_purchase(purchase: PurchaseCreate):
     }
 # View All
 @router.get("/")
-def purchase_history():
+def purchase_history(user=Depends(verify_token)):
 
     query = """
     SELECT

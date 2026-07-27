@@ -1,7 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 
 from schemas import SupplierCreate, SupplierUpdate
 from database import insert_data, fetch_all, fetch_one, update_data, delete_data
+
+from auth import verify_token, admin_required
+
 
 router = APIRouter(
     prefix="/suppliers",
@@ -10,7 +13,7 @@ router = APIRouter(
 
 # ADD
 @router.post("/")
-def add_supplier(supplier: SupplierCreate):
+def add_supplier(supplier: SupplierCreate, user=Depends(admin_required)):
 
     query = """
     INSERT INTO suppliers
@@ -41,7 +44,7 @@ def add_supplier(supplier: SupplierCreate):
 
 # View All
 @router.get("/")
-def view_suppliers():
+def view_suppliers(user=Depends(verify_token)):
 
     query = """
     SELECT * FROM suppliers
@@ -53,7 +56,7 @@ def view_suppliers():
 
 # View One
 @router.get("/{supplier_id}")
-def view_supplier(supplier_id: int):
+def view_supplier(supplier_id: int, user=Depends(verify_token)):
 
     query = """
     SELECT *
@@ -74,7 +77,7 @@ def view_supplier(supplier_id: int):
 
 # Update
 @router.put("/{supplier_id}")
-def update_supplier(supplier_id: int, supplier: SupplierUpdate):
+def update_supplier(supplier_id: int, supplier: SupplierUpdate, user=Depends(admin_required)):
 
     check_query = """
     SELECT *
@@ -119,7 +122,7 @@ def update_supplier(supplier_id: int, supplier: SupplierUpdate):
 # Delete
 
 @router.delete("/{supplier_id}")
-def delete_supplier(supplier_id: int):
+def delete_supplier(supplier_id: int, user=Depends(admin_required)):
 
     check_query = """
     SELECT *

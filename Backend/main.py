@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from modules.auth_routes import router as auth_router
 from modules.suppliers import router as supplier_router
 from modules.products import router as product_router
 from modules.inventory import router as inventory_router
@@ -42,6 +43,7 @@ def about():
         "database": "MySQL"
     }
 
+app.include_router(auth_router)
 app.include_router(product_router)
 app.include_router(supplier_router)
 app.include_router(inventory_router)

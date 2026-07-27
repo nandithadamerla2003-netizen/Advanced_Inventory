@@ -1,17 +1,17 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from database import fetch_all, fetch_one
+
+from auth import verify_token
+
 
 router = APIRouter(
     prefix="/reports",
     tags=["Reports"]
 )
 
-
-# -------------------------------
 # Inventory Report
-# -------------------------------
 @router.get("/inventory")
-def inventory_report():
+def inventory_report(user=Depends(verify_token)):
 
     query = """
     SELECT
@@ -27,12 +27,9 @@ def inventory_report():
 
     return fetch_all(query)
 
-
-# -------------------------------
 # Sales Report
-# -------------------------------
 @router.get("/sales")
-def sales_report():
+def sales_report(user=Depends(verify_token)):
 
     query = """
     SELECT
@@ -49,11 +46,9 @@ def sales_report():
     """
     return fetch_all(query)
 
-# -------------------------------
 # Purchase Report
-# -------------------------------
 @router.get("/purchases")
-def purchase_report():
+def purchase_report(user=Depends(verify_token)):
 
     query = """
     SELECT
@@ -70,12 +65,9 @@ def purchase_report():
     """
     return fetch_all(query)
 
-
-# -------------------------------
 # Low Stock Report
-# -------------------------------
 @router.get("/low-stock")
-def low_stock_report():
+def low_stock_report(user=Depends(verify_token)):
 
     query = """
     SELECT
@@ -90,12 +82,9 @@ def low_stock_report():
 
     return fetch_all(query)
 
-
-# -------------------------------
 # Dashboard Summary
-# -------------------------------
 @router.get("/dashboard")
-def dashboard_report():
+def dashboard_report(user=Depends(verify_token)):
 
     total_products = fetch_one(
         "SELECT COUNT(*) AS total FROM products",

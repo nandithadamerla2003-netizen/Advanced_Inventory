@@ -110,3 +110,4 @@ def execute_transaction(queries):
     finally:
         cursor.close()
         connection.close()  
+

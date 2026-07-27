@@ -1,7 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 
 from schemas import InventoryCreate, InventoryUpdate
 from database import insert_data, fetch_all, fetch_one, update_data
+
+from auth import verify_token, admin_required
+
 
 router = APIRouter(
     prefix="/inventory",
@@ -10,7 +13,7 @@ router = APIRouter(
 
 # ADD
 @router.post("/")
-def add_inventory(inventory: InventoryCreate):
+def add_inventory(inventory: InventoryCreate, user=Depends(admin_required)):
 
     check_query = """
     SELECT * FROM products
@@ -50,7 +53,7 @@ def add_inventory(inventory: InventoryCreate):
 
 # View All
 @router.get("/")
-def view_inventory():
+def view_inventory(user=Depends(verify_token)):
 
     query = """
     SELECT
@@ -68,7 +71,7 @@ def view_inventory():
 
 # Low Stock Checker API
 @router.get("/low-stock")
-def low_stock_items():
+def low_stock_items( user=Depends(verify_token)):
 
     query = """
     SELECT
@@ -86,7 +89,7 @@ def low_stock_items():
 
 # Stock Alert API
 @router.get("/alerts")
-def stock_alerts():
+def stock_alerts(user=Depends(verify_token)):
 
     query = """
     SELECT
@@ -113,7 +116,7 @@ def stock_alerts():
 
 # Inventory Dashboard API
 @router.get("/dashboard")
-def inventory_dashboard():
+def inventory_dashboard(user=Depends(verify_token)):
 
     total_products = fetch_one(
         "SELECT COUNT(*) AS total FROM products",
@@ -142,7 +145,7 @@ def inventory_dashboard():
 
 # View One
 @router.get("/{inventory_id}")
-def view_inventory_item(inventory_id: int):
+def view_inventory_item(inventory_id: int, user=Depends(verify_token)):
 
     query = """
     SELECT
@@ -172,7 +175,8 @@ def view_inventory_item(inventory_id: int):
 @router.put("/{inventory_id}")
 def update_inventory(
     inventory_id: int,
-    inventory: InventoryUpdate
+    inventory: InventoryUpdate,
+    user=Depends(admin_required)
 ):
 
     check_query = """

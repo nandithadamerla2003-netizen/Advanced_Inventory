@@ -1,7 +1,9 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 
 from schemas import SaleCreate
 from database import fetch_one, fetch_all, execute_transaction
+
+from auth import verify_token, admin_required
 
 
 router = APIRouter(
@@ -11,7 +13,7 @@ router = APIRouter(
 
 # ADD
 @router.post("/")
-def add_sale(sale: SaleCreate):
+def add_sale(sale: SaleCreate,  user=Depends(admin_required)):
 
     inventory = fetch_one(
         "SELECT * FROM inventory WHERE product_id=%s",
@@ -66,7 +68,7 @@ def add_sale(sale: SaleCreate):
 
 # View All
 @router.get("/")
-def sales_history():
+def sales_history(user=Depends(verify_token)):
 
     query = """
     SELECT

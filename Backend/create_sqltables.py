@@ -4,6 +4,7 @@ connection = get_connection()
 
 cursor = connection.cursor()
 
+# Suppliers
 cursor.execute("""
 
 CREATE TABLE IF NOT EXISTS suppliers(
@@ -24,6 +25,7 @@ address TEXT
 
 """)
 
+# Producs
 cursor.execute("""
 
 CREATE TABLE IF NOT EXISTS products(
@@ -46,6 +48,7 @@ REFERENCES suppliers(supplier_id)
 
 """)
 
+# Inventory
 cursor.execute("""
 
 CREATE TABLE IF NOT EXISTS inventory(
@@ -68,6 +71,7 @@ REFERENCES products(product_id)
 
 """)
 
+# Purchases
 cursor.execute("""
 
 CREATE TABLE IF NOT EXISTS purchases(
@@ -96,6 +100,7 @@ REFERENCES suppliers(supplier_id)
 
 """)
 
+# Sales
 cursor.execute("""
 
 CREATE TABLE IF NOT EXISTS sales(
@@ -118,6 +123,22 @@ REFERENCES products(product_id)
 
 """)
 
+# Users
+cursor.execute("""
+CREATE TABLE users (
+
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    username VARCHAR(100) UNIQUE NOT NULL,
+
+    password VARCHAR(255) NOT NULL,
+
+    role VARCHAR(20) NOT NULL
+
+);
+
+""")
+
 connection.commit()
 
 cursor.close()
@@ -125,3 +146,4 @@ cursor.close()
 connection.close()
 
 print("All tables created successfully.")
+

@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field,   EmailStr
+from fastapi.security import OAuth2PasswordRequestForm
 
 # Suppliers
 class SupplierCreate(BaseModel):
@@ -78,4 +79,7 @@ class PurchaseCreate(BaseModel):
     quantity: int = Field(..., gt=0)
     purchase_price: float = Field(..., gt=0)
 
-
+# Login Schema
+class Login(BaseModel):
+    username: str
+    password: str
