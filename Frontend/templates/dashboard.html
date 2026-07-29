@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+
+<body>
+
+    <!-- =======================
+         Navigation Bar
+    ======================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                <h2>Inventory System</h2>
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="dashboard.html">Dashboard</a></li>
+
+                <li><a href="products.html">Products</a></li>
+
+                <li><a href="suppliers.html">Suppliers</a></li>
+
+                <li><a href="inventory.html">Inventory</a></li>
+
+                <li><a href="sales.html">Sales</a></li>
+
+                <li><a href="reports.html">Reports</a></li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+     <!-- =======================
+         Back Button
+    ======================== -->
+
+    <div class="top-buttons">
+
+        <button onclick="history.back()">
+
+             Back
+
+        </button>
+
+    </div>
+
+    <!-- Dashboard Title -->
+
+    <section class="page-title">
+
+        <h1>Dashboard Summary</h1>
+
+        <p>
+            Overview of the Inventory Management System
+        </p>
+
+    </section>
+
+    <!-- Dashboard Cards -->
+
+    <section class="dashboard-container">
+
+        <div class="dashboard-card">
+
+            <h3>Total Products</h3>
+
+            <h1 id="totalProducts">0</h1>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h3>Total Suppliers</h3>
+
+            <h1 id="totalSuppliers">0</h1>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h3>Total Sales</h3>
+
+            <h1 id="totalSales">0</h1>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h3>Total Purchases</h3>
+
+            <h1 id="totalPurchases">0</h1>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h3>Low Stock Products</h3>
+
+            <h1 id="lowStock">0</h1>
+
+        </div>
+
+    </section>
+
+    <!-- Refresh Button -->
+
+    <div class="button-area">
+
+        <button onclick="loadDashboard()">
+
+            🔄 Refresh
+
+        </button>
+
+    </div>
+
+    <script>
+
+        const API_URL = "http://127.0.0.1:8000";
+
+        function loadDashboard() {
+
+            const token = localStorage.getItem("access_token");
+
+            fetch(API_URL + "/reports/dashboard", {
+
+                method: "GET",
+
+                headers: {
+
+                    "Authorization": "Bearer " + token
+
+                }
+
+            })
+
+            .then(response => response.json())
+
+            .then(data => {
+
+                document.getElementById("totalProducts").innerHTML =
+                    data.total_products;
+
+                document.getElementById("totalSuppliers").innerHTML =
+                    data.total_suppliers;
+
+                document.getElementById("totalSales").innerHTML =
+                    data.total_sales_amount;
+
+                document.getElementById("totalPurchases").innerHTML =
+                    data.total_purchase_amount;
+
+                document.getElementById("lowStock").innerHTML =
+                    data.low_stock_products;
+
+            })
+
+            .catch(error => {
+
+                alert("Unable to load dashboard.");
+
+                console.log(error);
+
+            });
+
+        }
+
+        loadDashboard();
+
+    </script>
+
+</body>
+
+</html>

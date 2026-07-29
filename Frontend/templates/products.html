@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products</title>
+
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+
+<body>
+    
+    <!-- =======================
+         Navigation Bar
+    ======================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                <h2>Inventory System</h2>
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="dashboard.html">Dashboard</a></li>
+
+                <li><a href="products.html">Products</a></li>
+
+                <li><a href="suppliers.html">Suppliers</a></li>
+
+                <li><a href="inventory.html">Inventory</a></li>
+
+                <li><a href="sales.html">Sales</a></li>
+
+                <li><a href="reports.html">Reports</a></li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+     <!-- =======================
+         Back Button
+    ======================== -->
+
+    <div class="top-buttons">
+
+        <button onclick="history.back()">
+
+             Back
+
+        </button>
+
+    </div>
+
+
+    <h1>Product Management</h1>
+
+    <form id="productForm">
+
+        <input type="hidden" id="product_id">
+
+        <input
+            type="text"
+            id="product_name"
+            placeholder="Product Name"
+            required
+        >
+
+        <input
+            type="text"
+            id="category"
+            placeholder="Category"
+            required
+        >
+
+        <input
+            type="number"
+            id="price"
+            placeholder="Price"
+            required
+        >
+
+        <input
+            type="number"
+            id="supplier_id"
+            placeholder="Supplier ID"
+            required
+        >
+
+        <button type="submit">
+            Save Product
+        </button>
+
+    </form>
+
+    <br>
+
+    <table border="1">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Supplier</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="productTable">
+
+        </tbody>
+
+    </table>
+
+    <script>
+
+        const API = "http://127.0.0.1:8000/products";
+
+        const token = localStorage.getItem("access_token");
+
+        loadProducts();
+
+        function loadProducts() {
+
+            fetch(API, {
+
+                headers: {
+
+                    "Authorization": "Bearer " + token
+
+                }
+
+            })
+
+            .then(res => res.json())
+
+            .then(data => {
+
+                let rows = "";
+
+                data.forEach(product => {
+
+                    rows += `
+
+                    <tr>
+
+                        <td>${product.product_id}</td>
+
+                        <td>${product.product_name}</td>
+
+                        <td>${product.category}</td>
+
+                        <td>${product.price}</td>
+
+                        <td>${product.supplier_id}</td>
+
+                        <td>
+
+                            <button onclick="editProduct(
+                                ${product.product_id},
+                                '${product.product_name}',
+                                '${product.category}',
+                                ${product.price},
+                                ${product.supplier_id}
+                            )">
+
+                                Edit
+
+                            </button>
+
+                            <button onclick="deleteProduct(${product.product_id})">
+
+                                Delete
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    `;
+
+                });
+
+                document.getElementById("productTable").innerHTML = rows;
+
+            });
+
+        }
+
+        document.getElementById("productForm").onsubmit = function(e) {
+
+            e.preventDefault();
+
+            let id = document.getElementById("product_id").value;
+
+            let product = {
+
+                product_name: document.getElementById("product_name").value,
+
+                category: document.getElementById("category").value,
+
+                price: Number(document.getElementById("price").value),
+
+                supplier_id: Number(document.getElementById("supplier_id").value)
+
+            };
+
+            let url = API;
+
+            let method = "POST";
+
+            if(id){
+
+                url = API + "/" + id;
+
+                method = "PUT";
+
+            }
+
+            fetch(url,{
+
+                method: method,
+
+                headers:{
+
+                    "Content-Type":"application/json",
+
+                    "Authorization":"Bearer " + token
+
+                },
+
+                body:JSON.stringify(product)
+
+            })
+
+            .then(() => {
+
+                document.getElementById("productForm").reset();
+
+                document.getElementById("product_id").value="";
+
+                loadProducts();
+
+            });
+
+        };
+
+        function editProduct(id,name,category,price,supplier){
+
+            document.getElementById("product_id").value=id;
+
+            document.getElementById("product_name").value=name;
+
+            document.getElementById("category").value=category;
+
+            document.getElementById("price").value=price;
+
+            document.getElementById("supplier_id").value=supplier;
+
+        }
+
+        function deleteProduct(id){
+
+            fetch(API+"/"+id,{
+
+                method:"DELETE",
+
+                headers:{
+
+                    "Authorization":"Bearer "+token
+
+                }
+
+            })
+
+            .then(() => loadProducts());
+
+        }
+
+    </script>
+
+</body>
+
+</html>

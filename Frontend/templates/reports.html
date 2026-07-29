@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reports</title>
+
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+
+<body>
+
+    <!-- =======================
+         Navigation Bar
+    ======================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                <h2>Inventory System</h2>
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="dashboard.html">Dashboard</a></li>
+
+                <li><a href="products.html">Products</a></li>
+
+                <li><a href="suppliers.html">Suppliers</a></li>
+
+                <li><a href="inventory.html">Inventory</a></li>
+
+                <li><a href="sales.html">Sales</a></li>
+
+                <li><a href="reports.html">Reports</a></li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+     <!-- =======================
+         Back Button
+    ======================== -->
+
+    <div class="top-buttons">
+
+        <button onclick="history.back()">
+
+             Back
+
+        </button>
+
+    </div>
+    
+
+    <h1>Reports</h1>
+
+    <button onclick="inventoryReport()">
+        Inventory Report
+    </button>
+
+    <button onclick="salesReport()">
+        Sales Report
+    </button>
+
+    <button onclick="purchaseReport()">
+        Purchase Report
+    </button>
+
+    <button onclick="dashboardReport()">
+        Dashboard Report
+    </button>
+
+    <br><br>
+
+    <div id="dashboard"></div>
+
+    <br>
+
+    <table border="1">
+
+        <thead id="tableHead">
+
+        </thead>
+
+        <tbody id="tableBody">
+
+        </tbody>
+
+    </table>
+
+<script>
+
+const API="http://127.0.0.1:8000/reports";
+
+const token=localStorage.getItem("access_token");
+
+function inventoryReport(){
+
+    fetch(API+"/inventory",{
+
+        headers:{
+            "Authorization":"Bearer "+token
+        }
+
+    })
+
+    .then(response=>response.json())
+
+    .then(data=>{
+
+        document.getElementById("dashboard").innerHTML="";
+
+        document.getElementById("tableHead").innerHTML=`
+
+        <tr>
+
+            <th>ID</th>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Minimum Stock</th>
+
+        </tr>
+
+        `;
+
+        let rows="";
+
+        data.forEach(item=>{
+
+            rows+=`
+
+            <tr>
+
+                <td>${item.inventory_id}</td>
+
+                <td>${item.product_name}</td>
+
+                <td>${item.category}</td>
+
+                <td>${item.quantity}</td>
+
+                <td>${item.minimum_stock}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById("tableBody").innerHTML=rows;
+
+    });
+
+}
+
+function salesReport(){
+
+    fetch(API+"/sales",{
+
+        headers:{
+            "Authorization":"Bearer "+token
+        }
+
+    })
+
+    .then(response=>response.json())
+
+    .then(data=>{
+
+        document.getElementById("dashboard").innerHTML="";
+
+        document.getElementById("tableHead").innerHTML=`
+
+        <tr>
+
+            <th>Sale ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Selling Price</th>
+            <th>Total Amount</th>
+            <th>Sale Date</th>
+
+        </tr>
+
+        `;
+
+        let rows="";
+
+        data.forEach(item=>{
+
+            rows+=`
+
+            <tr>
+
+                <td>${item.sale_id}</td>
+
+                <td>${item.product_name}</td>
+
+                <td>${item.quantity}</td>
+
+                <td>${item.selling_price}</td>
+
+                <td>${item.total_amount}</td>
+
+                <td>${item.sale_date}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById("tableBody").innerHTML=rows;
+
+    });
+
+}
+
+function purchaseReport(){
+
+    fetch(API+"/purchases",{
+
+        headers:{
+            "Authorization":"Bearer "+token
+        }
+
+    })
+
+    .then(response=>response.json())
+
+    .then(data=>{
+
+        document.getElementById("dashboard").innerHTML="";
+
+        document.getElementById("tableHead").innerHTML=`
+
+        <tr>
+
+            <th>Purchase ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Purchase Price</th>
+            <th>Total Amount</th>
+            <th>Purchase Date</th>
+
+        </tr>
+
+        `;
+
+        let rows="";
+
+        data.forEach(item=>{
+
+            rows+=`
+
+            <tr>
+
+                <td>${item.purchase_id}</td>
+
+                <td>${item.product_name}</td>
+
+                <td>${item.quantity}</td>
+
+                <td>${item.purchase_price}</td>
+
+                <td>${item.total_amount}</td>
+
+                <td>${item.purchase_date}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById("tableBody").innerHTML=rows;
+
+    });
+
+}
+
+function dashboardReport(){
+
+    fetch(API+"/dashboard",{
+
+        headers:{
+            "Authorization":"Bearer "+token
+        }
+
+    })
+
+    .then(response=>response.json())
+
+    .then(data=>{
+
+        document.getElementById("tableHead").innerHTML="";
+
+        document.getElementById("tableBody").innerHTML="";
+
+        document.getElementById("dashboard").innerHTML=`
+
+        <h2>Dashboard Report</h2>
+
+        <p>Total Products : ${data.total_products}</p>
+
+        <p>Total Suppliers : ${data.total_suppliers}</p>
+
+        <p>Total Sales Amount : ${data.total_sales_amount}</p>
+
+        <p>Total Purchase Amount : ${data.total_purchase_amount}</p>
+
+        <p>Low Stock Products : ${data.low_stock_products}</p>
+
+        `;
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

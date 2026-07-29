@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Suppliers</title>
+
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+
+<body>
+
+    <!-- =======================
+         Navigation Bar
+    ======================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                <h2>Inventory System</h2>
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="dashboard.html">Dashboard</a></li>
+
+                <li><a href="products.html">Products</a></li>
+
+                <li><a href="suppliers.html">Suppliers</a></li>
+
+                <li><a href="inventory.html">Inventory</a></li>
+
+                <li><a href="sales.html">Sales</a></li>
+
+                <li><a href="reports.html">Reports</a></li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+     <!-- =======================
+         Back Button
+    ======================== -->
+
+    <div class="top-buttons">
+
+        <button onclick="history.back()">
+
+             Back
+
+        </button>
+
+    </div>
+
+
+    <h1>Supplier Management</h1>
+
+    <form id="supplierForm">
+
+        <input type="hidden" id="supplier_id">
+
+        <input
+            type="text"
+            id="supplier_name"
+            placeholder="Supplier Name"
+            required
+        >
+
+        <input
+            type="text"
+            id="contact_person"
+            placeholder="Contact Person"
+            required
+        >
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            required
+        >
+
+        <input
+            type="text"
+            id="phone"
+            placeholder="Phone"
+            required
+        >
+
+        <input
+            type="text"
+            id="address"
+            placeholder="Address"
+            required
+        >
+
+        <button type="submit">
+
+            Save Supplier
+
+        </button>
+
+    </form>
+
+    <br>
+
+    <table border="1">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Supplier Name</th>
+                <th>Contact Person</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="supplierTable">
+
+        </tbody>
+
+    </table>
+
+<script>
+
+const API = "http://127.0.0.1:8000/suppliers";
+
+const token = localStorage.getItem("access_token");
+
+loadSuppliers();
+
+function loadSuppliers(){
+
+    fetch(API,{
+
+        headers:{
+            "Authorization":"Bearer "+token
+        }
+
+    })
+
+    .then(response => response.json())
+
+    .then(data=>{
+
+        let rows="";
+
+        data.forEach(supplier=>{
+
+            rows +=`
+
+            <tr>
+
+                <td>${supplier.supplier_id}</td>
+
+                <td>${supplier.supplier_name}</td>
+
+                <td>${supplier.contact_person}</td>
+
+                <td>${supplier.email}</td>
+
+                <td>${supplier.phone}</td>
+
+                <td>${supplier.address}</td>
+
+                <td>
+
+                    <button onclick="editSupplier(
+                    ${supplier.supplier_id},
+                    '${supplier.supplier_name}',
+                    '${supplier.contact_person}',
+                    '${supplier.email}',
+                    '${supplier.phone}',
+                    '${supplier.address}'
+                    )">
+
+                    Edit
+
+                    </button>
+
+                    <button onclick="deleteSupplier(${supplier.supplier_id})">
+
+                    Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById("supplierTable").innerHTML=rows;
+
+    });
+
+}
+
+document.getElementById("supplierForm").onsubmit=function(e){
+
+    e.preventDefault();
+
+    let id=document.getElementById("supplier_id").value;
+
+    let supplier={
+
+        supplier_name:document.getElementById("supplier_name").value,
+
+        contact_person:document.getElementById("contact_person").value,
+
+        email:document.getElementById("email").value,
+
+        phone:document.getElementById("phone").value,
+
+        address:document.getElementById("address").value
+
+    };
+
+    let url=API;
+
+    let method="POST";
+
+    if(id){
+
+        url=API+"/"+id;
+
+        method="PUT";
+
+    }
+
+    fetch(url,{
+
+        method:method,
+
+        headers:{
+
+            "Content-Type":"application/json",
+
+            "Authorization":"Bearer "+token
+
+        },
+
+        body:JSON.stringify(supplier)
+
+    })
+
+    .then(()=>{
+
+        document.getElementById("supplierForm").reset();
+
+        document.getElementById("supplier_id").value="";
+
+        loadSuppliers();
+
+    });
+
+};
+
+function editSupplier(id,name,contact,email,phone,address){
+
+    document.getElementById("supplier_id").value=id;
+
+    document.getElementById("supplier_name").value=name;
+
+    document.getElementById("contact_person").value=contact;
+
+    document.getElementById("email").value=email;
+
+    document.getElementById("phone").value=phone;
+
+    document.getElementById("address").value=address;
+
+}
+
+function deleteSupplier(id){
+
+    fetch(API+"/"+id,{
+
+        method:"DELETE",
+
+        headers:{
+
+            "Authorization":"Bearer "+token
+
+        }
+
+    })
+
+    .then(()=>loadSuppliers());
+
+}
+
+</script>
+
+</body>
+
+</html>

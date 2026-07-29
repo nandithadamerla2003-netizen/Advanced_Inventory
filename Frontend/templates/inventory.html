@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inventory</title>
+
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+
+<body>
+
+    <!-- =======================
+         Navigation Bar
+    ======================== -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                <h2>Inventory System</h2>
+            </div>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="dashboard.html">Dashboard</a></li>
+
+                <li><a href="products.html">Products</a></li>
+
+                <li><a href="suppliers.html">Suppliers</a></li>
+
+                <li><a href="inventory.html">Inventory</a></li>
+
+                <li><a href="sales.html">Sales</a></li>
+
+                <li><a href="reports.html">Reports</a></li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+     <!-- =======================
+         Back Button
+    ======================== -->
+
+    <div class="top-buttons">
+
+        <button onclick="history.back()">
+
+             Back
+
+        </button>
+
+    </div>
+
+
+    <h1>Inventory Management</h1>
+
+    <form id="inventoryForm">
+
+        <input
+            type="number"
+            id="product_id"
+            placeholder="Product ID"
+            required
+        >
+
+        <input
+            type="number"
+            id="quantity"
+            placeholder="Quantity"
+            required
+        >
+
+        <input
+            type="number"
+            id="minimum_stock"
+            placeholder="Minimum Stock"
+            required
+        >
+
+        <button type="submit">
+
+            Add Inventory
+
+        </button>
+
+    </form>
+
+    <br>
+
+    <h2>Inventory Dashboard</h2>
+
+    <p>Total Products :
+        <span id="totalProducts">0</span>
+    </p>
+
+    <p>Total Stock :
+        <span id="totalStock">0</span>
+    </p>
+
+    <p>Low Stock Items :
+        <span id="lowStockItems">0</span>
+    </p>
+
+    <br>
+
+    <button onclick="loadLowStock()">
+
+        View Low Stock
+
+    </button>
+
+    <br><br>
+
+    <table border="1">
+
+        <thead>
+
+            <tr>
+
+                <th>Inventory ID</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Minimum Stock</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="inventoryTable">
+
+        </tbody>
+
+    </table>
+
+<script>
+
+const API="http://127.0.0.1:8000/inventory";
+
+const token=localStorage.getItem("access_token");
+
+loadInventory();
+
+loadDashboard();
+
+function loadInventory(){
+
+    fetch(API,{
+
+        headers:{
+
+            "Authorization":"Bearer "+token
+
+        }
+
+    })
+
+    .then(response=>response.json())
+
+    .then(data=>{
+
+        let rows="";
+
+        data.forEach(item=>{
+
+            rows+=`
+
+            <tr>
+
+                <td>${item.inventory_id}</td>
+
+                <td>${item.product_name}</td>
+
+                <td>${item.quantity}</td>
+
+                <td>${item.minimum_stock}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById("inventoryTable").innerHTML=rows;
+
+    });
+
+}
+
+document.getElementById("inventoryForm").onsubmit=function(e){
+
+    e.preventDefault();
+
+    let inventory={
+
+        product_id:Number(document.getElementById("product_id").value),
+
+        quantity:Number(document.getElementById("quantity").value),
+
+        minimum_stock:Number(document.getElementById("minimum_stock").value)
+
+    };
+
+    fetch(API,{
+
+        method:"POST",
+
+        headers:{
+
+            "Content-Type":"application/json",
+
+            "Authorization":"Bearer "+token
+
+        },
+
+        body:JSON.stringify(inventory)
+
+    })
+
+    .then(response=>response.json())
+
+    .then(()=>{
+
+        document.getElementById("inventoryForm").reset();
+
+        loadInventory();
+
+        loadDashboard();
+
+    });
+
+};
+
+function loadDashboard(){
+
+    fetch(API+"/dashboard",{
+
+        headers:{
+
+            "Authorization":"Bearer "+token
+
+        }
+
+    })
+
+    .then(response=>response.json())
+
+    .then(data=>{
+
+        document.getElementById("totalProducts").innerHTML=data.total_products;
+
+        document.getElementById("totalStock").innerHTML=data.total_stock;
+
+        document.getElementById("lowStockItems").innerHTML=data.low_stock_items;
+
+    });
+
+}
+
+function loadLowStock(){
+
+    fetch(API+"/low-stock",{
+
+        headers:{
+
+            "Authorization":"Bearer "+token
+
+        }
+
+    })
+
+    .then(response=>response.json())
+
+    .then(data=>{
+
+        let rows="";
+
+        data.forEach(item=>{
+
+            rows+=`
+
+            <tr>
+
+                <td>${item.inventory_id}</td>
+
+                <td>${item.product_name}</td>
+
+                <td>${item.quantity}</td>
+
+                <td>${item.minimum_stock}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById("inventoryTable").innerHTML=rows;
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>
