@@ -1,4 +1,4 @@
-from config import ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_ROLE
+from config import  ADMIN_EMAIL,ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_ROLE
 
 from security import hash_password
 from database import fetch_one, execute_query
@@ -10,12 +10,13 @@ def create_admin():
     query = """
     SELECT *
     FROM users
-    WHERE username = %s
+    WHERE Email=%s
+    AND username=%s
     """
 
     user = fetch_one(
         query,
-        (ADMIN_USERNAME,)
+        (ADMIN_USERNAME, ADMIN_EMAIL)
     )
 
     if user:
@@ -32,12 +33,14 @@ def create_admin():
     insert_query = """
     INSERT INTO users
     (
+        Email,
         username,
         password,
         role
     )
     VALUES
     (
+        %s,
         %s,
         %s,
         %s
@@ -47,6 +50,7 @@ def create_admin():
     execute_query(
         insert_query,
         (
+            ADMIN_EMAIL,
             ADMIN_USERNAME,
             hashed_password,
             ADMIN_ROLE

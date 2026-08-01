@@ -1,13 +1,8 @@
-// ======================================
 // API URL
-// ======================================
 
 const BASE_URL = "http://127.0.0.1:8000";
 
-
-// ======================================
 // JWT TOKEN
-// ======================================
 
 function getToken() {
 
@@ -25,161 +20,297 @@ function logout() {
 
     localStorage.removeItem("access_token");
 
-    window.location.href = "index.html";
+    alert("Logged out successfully.");
+
+    window.location.href = "login.html";
 
 }
 
+// CHECK LOGIN
 
-// ======================================
+function checkLogin() {
+
+    const token = getToken();
+
+    if (!token) {
+
+        alert("Please login first.");
+
+        window.location.href = "login.html";
+
+    }
+
+}
+
 // LOGIN
-// ======================================
 
-async function login(username, password) {
+async function login(Email, username, password) {
 
-    const formData = new URLSearchParams();
+    try {
 
-    formData.append("username", username);
+        const response = await fetch(BASE_URL + "/auth/login", {
 
-    formData.append("password", password);
+            method: "POST",
 
-    const response = await fetch(BASE_URL + "/auth/login", {
+            headers: {
 
-        method: "POST",
+                "Content-Type": "application/json"
 
-        headers: {
+            },
 
-            "Content-Type": "application/x-www-form-urlencoded"
+            body: JSON.stringify({
 
-        },
+                Email: Email,
 
-        body: formData
+                username: username,
 
-    });
+                password: password
 
-    const data = await response.json();
+            })
 
-    if (response.ok) {
+        });
 
-        saveToken(data.access_token);
+        const data = await response.json();
 
-        window.location.href = "dashboard.html";
+        if (response.ok) {
+
+            saveToken(data.access_token);
+
+            alert("Login Successful.");
+
+            window.location.href = "dashboard.html";
+
+        }
+
+        else {
+
+            alert(data.detail);
+
+        }
 
     }
 
-    else {
+    catch (error) {
 
-        alert(data.detail);
+        alert("Unable to connect to server.");
+
+        console.error(error);
 
     }
 
 }
 
+// REGISTER
 
-// ======================================
+async function register(full_name, Email, username, password) {
+
+    try {
+
+        const response = await fetch(BASE_URL + "/auth/register", {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type": "application/json"
+
+            },
+
+            body: JSON.stringify({
+
+                full_name: full_name,
+
+                Email: Email,
+
+                username: username,
+
+                password: password
+
+            })
+
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            alert("Registration Successful.");
+
+            window.location.href = "login.html";
+
+        }
+
+        else {
+
+            alert(data.detail);
+
+        }
+
+    }
+
+    catch (error) {
+
+        alert("Unable to connect to server.");
+
+        console.error(error);
+
+    }
+
+}
+
 // FETCH GET
-// ======================================
 
 async function fetchData(endpoint) {
 
-    const response = await fetch(BASE_URL + endpoint, {
+    try {
 
-        headers: {
+        const response = await fetch(BASE_URL + endpoint, {
 
-            "Authorization": "Bearer " + getToken()
+            headers: {
+
+                "Authorization": "Bearer " + getToken()
+
+            }
+
+        });
+
+        if (response.status === 401) {
+
+            alert("Session Expired. Please Login Again.");
+
+            logout();
+
+            return;
 
         }
 
-    });
+        return await response.json();
 
-    return await response.json();
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
 
 }
 
-
-// ======================================
 // FETCH POST
-// ======================================
 
 async function postData(endpoint, body) {
 
-    const response = await fetch(BASE_URL + endpoint, {
+    try {
 
-        method: "POST",
+        const response = await fetch(BASE_URL + endpoint, {
 
-        headers: {
+            method: "POST",
 
-            "Content-Type": "application/json",
+            headers: {
 
-            "Authorization": "Bearer " + getToken()
+                "Content-Type": "application/json",
 
-        },
+                "Authorization": "Bearer " + getToken()
 
-        body: JSON.stringify(body)
+            },
 
-    });
+            body: JSON.stringify(body)
 
-    return await response.json();
+        });
 
-}
+        const data = await response.json();
 
+        if (!response.ok) {
 
-// ======================================
-// FETCH PUT
-// ======================================
+            alert(data.detail);
 
-async function putData(endpoint, body) {
-
-    const response = await fetch(BASE_URL + endpoint, {
-
-        method: "PUT",
-
-        headers: {
-
-            "Content-Type": "application/json",
-
-            "Authorization": "Bearer " + getToken()
-
-        },
-
-        body: JSON.stringify(body)
-
-    });
-
-    return await response.json();
-
-}
-
-
-// ======================================
-// FETCH DELETE
-// ======================================
-
-async function deleteData(endpoint) {
-
-    const response = await fetch(BASE_URL + endpoint, {
-
-        method: "DELETE",
-
-        headers: {
-
-            "Authorization": "Bearer " + getToken()
+            return null;
 
         }
 
-    });
+        return data;
 
-    return await response.json();
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
 
 }
 
+// FETCH PUT
 
-// ======================================
+async function putData(endpoint, body) {
+
+    try {
+
+        const response = await fetch(BASE_URL + endpoint, {
+
+            method: "PUT",
+
+            headers: {
+
+                "Content-Type": "application/json",
+
+                "Authorization": "Bearer " + getToken()
+
+            },
+
+            body: JSON.stringify(body)
+
+        });
+
+        return await response.json();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+// FETCH DELETE
+
+async function deleteData(endpoint) {
+
+    try {
+
+        const response = await fetch(BASE_URL + endpoint, {
+
+            method: "DELETE",
+
+            headers: {
+
+                "Authorization": "Bearer " + getToken()
+
+            }
+
+        });
+
+        return await response.json();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
 // LOAD TABLE
-// ======================================
 
 function loadTable(data, tbodyId, columns) {
 
     const tbody = document.getElementById(tbodyId);
+
+    if (!tbody) return;
 
     tbody.innerHTML = "";
 
@@ -201,10 +332,7 @@ function loadTable(data, tbodyId, columns) {
 
 }
 
-
-// ======================================
 // FORM SUBMIT
-// ======================================
 
 async function submitForm(formId, endpoint) {
 
@@ -218,20 +346,25 @@ async function submitForm(formId, endpoint) {
 
     });
 
-    await postData(endpoint, body);
+    const result = await postData(endpoint, body);
 
-    form.reset();
+    if (result) {
+
+        alert("Data Saved Successfully.");
+
+        form.reset();
+
+    }
 
 }
 
-
-// ======================================
 // DASHBOARD
-// ======================================
 
 async function loadDashboard() {
 
     const data = await fetchData("/reports/dashboard");
+
+    if (!data) return;
 
     document.getElementById("totalProducts").innerText =
         data.total_products;
@@ -249,3 +382,19 @@ async function loadDashboard() {
         data.low_stock_products;
 
 }
+
+// PAGE LOADER
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const page = window.location.pathname;
+
+    if (page.includes("dashboard.html")) {
+
+        checkLogin();
+
+        loadDashboard();
+
+    }
+
+});

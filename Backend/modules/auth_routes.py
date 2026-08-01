@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, Depends
-from fastapi.security import OAuth2PasswordRequestForm
 from database import fetch_one
 from security import verify_password
 from auth import create_access_token, get_current_user
+from schemas import Login
 
 router = APIRouter(
     prefix="/auth",
@@ -10,24 +10,25 @@ router = APIRouter(
 )
 
 @router.post("/login")
-def login(user: OAuth2PasswordRequestForm = Depends()):
+def login(user: Login):
 
     query = """
     SELECT *
     FROM users
-    WHERE username=%s
+    WHERE Email=%s
+    AND username=%s
     """
 
     db_user = fetch_one(
         query,
-        (user.username,)
+        (user.Email,user.username)
     )
 
     if db_user is None:
 
         raise HTTPException(
             status_code=401,
-            detail="Invalid username or password"
+            detail="Invalid Email, username or password"
         )
 
     if not verify_password(
@@ -37,7 +38,7 @@ def login(user: OAuth2PasswordRequestForm = Depends()):
 
         raise HTTPException(
             status_code=401,
-            detail="Invalid username or password"
+            detail="Invalid Email, username or password"
         )
 
     access_token = create_access_token(

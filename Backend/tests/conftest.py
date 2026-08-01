@@ -12,7 +12,7 @@ if BASE_DIR not in sys.path:
 from fastapi.testclient import TestClient
 
 from main import app
-from config import ADMIN_USERNAME, ADMIN_PASSWORD
+from config import ADMIN_EMAIL,ADMIN_USERNAME, ADMIN_PASSWORD
 
 client = TestClient(app)
 
@@ -22,6 +22,7 @@ def get_access_token():
     response = client.post(
         "/auth/login",
         data={
+            "Email": ADMIN_EMAIL,
             "username": ADMIN_USERNAME,
             "password": ADMIN_PASSWORD
         }

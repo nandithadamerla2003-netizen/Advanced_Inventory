@@ -129,6 +129,8 @@ CREATE TABLE users (
 
     user_id INT AUTO_INCREMENT PRIMARY KEY,
 
+    Email VARCHAR(100) UNIQUE,
+    
     username VARCHAR(100) UNIQUE NOT NULL,
 
     password VARCHAR(255) NOT NULL,

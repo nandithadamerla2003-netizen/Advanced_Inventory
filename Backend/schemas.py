@@ -1,5 +1,4 @@
-from pydantic import BaseModel, Field,   EmailStr
-from fastapi.security import OAuth2PasswordRequestForm
+from pydantic import BaseModel, Field, EmailStr
 
 # Suppliers
 class SupplierCreate(BaseModel):
@@ -81,5 +80,13 @@ class PurchaseCreate(BaseModel):
 
 # Login Schema
 class Login(BaseModel):
+    Email: EmailStr
     username: str
     password: str
+
+# Register Schema
+class Register(BaseModel):
+    full_name: str = Field(..., min_length=3, max_length=100)
+    Email: EmailStr
+    username: str = Field(..., min_length=3, max_length=50)
+    password: str = Field(..., min_length=6)
