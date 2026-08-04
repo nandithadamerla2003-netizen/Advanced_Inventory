@@ -1,14 +1,119 @@
 from fastapi import APIRouter, HTTPException, Depends
-from database import fetch_one
-from security import verify_password
+from database import fetch_one, execute_query
+from security import  hash_password, verify_password
 from auth import create_access_token, get_current_user
-from schemas import Login
+from schemas import Register, Login
 
 router = APIRouter(
     prefix="/auth",
     tags=["Authentication"]
 )
 
+# Register Route
+@router.post("/register")
+def register(user: Register):
+
+    # -------------------------
+    # Check Email
+    # -------------------------
+
+    email_query = """
+    SELECT *
+    FROM users
+    WHERE Email = %s
+    """
+
+    existing_email = fetch_one(
+        email_query,
+        (user.Email,)
+    )
+
+    if existing_email:
+
+        raise HTTPException(
+            status_code=400,
+            detail="Email already exists."
+        )
+
+
+    # -------------------------
+    # Check Username
+    # -------------------------
+
+    username_query = """
+    SELECT *
+    FROM users
+    WHERE username = %s
+    """
+
+    existing_username = fetch_one(
+        username_query,
+        (user.username,)
+    )
+
+    if existing_username:
+
+        raise HTTPException(
+            status_code=400,
+            detail="Username already exists."
+        )
+
+
+    # -------------------------
+    # Hash Password
+    # -------------------------
+
+    hashed_password = hash_password(
+        user.password
+    )
+
+
+    # -------------------------
+    # Insert User
+    # -------------------------
+
+    insert_query = """
+    INSERT INTO users
+    (
+        full_name,
+        Email,
+        username,
+        password,
+        role
+    )
+    VALUES
+    (
+        %s,
+        %s,
+        %s,
+        %s,
+        %s
+    )
+    """
+
+    execute_query(
+
+        insert_query,
+
+        (
+            user.full_name,
+            user.Email,
+            user.username,
+            hashed_password,
+            "User"
+        )
+
+    )
+
+
+    return {
+
+        "message": "Registration Successful."
+
+    }
+
+
+# Login Route
 @router.post("/login")
 def login(user: Login):
 
