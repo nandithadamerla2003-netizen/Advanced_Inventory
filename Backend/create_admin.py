@@ -16,7 +16,7 @@ def create_admin():
 
     user = fetch_one(
         query,
-        (ADMIN_USERNAME, ADMIN_EMAIL)
+        (ADMIN_EMAIL, ADMIN_USERNAME)
     )
 
     if user:

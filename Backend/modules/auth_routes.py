@@ -1,8 +1,8 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Request, Form
 from database import fetch_one, execute_query
 from security import  hash_password, verify_password
 from auth import create_access_token, get_current_user
-from schemas import Register, Login
+from schemas import Register
 
 router = APIRouter(
     prefix="/auth",
@@ -115,35 +115,55 @@ def register(user: Register):
 
 # Login Route
 @router.post("/login")
-def login(user: Login):
+async def login(
+    request: Request,
+    username: str = Form(None),
+    password: str = Form(None)
+):
+
+    content_type = request.headers.get("content-type", "")
+    email = None
+    pwd = None
+
+    if "application/json" in content_type:
+        body = await request.json()
+        email = body.get("Email") or body.get("username")
+        pwd = body.get("password")
+    else:
+        email = username
+        pwd = password
+
+    if not email or not pwd:
+        raise HTTPException(
+            status_code=422,
+            detail="Email and password are required."
+        )
+
+    if not email or not password:
+        raise HTTPException(
+            status_code=422,
+            detail="Email and password are required."
+        )
 
     query = """
     SELECT *
     FROM users
-    WHERE Email=%s
-    AND username=%s
+    WHERE Email=%s OR username=%s
     """
 
     db_user = fetch_one(
         query,
-        (user.Email,user.username)
+        (email, email)
     )
 
-    if db_user is None:
-
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid Email, username or password"
-        )
-
-    if not verify_password(
-        user.password,
+    if db_user is None or not verify_password(
+        pwd,
         db_user["password"]
     ):
 
         raise HTTPException(
             status_code=401,
-            detail="Invalid Email, username or password"
+            detail="Invalid email or password"
         )
 
     access_token = create_access_token(

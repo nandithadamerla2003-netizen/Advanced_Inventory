@@ -99,25 +99,8 @@
 
                 <input
                     type="email"
-                    id="Eamil"
+                    id="Email"
                     placeholder="Enter your Email"
-                    required
-                >
-
-            </div>
-
-            <div class="input-group">
-
-                <label>
-
-                    Username
-
-                </label>
-
-                <input
-                    type="text"
-                    id="username"
-                    placeholder="Enter your username"
                     required
                 >
 
@@ -192,79 +175,37 @@
 
         e.preventDefault();
 
-        const username =
-        document.getElementById("username").value;
+        const Email = document.getElementById("Email").value;
+        const password = document.getElementById("password").value;
 
-        const password =
-        document.getElementById("password").value;
-
-        const formData =
-        new URLSearchParams();
-
-        formData.append(
-            "username",
-            username
-        );
-
-        formData.append(
-            "password",
-            password
-        );
-
-        try{
-
-            const response =
-            await fetch(
+        try {
+            const response = await fetch(
                 "http://127.0.0.1:8000/auth/login",
                 {
-
-                    method:"POST",
-
-                    headers:{
-
-                        "Content-Type":
-                        "application/x-www-form-urlencoded"
-
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
                     },
-
-                    body:formData
-
+                    body: JSON.stringify({
+                        Email,
+                        password
+                    })
                 }
             );
 
-            const data =
-            await response.json();
+            const data = await response.json();
 
-            if(response.ok){
-
-                localStorage.setItem(
-                    "access_token",
-                    data.access_token
-                );
-
+            if (response.ok) {
+                localStorage.setItem("access_token", data.access_token);
                 alert("Login Successful");
-
-                window.location.href =
-                "dashboard.html";
-
+                window.location.href = "dashboard.html";
+            } else {
+                document.getElementById("message").innerHTML = data.detail || "Login failed.";
             }
-
-            else{
-
-                document.getElementById("message").innerHTML =
-                data.detail;
-
-            }
-
+        } catch (error) {
+            document.getElementById("message").innerHTML = "Unable to connect to server.";
+            console.error(error);
         }
-
-        catch(error){
-
-            document.getElementById("message").innerHTML =
-            "Unable to connect to server.";
-
-        }
-
     }
 
     </script>

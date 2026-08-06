@@ -1,5 +1,7 @@
-from fastapi import FastAPI, Request
+from pathlib import Path
 
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -16,16 +18,29 @@ app = FastAPI(
     version="1.0",
 )
 
+# Enable CORS for frontend and Swagger clients
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500", "http://localhost:5500", "http://127.0.0.1:8000", "*"] if True else [],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+)
+
+# Resolve frontend asset paths relative to this file location
+BASE_DIR = Path(__file__).resolve().parent.parent
+FRONTEND_DIR = BASE_DIR / "Frontend"
+
 # Mount the Static Folder
 app.mount(
     "/static",
-    StaticFiles(directory="../Frontend/static"),
+    StaticFiles(directory=str(FRONTEND_DIR / "static")),
     name="static"
 )
 
 # Configure the Templates Folder
 templates = Jinja2Templates(
-    directory="../Frontend/templates"
+    directory=str(FRONTEND_DIR / "templates")
 )
 
 @app.get("/")

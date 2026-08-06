@@ -44,7 +44,7 @@ function checkLogin() {
 
 // LOGIN
 
-async function login(Email, username, password) {
+async function login(Email, password) {
 
     try {
 
@@ -61,8 +61,6 @@ async function login(Email, username, password) {
             body: JSON.stringify({
 
                 Email: Email,
-
-                username: username,
 
                 password: password
 

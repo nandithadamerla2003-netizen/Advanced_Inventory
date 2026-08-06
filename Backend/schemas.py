@@ -81,8 +81,7 @@ class PurchaseCreate(BaseModel):
 # Login Schema
 class Login(BaseModel):
     Email: EmailStr
-    username: str
-    password: str
+    password: str = Field(..., min_length=6)
 
 # Register Schema
 class Register(BaseModel):
