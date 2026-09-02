@@ -139,12 +139,6 @@ async def login(
             detail="Email and password are required."
         )
 
-    if not email or not password:
-        raise HTTPException(
-            status_code=422,
-            detail="Email and password are required."
-        )
-
     query = """
     SELECT *
     FROM users
