@@ -10,6 +10,7 @@ router = APIRouter(
 )
 
 # Inventory Report
+
 @router.get("/inventory")
 def inventory_report(user=Depends(verify_token)):
 
@@ -28,6 +29,7 @@ def inventory_report(user=Depends(verify_token)):
     return fetch_all(query)
 
 # Sales Report
+
 @router.get("/sales")
 def sales_report(user=Depends(verify_token)):
 
@@ -47,6 +49,7 @@ def sales_report(user=Depends(verify_token)):
     return fetch_all(query)
 
 # Purchase Report
+
 @router.get("/purchases")
 def purchase_report(user=Depends(verify_token)):
 
@@ -66,6 +69,7 @@ def purchase_report(user=Depends(verify_token)):
     return fetch_all(query)
 
 # Low Stock Report
+
 @router.get("/low-stock")
 def low_stock_report(user=Depends(verify_token)):
 
@@ -83,6 +87,7 @@ def low_stock_report(user=Depends(verify_token)):
     return fetch_all(query)
 
 # Dashboard Summary
+
 @router.get("/dashboard")
 def dashboard_report(user=Depends(verify_token)):
 

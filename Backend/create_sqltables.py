@@ -9,7 +9,7 @@ cursor.execute("""
 
 CREATE TABLE IF NOT EXISTS suppliers(
 
-supplier_id INT AUTO_INCREMENT PRIMARY KEY,
+supplier_id INT PRIMARY KEY,
 
 supplier_name VARCHAR(100),
 
@@ -30,7 +30,7 @@ cursor.execute("""
 
 CREATE TABLE IF NOT EXISTS products(
 
-product_id INT AUTO_INCREMENT PRIMARY KEY,
+product_id INT  PRIMARY KEY,
 
 product_name VARCHAR(100),
 
@@ -53,7 +53,7 @@ cursor.execute("""
 
 CREATE TABLE IF NOT EXISTS inventory(
 
-inventory_id INT AUTO_INCREMENT PRIMARY KEY,
+inventory_id INT  PRIMARY KEY,
 
 product_id INT,
 
@@ -76,7 +76,7 @@ cursor.execute("""
 
 CREATE TABLE IF NOT EXISTS purchases(
 
-purchase_id INT AUTO_INCREMENT PRIMARY KEY,
+purchase_id INT  PRIMARY KEY,
 
 product_id INT,
 
@@ -105,7 +105,7 @@ cursor.execute("""
 
 CREATE TABLE IF NOT EXISTS sales(
 
-sale_id INT AUTO_INCREMENT PRIMARY KEY,
+sale_id INT  PRIMARY KEY,
 
 product_id INT,
 
@@ -127,7 +127,7 @@ REFERENCES products(product_id)
 cursor.execute("""
 CREATE TABLE users (
 
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT  PRIMARY KEY,
 
     full_name VARCHAR(100) NOT NULL,
 
@@ -150,4 +150,3 @@ cursor.close()
 connection.close()
 
 print("All tables created successfully.")
-
