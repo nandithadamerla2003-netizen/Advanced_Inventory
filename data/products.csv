@@ -1,0 +1,21 @@
+product_id,product_name,category,unit_price,supplier_id
+1,Basmati Rice,Grains,650.0,1
+2,Wheat Flour,Grains,280.0,2
+3,Toor Dal,Pulses,160.0,3
+4,Moong Dal,Pulses,145.0,3
+5,Sugar,Grocery,48.0,4
+6,Salt,Grocery,25.0,4
+7,Sunflower Oil,Cooking Oil,145.0,5
+8,Groundnut Oil,Cooking Oil,175.0,5
+9,Rice,Food,100.0,3
+10,Curd,Dairy,45.0,6
+11,Butter,Dairy,280.0,7
+12,Cheese,Dairy,120.0,7
+13,Tomato,Vegetables,55.0,8
+14,Potato,Vegetables,40.0,8
+15,Onion,Vegetables,45.0,8
+16,Apple,Fruits,160.0,9
+17,Banana,Fruits,70.0,9
+18,Orange,Fruits,100.0,9
+19,Tea Powder,Beverages,120.0,10
+20,Coffee Powder,Beverages,180.0,10

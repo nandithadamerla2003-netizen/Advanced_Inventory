@@ -1,0 +1,21 @@
+supplier_id,supplier_name,contact_person,email,phone,address
+1,Sri Lakshmi Foods,Ravi Kumar,ravi@lakshmifoods.com,9876543210,"Vijayawada, Andhra Pradesh"
+2,Andhra Grains Pvt Ltd,Suresh Reddy,suresh@andhragrains.com,9876543211,"Guntur, Andhra Pradesh"
+3,ABC Suppliers,Ramesh,abc@gmail.com,9876543210,Hyderabad
+4,ABC Suppliers,Ravi,abc@gmail.com,9876543210,Hyderabad
+5,Golden Oil Suppliers,Venkat Rao,venkat@goldenoils.com,9876543214,"Rajahmundry, Andhra Pradesh"
+6,Krishna Dairy Products,Arjun Reddy,arjun@krishnadairy.com,9876543215,"Eluru, Andhra Pradesh"
+7,Amul Distributors,Naveen Kumar,naveen@amulsupplier.com,9876543216,"Visakhapatnam, Andhra Pradesh"
+8,Green Basket Foods,Lakshmi Devi,lakshmi@greenbasket.com,9876543217,"Tirupati, Andhra Pradesh"
+9,Fresh Fruits Wholesale,Ramesh Babu,ramesh@freshfruits.com,9876543218,"Nellore, Andhra Pradesh"
+10,Sunrise Beverages,Kiran Kumar,kiran@sunrisebeverages.com,9876543219,"Bengaluru, Karnataka"
+11,Heritage Foods Supplier,Anand Rao,anand@heritagefoods.com,9876543220,"Hyderabad, Telangana"
+12,Royal Grocery Suppliers,Deepak Sharma,deepak@royalgrocery.com,9876543221,"Chennai, Tamil Nadu"
+13,Nature Fresh Organics,Swathi Reddy,swathi@naturefresh.com,9876543222,"Vijayawada, Andhra Pradesh"
+14,Quality Foods India,Prakash Kumar,prakash@qualityfoods.com,9876543223,"Mumbai, Maharashtra"
+15,Daily Needs Wholesale,Sunil Kumar,sunil@dailyneeds.com,9876543224,"Pune, Maharashtra"
+16,Green Valley Suppliers,Harish Reddy,harish@greenvalley.com,9876543225,"Warangal, Telangana"
+17,Best Choice Foods,Divya Sharma,divya@bestchoicefoods.com,9876543226,"Bengaluru, Karnataka"
+18,Fresh Harvest Suppliers,Rajesh Kumar,rajesh@freshharvest.com,9876543227,"Ongole, Andhra Pradesh"
+19,Metro Grocery Distributors,Ajay Singh,ajay@metrogrocery.com,9876543228,"Chennai, Tamil Nadu"
+20,Supreme Food Products,Manohar Rao,manohar@supremefoods.com,9876543229,"Hyderabad, Telangana"
