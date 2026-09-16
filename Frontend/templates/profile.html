@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - Inventory System</title>
+
+    <link rel="stylesheet"
+          href="../static/style.css">
+
+
+    <style>
+
+        /* =========================================
+           PROFILE PAGE
+           ========================================= */
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* =========================================
+           PROFILE CONTAINER
+           ========================================= */
+
+        .profile-page {
+            min-height: 80vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 40px 20px;
+        }
+
+
+        /* =========================================
+           PROFILE CARD
+           ========================================= */
+
+        .profile-card {
+
+            width: 450px;
+
+            max-width: 95%;
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* =========================================
+           ROUND PROFILE LOGO
+           ========================================= */
+
+        .profile-logo {
+
+            width: 100px;
+
+            height: 100px;
+
+            border-radius: 50%;
+
+            background: #f2f2f2;
+
+            border: 3px solid #333;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 20px auto;
+
+            font-size: 50px;
+        }
+
+
+        /* =========================================
+           PROFILE TITLE
+           ========================================= */
+
+        .profile-card h1 {
+
+            margin-bottom: 8px;
+
+            font-size: 28px;
+        }
+
+
+        .profile-card .subtitle {
+
+            color: #666;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================================
+           USER INFORMATION
+           ========================================= */
+
+        .profile-info {
+
+            text-align: left;
+
+            margin-top: 20px;
+        }
+
+
+        .profile-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 15px 5px;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+
+        .profile-row:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .profile-label {
+
+            font-weight: bold;
+
+            color: #555;
+        }
+
+
+        .profile-value {
+
+            color: #222;
+
+            font-weight: 500;
+
+            text-align: right;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================================
+           ACTIVE STATUS
+           ========================================= */
+
+        .active-status {
+
+            color: green;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================================
+           ROLE BADGE
+           ========================================= */
+
+        .role-badge {
+
+            display: inline-block;
+
+            padding: 6px 14px;
+
+            border-radius: 20px;
+
+            background: #eeeeee;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================================
+           BUTTONS
+           ========================================= */
+
+        .profile-buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-top: 30px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .profile-btn {
+
+            padding: 11px 20px;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+        }
+
+
+        .dashboard-btn {
+
+            background: #333;
+
+            color: white;
+        }
+
+
+        .home-btn {
+
+            background: #777;
+
+            color: white;
+        }
+
+
+        .logout-btn {
+
+            background: #d9534f;
+
+            color: white;
+        }
+
+
+        .profile-btn:hover {
+
+            opacity: 0.85;
+
+        }
+
+
+        /* =========================================
+           LOADING MESSAGE
+           ========================================= */
+
+        #loadingMessage {
+
+            text-align: center;
+
+            color: #666;
+
+            margin-top: 20px;
+        }
+
+
+        /* =========================================
+           ERROR MESSAGE
+           ========================================= */
+
+        #errorMessage {
+
+            display: none;
+
+            color: red;
+
+            margin-top: 20px;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .profile-card {
+
+                padding: 25px 20px;
+
+            }
+
+            .profile-card h1 {
+
+                font-size: 24px;
+
+            }
+
+            .profile-row {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 5px;
+
+            }
+
+            .profile-value {
+
+                text-align: left;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================================= -->
+    <!--                    NAVIGATION                     -->
+    <!-- ================================================= -->
+
+    <header>
+
+        <nav class="navbar">
+
+
+            <!-- Logo -->
+
+            <div class="logo">
+
+                <h2>
+                    Inventory System
+                </h2>
+
+            </div>
+
+
+            <!-- Navigation Links -->
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="products.html">
+                        Products
+                    </a>
+                </li>
+
+                <li>
+                    <a href="suppliers.html">
+                        Suppliers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="inventory.html">
+                        Inventory
+                    </a>
+                </li>
+
+                <li>
+                    <a href="sales.html">
+                        Sales
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reports.html">
+                        Reports
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <!-- Profile Icon -->
+
+            <div class="profile-top-right">
+
+                <a href="profile.html"
+                   class="profile-circle"
+                   title="My Profile">
+
+                    👤
+
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ================================================= -->
+    <!--                    BACK BUTTON                    -->
+    <!-- ================================================= -->
+
+    <div class="top-buttons">
+
+        <button onclick="history.back()">
+
+            ← Back
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ================================================= -->
+    <!--                  PROFILE SECTION                  -->
+    <!-- ================================================= -->
+
+    <main class="profile-page">
+
+
+        <div class="profile-card">
+
+
+            <!-- ========================================= -->
+            <!--             ROUND PROFILE ICON            -->
+            <!-- ========================================= -->
+
+            <div class="profile-logo">
+
+                👤
+
+            </div>
+
+
+            <!-- ========================================= -->
+            <!--                  TITLE                    -->
+            <!-- ========================================= -->
+
+            <h1>
+
+                My Profile
+
+            </h1>
+
+
+            <p class="subtitle">
+
+                Advanced Inventory & Supplier
+                Management System
+
+            </p>
+
+
+
+            <!-- ========================================= -->
+            <!--              LOADING MESSAGE              -->
+            <!-- ========================================= -->
+
+            <p id="loadingMessage">
+
+                Loading profile...
+
+            </p>
+
+
+            <!-- ========================================= -->
+            <!--              ERROR MESSAGE                -->
+            <!-- ========================================= -->
+
+            <p id="errorMessage"></p>
+
+
+
+            <!-- ========================================= -->
+            <!--              PROFILE INFORMATION          -->
+            <!-- ========================================= -->
+
+            <div class="profile-info"
+                 id="profileInfo"
+                 style="display: none;">
+
+
+                <!-- Username -->
+
+                <div class="profile-row">
+
+                    <span class="profile-label">
+
+                        Username
+
+                    </span>
+
+                    <span class="profile-value"
+                          id="username">
+
+                        -
+
+                    </span>
+
+                </div>
+
+
+                <!-- Role -->
+
+                <div class="profile-row">
+
+                    <span class="profile-label">
+
+                        Role
+
+                    </span>
+
+                    <span class="profile-value">
+
+                        <span class="role-badge"
+                              id="role">
+
+                            -
+
+                        </span>
+
+                    </span>
+
+                </div>
+
+
+                <!-- Account Status -->
+
+                <div class="profile-row">
+
+                    <span class="profile-label">
+
+                        Account Status
+
+                    </span>
+
+                    <span class="profile-value active-status">
+
+                        Active
+
+                    </span>
+
+                </div>
+
+
+                <!-- Authentication -->
+
+                <div class="profile-row">
+
+                    <span class="profile-label">
+
+                        Authentication
+
+                    </span>
+
+                    <span class="profile-value">
+
+                        JWT Secured
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ========================================= -->
+            <!--                  BUTTONS                  -->
+            <!-- ========================================= -->
+
+            <div class="profile-buttons">
+
+
+                <!-- Dashboard -->
+
+                <a href="dashboard.html"
+                   class="profile-btn dashboard-btn">
+
+                    Dashboard
+
+                </a>
+
+
+                <!-- Home -->
+
+                <a href="index.html"
+                   class="profile-btn home-btn">
+
+                    Home
+
+                </a>
+
+
+                <!-- Logout -->
+
+                <button onclick="logoutUser()"
+                        class="profile-btn logout-btn">
+
+                    Logout
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================================================= -->
+    <!--                       FOOTER                      -->
+    <!-- ================================================= -->
+
+    <footer>
+
+        <p>
+
+            © 2026 Advanced Inventory & Supplier
+            Management System
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================================================= -->
+    <!--                 MAIN JAVASCRIPT                  -->
+    <!-- ================================================= -->
+
+    <script src="../static/script.js"></script>
+
+
+
+    <!-- ================================================= -->
+    <!--                 PROFILE JAVASCRIPT               -->
+    <!-- ================================================= -->
+
+    <script>
+
+        const BASE_URL = "http://127.0.0.1:8000";
+
+
+        /*
+         * ================================================
+         * LOAD PROFILE
+         * ================================================
+         */
+
+        async function loadProfile() {
+
+            const token =
+                localStorage.getItem("access_token");
+
+
+            /*
+             * No token
+             */
+
+            if (!token) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            try {
+
+
+                /*
+                 * Call FastAPI /auth/me
+                 */
+
+                const response =
+                    await fetch(
+                        BASE_URL + "/auth/me",
+                        {
+                            method: "GET",
+
+                            headers: {
+
+                                "Authorization":
+                                    "Bearer " + token
+
+                            }
+
+                        }
+                    );
+
+
+                /*
+                 * Token invalid / expired
+                 */
+
+                if (response.status === 401) {
+
+                    localStorage.removeItem(
+                        "access_token"
+                    );
+
+                    alert(
+                        "Session expired. Please login again."
+                    );
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                /*
+                 * Other error
+                 */
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Unable to load profile."
+                    );
+
+                }
+
+
+                /*
+                 * Convert response to JSON
+                 */
+
+                const data =
+                    await response.json();
+
+
+                /*
+                 * Display username
+                 */
+
+                document.getElementById(
+                    "username"
+                ).innerText =
+                    data.username || "-";
+
+
+                /*
+                 * Display role
+                 */
+
+                document.getElementById(
+                    "role"
+                ).innerText =
+                    data.role || "User";
+
+
+                /*
+                 * Hide loading message
+                 */
+
+                document.getElementById(
+                    "loadingMessage"
+                ).style.display =
+                    "none";
+
+
+                /*
+                 * Show profile information
+                 */
+
+                document.getElementById(
+                    "profileInfo"
+                ).style.display =
+                    "block";
+
+
+            } catch (error) {
+
+
+                console.error(error);
+
+
+                document.getElementById(
+                    "loadingMessage"
+                ).style.display =
+                    "none";
+
+
+                const errorMessage =
+                    document.getElementById(
+                        "errorMessage"
+                    );
+
+
+                errorMessage.innerText =
+                    "Unable to connect to the server.";
+
+
+                errorMessage.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+
+        /*
+         * ================================================
+         * LOGOUT
+         * ================================================
+         */
+
+        function logoutUser() {
+
+
+            /*
+             * Remove JWT token
+             */
+
+            localStorage.removeItem(
+                "access_token"
+            );
+
+
+            /*
+             * Message
+             */
+
+            alert(
+                "Logged out successfully."
+            );
+
+
+            /*
+             * Return to home page
+             */
+
+            window.location.href =
+                "index.html";
+
+        }
+
+
+
+        /*
+         * ================================================
+         * RUN WHEN PAGE LOADS
+         * ================================================
+         */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                loadProfile();
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

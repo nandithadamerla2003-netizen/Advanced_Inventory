@@ -259,6 +259,255 @@ footer{
 
 }
 
+/* =========================================================
+   GLOBAL SETTINGS
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #222;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   NAVIGATION BAR
+   ========================================================= */
+
+header {
+    width: 100%;
+}
+
+.navbar {
+    width: calc(100% - 20px);
+    min-height: 60px;
+
+    margin: 0 10px;
+
+    background: #15578b;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 25px;
+
+    position: relative;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo {
+    flex-shrink: 0;
+}
+
+.logo h2 {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   NAVIGATION LINKS
+   ========================================================= */
+
+.nav-links {
+    list-style: none;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    margin-left: auto;
+
+    margin-right: 55px;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #d8ecff;
+}
+
+
+/* =========================================================
+   PROFILE LOGO
+   ========================================================= */
+
+.profile-top {
+    position: fixed;
+
+    top: 5px;
+
+    right: 10px;
+
+    z-index: 9999;
+}
+
+.profile-logo {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border: 2px solid #333;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-decoration: none;
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+
+    transition: 0.3s;
+}
+
+.profile-logo:hover {
+    transform: scale(1.1);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.top-buttons {
+    margin: 14px 22px;
+}
+
+.top-buttons button {
+    background: #2874c6;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 17px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.top-buttons button:hover {
+    background: #155fa5;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+
+.hero {
+    text-align: center;
+
+    padding: 50px 20px 45px;
+}
+
+.hero h1 {
+    font-size: 27px;
+
+    color: #2d2d2d;
+
+    margin-bottom: 14px;
+}
+
+.hero p {
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #222;
+}
+
+
+/* =========================================================
+   LOGIN & REGISTER BUTTONS
+   ========================================================= */
+
+.auth-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.auth-buttons a {
+    display: inline-block;
+
+    min-width: 110px;
+
+    padding: 11px 25px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
 /* Login Page */
 
 /* ==========================
@@ -827,6 +1076,543 @@ body{
 .register-footer a:hover{
 
     text-decoration:underline;
+
+}
+
+
+/* =========================================================
+   FEATURES SECTION
+   ========================================================= */
+
+.features {
+    width: 95%;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
+    gap: 12px;
+
+    padding: 10px 0 25px;
+}
+
+
+/* =========================================================
+   FEATURE CARDS
+   ========================================================= */
+
+.card {
+    background: white;
+
+    min-height: 105px;
+
+    padding: 15px 10px;
+
+    text-align: center;
+
+    border-radius: 7px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.15);
+
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.20);
+}
+
+.card h3 {
+    font-size: 15px;
+
+    margin-bottom: 8px;
+
+    color: #111;
+}
+
+.card p {
+    font-size: 12px;
+
+    line-height: 1.25;
+
+    min-height: 30px;
+
+    margin-bottom: 10px;
+}
+
+.card a {
+    display: inline-block;
+
+    background: #087dcc;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 7px 17px;
+
+    border-radius: 4px;
+
+    font-size: 12px;
+
+    transition: 0.3s;
+}
+
+.card a:hover {
+    background: #065f9d;
+}
+
+
+/* =========================================================
+   ABOUT SECTION
+   ========================================================= */
+
+.about {
+    width: 90%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    text-align: center;
+
+    padding: 15px 20px;
+}
+
+.about h2 {
+    font-size: 19px;
+
+    color: #444;
+
+    margin-bottom: 10px;
+}
+
+.about p {
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    margin-bottom: 5px;
+}
+
+.about strong {
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    margin-top: 20px;
+
+    padding: 18px;
+
+    text-align: center;
+
+    background: #15578b;
+
+    color: white;
+}
+
+footer p {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+form {
+    width: 90%;
+
+    max-width: 500px;
+
+    margin: 30px auto;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+form label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+
+    padding: 10px;
+
+    margin-bottom: 15px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+}
+
+form button {
+    background: #2874c6;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 20px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+form button:hover {
+    background: #155fa5;
+}
+
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+table {
+    width: 95%;
+
+    margin: 25px auto;
+
+    border-collapse: collapse;
+
+    background: white;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+table th {
+    background: #15578b;
+
+    color: white;
+
+    padding: 11px;
+
+    font-size: 13px;
+}
+
+table td {
+    padding: 10px;
+
+    border-bottom: 1px solid #ddd;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+table tr:hover {
+    background: #f1f6fa;
+}
+
+
+/* =========================================================
+   DASHBOARD CARDS
+   ========================================================= */
+
+.dashboard-container {
+    width: 95%;
+
+    margin: 30px auto;
+}
+
+.dashboard-cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+.dashboard-card {
+    background: white;
+
+    padding: 25px;
+
+    text-align: center;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card h3 {
+    font-size: 15px;
+
+    margin-bottom: 10px;
+}
+
+.dashboard-card p {
+    font-size: 25px;
+
+    font-weight: bold;
+
+    color: #15578b;
+}
+
+
+/* =========================================================
+   PROFILE PAGE
+   ========================================================= */
+
+.profile-page {
+    min-height: 75vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px 20px;
+}
+
+.profile-card {
+    width: 450px;
+
+    max-width: 95%;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.profile-logo-large {
+    width: 100px;
+
+    height: 100px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: #f2f2f2;
+
+    border: 3px solid #333;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 50px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .nav-links {
+        gap: 13px;
+
+        margin-right: 50px;
+    }
+
+    .nav-links a {
+        font-size: 11px;
+    }
+
+    .features {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .dashboard-cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        width: 100%;
+
+        margin: 0;
+
+        flex-direction: column;
+
+        padding: 15px 10px;
+
+        gap: 12px;
+    }
+
+
+    .logo h2 {
+        font-size: 19px;
+    }
+
+
+    .nav-links {
+        margin: 0;
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 12px;
+    }
+
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+
+    .profile-top {
+        top: 10px;
+
+        right: 10px;
+    }
+
+
+    .profile-logo {
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 20px;
+    }
+
+
+    .hero {
+        padding: 35px 15px;
+    }
+
+
+    .hero h1 {
+        font-size: 22px;
+    }
+
+
+    .hero p {
+        font-size: 13px;
+    }
+
+
+    .features {
+        width: 90%;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 15px;
+    }
+
+
+    .card {
+        min-height: 120px;
+    }
+
+
+    .about {
+        width: 95%;
+    }
+
+
+    .dashboard-cards {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    table {
+        display: block;
+
+        overflow-x: auto;
+
+        white-space: nowrap;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 450px) {
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+
+    .auth-buttons {
+        flex-direction: column;
+    }
+
+
+    .auth-buttons a {
+        width: 180px;
+
+        text-align: center;
+    }
+
+
+    .hero h1 {
+        font-size: 20px;
+    }
+
+
+    .profile-logo {
+        width: 38px;
+
+        height: 38px;
+
+        font-size: 19px;
+    }
 
 }
 

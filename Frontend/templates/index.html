@@ -8,239 +8,607 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Advanced Inventory & Supplier Management System</title>
+    <title>
+        Advanced Inventory & Supplier Management System
+    </title>
 
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet"
+          href="../static/style.css">
+
+
+    <style>
+
+        /* =========================================
+           PROFILE LOGO - TOP RIGHT
+           ========================================= */
+
+        .profile-top {
+
+            position: fixed;
+
+            top: 5px;
+
+            right: 10px;
+
+            z-index: 9999;
+
+        }
+
+        .profile-logo {
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 50%;
+
+            background-color: white;
+
+            border: 2px solid #333;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-decoration: none;
+
+            font-size: 23px;
+
+            cursor: pointer;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.20);
+
+            transition: 0.3s;
+
+        }
+
+        .profile-logo:hover {
+
+            transform: scale(1.1);
+
+        }
+
+
+        /* =========================================
+           LOGIN AND REGISTER BUTTONS
+           ========================================= */
+
+        .auth-buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-top: 25px;
+
+        }
+
+
+        .auth-buttons a {
+
+            display: inline-block;
+
+            padding: 12px 30px;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+
+        }
+
+
+        /* Login */
+
+        .login-button {
+
+            background-color: #1379de;
+
+            color: white;
+
+        }
+
+
+        /* Register */
+
+        .register-button {
+
+            background-color: #0ee42e;
+
+            color: white;
+
+        }
+
+
+        /* Hover */
+
+        .auth-buttons a:hover {
+
+            transform: translateY(-2px);
+
+            opacity: 0.85;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .profile-top {
+
+                top: 8px;
+
+                right: 8px;
+
+            }
+
+            .profile-logo {
+
+                width: 40px;
+
+                height: 40px;
+
+                font-size: 20px;
+
+            }
+
+            .auth-buttons {
+
+                flex-direction: column;
+
+            }
+
+            .auth-buttons a {
+
+                width: 180px;
+
+                text-align: center;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-    <!-- Navigation Bar -->
+
+    <!-- =========================================
+         PROFILE LOGO
+         ========================================= -->
+
+    <div class="profile-top">
+
+        <a href="profile.html"
+           class="profile-logo"
+           title="My Profile">
+
+            👤
+
+        </a>
+
+    </div>
+
+
+
+    <!-- =========================================
+         NAVIGATION BAR
+         ========================================= -->
 
     <header>
 
         <nav class="navbar">
 
+
+            <!-- Logo -->
+
             <div class="logo">
 
-                <h2>Inventory System</h2>
+                <h2>
+                    Inventory System
+                </h2>
 
             </div>
 
+
+
+            <!-- Navigation Links -->
+
             <ul class="nav-links">
 
-                <li><a href="index.html">Home</a></li>
 
-                <li><a href="login.html">Login</a></li>
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
 
-                <li><a href="register.html">Register</a></li>
 
-                <li><a href="dashboard.html">Dashboard</a></li>
+                <li>
+                    <a href="login.html">
+                        Login
+                    </a>
+                </li>
 
-                <li><a href="products.html">Products</a></li>
 
-                <li><a href="suppliers.html">Suppliers</a></li>
+                <li>
+                    <a href="register.html">
+                        Register
+                    </a>
+                </li>
 
-                <li><a href="inventory.html">Inventory</a></li>
 
-                <li><a href="sales.html">Sales</a></li>
+                <li>
+                    <a href="dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
 
-                <li><a href="reports.html">Reports</a></li>
+
+                <li>
+                    <a href="products.html">
+                        Products
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="suppliers.html">
+                        Suppliers
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="inventory.html">
+                        Inventory
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="sales.html">
+                        Sales
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="reports.html">
+                        Reports
+                    </a>
+                </li>
+
 
             </ul>
 
         </nav>
 
     </header>
-    
 
-    <!-- Back Button -->
+
+
+    <!-- =========================================
+         BACK BUTTON
+         ========================================= -->
 
     <div class="top-buttons">
 
         <button onclick="history.back()">
 
-             Back
+            Back
 
         </button>
 
     </div>
 
-    <!-- Hero Section -->
+
+
+    <!-- =========================================
+         HERO SECTION
+         ========================================= -->
 
     <section class="hero">
 
+
         <h1>
 
-            Advanced Inventory & Supplier Management System
+            Advanced Inventory & Supplier
+            Management System
 
         </h1>
 
+
         <p>
 
-            Manage Products, Suppliers, Inventory, Sales,
-            Purchases and Reports through a secure web
-            application built using FastAPI, MySQL and JWT
-            Authentication.
+            Manage Products, Suppliers, Inventory,
+            Sales, Purchases and Reports through a
+            secure web application built using
+            FastAPI, MySQL and JWT Authentication.
 
         </p>
 
-        <div class="hero-buttons">
 
-            <a href="login.html" class="btn">
+
+        <!-- =====================================
+             LOGIN AND REGISTER
+             ===================================== -->
+
+        <div class="auth-buttons">
+
+
+            <a href="login.html"
+               class="login-button">
 
                 Login
 
             </a>
 
+
             <a href="register.html"
-               class="btn btn-secondary">
+               class="register-button">
 
                 Register
 
             </a>
 
+
         </div>
+
 
     </section>
 
 
-    <!-- Features -->
+
+    <!-- =========================================
+         FEATURES SECTION
+         ========================================= -->
 
     <section class="features">
 
+
+        <!-- Products -->
+
         <div class="card">
 
-            <h3>Products</h3>
+            <h3>
+                Products
+            </h3>
 
             <p>
-
                 Add, Update, View and Delete Products.
-
             </p>
 
             <a href="products.html">
-
                 Open
-
             </a>
 
         </div>
 
+
+
+        <!-- Suppliers -->
+
         <div class="card">
 
-            <h3>Suppliers</h3>
+            <h3>
+                Suppliers
+            </h3>
 
             <p>
-
                 Manage Supplier Details.
-
             </p>
 
             <a href="suppliers.html">
-
                 Open
-
             </a>
 
         </div>
 
+
+
+        <!-- Inventory -->
+
         <div class="card">
 
-            <h3>Inventory</h3>
+            <h3>
+                Inventory
+            </h3>
 
             <p>
-
                 Monitor Stock and Low Stock Alerts.
-
             </p>
 
             <a href="inventory.html">
-
                 Open
-
             </a>
 
         </div>
 
+
+
+        <!-- Sales -->
+
         <div class="card">
 
-            <h3>Sales</h3>
+            <h3>
+                Sales
+            </h3>
 
             <p>
-
                 Record Product Sales.
-
             </p>
 
             <a href="sales.html">
-
                 Open
-
             </a>
 
         </div>
+
+
+
+        <!-- Purchases -->
 
         <div class="card">
 
-            <h3>Reports</h3>
+            <h3>
+                Purchases
+            </h3>
 
             <p>
-
-                Generate Inventory, Sales and Purchase Reports.
-
+                Record purchases and automatically
+                update stock.
             </p>
 
-            <a href="reports.html">
-
+            <a href="purchases.html">
                 Open
-
             </a>
 
         </div>
 
+
+
+        <!-- Reports -->
+
+        <div class="card">
+
+            <h3>
+                Reports
+            </h3>
+
+            <p>
+                Generate Inventory, Sales and
+                Purchase Reports.
+            </p>
+
+            <a href="reports.html">
+                Open
+            </a>
+
+        </div>
+
+
     </section>
 
 
-    <!-- About -->
+
+    <!-- =========================================
+         ABOUT PROJECT
+         ========================================= -->
 
     <section class="about">
 
+
         <h2>
-
             About the Project
-
         </h2>
+
 
         <p>
 
-            This project is developed using
-            <strong>FastAPI</strong>,
-            <strong>MySQL</strong>,
-            <strong>JWT Authentication</strong>,
-            HTML,
-            CSS and
-            JavaScript.
+            The Advanced Inventory & Supplier Management
+            System is a web-based application designed to
+            manage products, suppliers, inventory, purchases,
+            sales and reports in one centralized system.
 
         </p>
+
+
+        <p>
+
+            The backend is developed using
+            <strong>FastAPI</strong> and
+            <strong>MySQL</strong>, while the frontend
+            uses <strong>HTML</strong>,
+            <strong>CSS</strong> and
+            <strong>JavaScript</strong>.
+
+        </p>
+
+
+        <p>
+
+            <strong>JWT Authentication</strong> is used
+            to secure protected operations.
+
+        </p>
+
 
     </section>
 
 
-    <!-- Footer -->
+
+    <!-- =========================================
+         TECHNOLOGY STACK
+         ========================================= -->
+
+    <section class="about">
+
+
+        <h2>
+            Technology Stack
+        </h2>
+
+
+        <p>
+
+            FastAPI |
+            MySQL |
+            HTML |
+            CSS |
+            JavaScript |
+            JWT |
+            Kafka |
+            Docker |
+            GitHub Actions
+
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
 
     <footer>
 
         <p>
 
-            © 2026 Advanced Inventory & Supplier Management System
+            © 2026 Advanced Inventory & Supplier
+            Management System
 
         </p>
 
     </footer>
 
+
+
+    <!-- =========================================
+         MAIN JAVASCRIPT
+         ========================================= -->
+
     <script src="../static/script.js"></script>
+
 
 </body>
 
