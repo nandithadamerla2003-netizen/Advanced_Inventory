@@ -8,7 +8,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>My Profile - Inventory System</title>
+    <title>
+        My Profile | Inventory System
+    </title>
 
     <link rel="stylesheet"
           href="../static/style.css">
@@ -16,71 +18,119 @@
 
     <style>
 
-        /* =========================================
+        /* =====================================================
            PROFILE PAGE
-           ========================================= */
+           ===================================================== */
 
         body {
+            background: #f3f7fb;
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
 
-        /* =========================================
-           PROFILE CONTAINER
-           ========================================= */
+        /* =====================================================
+           PROFILE TOP ICON
+           ===================================================== */
 
-        .profile-page {
-            min-height: 80vh;
+        .profile-top-icon {
 
-            display: flex;
+            position: fixed;
 
-            justify-content: center;
+            top: 8px;
 
-            align-items: center;
+            right: 12px;
 
-            padding: 40px 20px;
-        }
+            width: 44px;
 
+            height: 44px;
 
-        /* =========================================
-           PROFILE CARD
-           ========================================= */
-
-        .profile-card {
-
-            width: 450px;
-
-            max-width: 95%;
+            border-radius: 50%;
 
             background: white;
 
-            border-radius: 15px;
+            border: 2px solid #333;
 
-            padding: 35px;
+            display: flex;
 
-            text-align: center;
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+
+            text-decoration: none;
+
+            z-index: 9999;
 
             box-shadow:
-                0 8px 25px rgba(0, 0, 0, 0.15);
+                0 3px 10px rgba(0,0,0,0.20);
+
         }
 
 
-        /* =========================================
-           ROUND PROFILE LOGO
-           ========================================= */
+        /* =====================================================
+           MAIN CONTAINER
+           ===================================================== */
 
-        .profile-logo {
+        .profile-container {
+
+            width: 92%;
+
+            max-width: 1150px;
+
+            margin: 35px auto 50px;
+
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+           ===================================================== */
+
+        .profile-header {
+
+            background: linear-gradient(
+                135deg,
+                #15578b,
+                #2874c6
+            );
+
+            color: white;
+
+            border-radius: 15px;
+
+            padding: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+
+            box-shadow:
+                0 6px 20px rgba(206, 59, 59, 0.15);
+
+        }
+
+
+        /* =====================================================
+           LARGE PROFILE LOGO
+           ===================================================== */
+
+        .profile-avatar {
 
             width: 100px;
 
             height: 100px;
 
+            min-width: 100px;
+
             border-radius: 50%;
 
-            background: #f2f2f2;
+            background: white;
 
-            border: 3px solid #333;
+            border: 4px solid rgba(255,255,255,0.8);
 
             display: flex;
 
@@ -88,45 +138,115 @@
 
             justify-content: center;
 
-            margin: 0 auto 20px auto;
+            font-size: 52px;
 
-            font-size: 50px;
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.20);
+
         }
 
 
-        /* =========================================
-           PROFILE TITLE
-           ========================================= */
+        /* =====================================================
+           PROFILE HEADER TEXT
+           ===================================================== */
 
-        .profile-card h1 {
+        .profile-header-info h1 {
 
-            margin-bottom: 8px;
+            margin: 0 0 8px;
 
-            font-size: 28px;
+            font-size: 30px;
+
         }
 
 
-        .profile-card .subtitle {
+        .profile-header-info p {
 
-            color: #666;
+            margin: 5px 0;
 
-            margin-bottom: 30px;
+            font-size: 14px;
+
+            opacity: 0.95;
+
         }
 
 
-        /* =========================================
-           USER INFORMATION
-           ========================================= */
+        .role-badge {
 
-        .profile-info {
+            display: inline-block;
 
-            text-align: left;
+            background: white;
+
+            color: #15578b;
+
+            padding: 6px 14px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-top: 8px;
+
+        }
+
+
+        /* =====================================================
+           GRID
+           ===================================================== */
+
+        .profile-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
 
             margin-top: 20px;
+
         }
 
 
-        .profile-row {
+        /* =====================================================
+           CARD
+           ===================================================== */
+
+        .profile-section {
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.10);
+
+        }
+
+
+        .profile-section h2 {
+
+            margin: 0 0 20px;
+
+            font-size: 19px;
+
+            color: #15578b;
+
+            border-bottom: 2px solid #e8edf2;
+
+            padding-bottom: 10px;
+
+        }
+
+
+        /* =====================================================
+           INFORMATION ROW
+           ===================================================== */
+
+        .info-row {
 
             display: flex;
 
@@ -134,74 +254,315 @@
 
             align-items: center;
 
-            padding: 15px 5px;
+            padding: 12px 0;
 
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #edf0f3;
+
+            gap: 15px;
+
         }
 
 
-        .profile-row:last-child {
+        .info-row:last-child {
 
             border-bottom: none;
+
         }
 
 
-        .profile-label {
+        .info-label {
+
+            color: #0e0404;
+
+            font-size: 13px;
 
             font-weight: bold;
 
-            color: #555;
         }
 
 
-        .profile-value {
+        .info-value {
 
             color: #222;
 
-            font-weight: 500;
+            font-size: 13px;
 
             text-align: right;
 
             word-break: break-word;
+
         }
 
 
-        /* =========================================
-           ACTIVE STATUS
-           ========================================= */
+        /* =====================================================
+           STATUS
+           ===================================================== */
 
-        .active-status {
+        .status-active {
 
-            color: green;
+            color: #16803c;
 
             font-weight: bold;
+
         }
 
 
-        /* =========================================
-           ROLE BADGE
-           ========================================= */
+        .status-active::before {
 
-        .role-badge {
+            content: "●";
 
-            display: inline-block;
+            margin-right: 6px;
 
-            padding: 6px 14px;
+        }
+
+
+        .status-secure {
+
+            color: #15578b;
+
+            font-weight: bold;
+
+        }
+
+
+        .status-secure::before {
+
+            content: "✓";
+
+            margin-right: 5px;
+
+        }
+
+
+        /* =====================================================
+           TECHNICAL INFORMATION
+           ===================================================== */
+
+        .technical-list {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+
+        }
+
+
+        .technical-item {
+
+            background: #f5f8fb;
+
+            border: 1px solid #e1e8ef;
+
+            border-radius: 8px;
+
+            padding: 14px;
+
+        }
+
+
+        .technical-item span {
+
+            display: block;
+
+            font-size: 11px;
+
+            color: #777;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .technical-item strong {
+
+            font-size: 13px;
+
+            color: #222;
+
+        }
+
+
+        /* =====================================================
+           SECURITY CARD
+           ===================================================== */
+
+        .security-card {
+
+            border-left: 5px solid #15578b;
+
+        }
+
+
+        .security-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 15px;
+
+            padding: 10px;
+
+            background: #f7fafc;
+
+            border-radius: 7px;
+
+        }
+
+
+        .security-icon {
+
+            width: 35px;
+
+            height: 35px;
+
+            border-radius: 50%;
+
+            background: #e8f1f8;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 17px;
+
+        }
+
+
+        .security-text strong {
+
+            display: block;
+
+            font-size: 13px;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .security-text span {
+
+            font-size: 11px;
+
+            color: #777;
+
+        }
+
+
+        /* =====================================================
+           TECHNOLOGY STACK
+           ===================================================== */
+
+        .technology-section {
+
+            margin-top: 20px;
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.10);
+
+        }
+
+
+        .technology-section h2 {
+
+            color: #15578b;
+
+            font-size: 19px;
+
+            margin-top: 0;
+
+        }
+
+
+        .technology-tags {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+        }
+
+
+        .technology-tag {
+
+            padding: 8px 15px;
 
             border-radius: 20px;
 
-            background: #eeeeee;
+            background: #eef5fa;
+
+            border: 1px solid #d7e5ef;
+
+            color: #15578b;
+
+            font-size: 12px;
 
             font-weight: bold;
 
         }
 
 
-        /* =========================================
-           BUTTONS
-           ========================================= */
+        /* =====================================================
+           API STATUS
+           ===================================================== */
 
-        .profile-buttons {
+        .api-status {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background: #f5f8fb;
+
+            border-radius: 8px;
+
+            padding: 14px;
+
+            margin-top: 15px;
+
+        }
+
+
+        .api-online {
+
+            color: #16803c;
+
+            font-weight: bold;
+
+        }
+
+
+        .api-online::before {
+
+            content: "●";
+
+            margin-right: 6px;
+
+        }
+
+
+        /* =====================================================
+           BUTTONS
+           ===================================================== */
+
+        .profile-actions {
 
             display: flex;
 
@@ -209,120 +570,187 @@
 
             gap: 12px;
 
-            margin-top: 30px;
+            margin-top: 25px;
 
             flex-wrap: wrap;
+
         }
 
 
-        .profile-btn {
+        .profile-action {
 
-            padding: 11px 20px;
+            border: none;
+
+            padding: 11px 22px;
 
             border-radius: 6px;
 
             text-decoration: none;
 
-            border: none;
-
-            cursor: pointer;
-
-            font-size: 15px;
+            font-size: 13px;
 
             font-weight: bold;
 
+            cursor: pointer;
+
+            transition: 0.3s;
+
         }
 
 
-        .dashboard-btn {
+        .dashboard-button {
 
-            background: #333;
+            background: #15578b;
 
             color: white;
+
         }
 
 
-        .home-btn {
+        .home-button {
 
-            background: #777;
+            background: #2874c6;
 
             color: white;
+
         }
 
 
-        .logout-btn {
+        .logout-button {
 
             background: #d9534f;
 
             color: white;
-        }
-
-
-        .profile-btn:hover {
-
-            opacity: 0.85;
 
         }
 
 
-        /* =========================================
-           LOADING MESSAGE
-           ========================================= */
+        .profile-action:hover {
 
-        #loadingMessage {
+            transform: translateY(-2px);
+
+            opacity: 0.88;
+
+        }
+
+
+        /* =====================================================
+           LOADING
+           ===================================================== */
+
+        #loading {
 
             text-align: center;
 
+            padding: 30px;
+
             color: #666;
 
-            margin-top: 20px;
         }
 
 
-        /* =========================================
-           ERROR MESSAGE
-           ========================================= */
+        /* =====================================================
+           ERROR
+           ===================================================== */
 
-        #errorMessage {
+        #error {
 
             display: none;
 
-            color: red;
+            background: #ffecec;
+
+            color: #c62828;
+
+            border: 1px solid #f3b7b7;
+
+            padding: 15px;
+
+            border-radius: 7px;
 
             margin-top: 20px;
+
+            text-align: center;
 
         }
 
 
-        /* =========================================
-           MOBILE
-           ========================================= */
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
 
-        @media (max-width: 600px) {
+        @media (max-width: 800px) {
 
-            .profile-card {
+            .profile-grid {
 
-                padding: 25px 20px;
+                grid-template-columns: 1fr;
 
             }
 
-            .profile-card h1 {
+
+            .profile-header {
+
+                flex-direction: column;
+
+                text-align: center;
+
+            }
+
+
+            .technical-list {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .profile-container {
+
+                width: 94%;
+
+            }
+
+
+            .profile-header {
+
+                padding: 25px 15px;
+
+            }
+
+
+            .profile-avatar {
+
+                width: 85px;
+
+                height: 85px;
+
+                min-width: 85px;
+
+                font-size: 43px;
+
+            }
+
+
+            .profile-header-info h1 {
 
                 font-size: 24px;
 
             }
 
-            .profile-row {
+
+            .info-row {
 
                 flex-direction: column;
 
                 align-items: flex-start;
 
-                gap: 5px;
-
             }
 
-            .profile-value {
+
+            .info-value {
 
                 text-align: left;
 
@@ -336,301 +764,705 @@
 
 
 <body>
+                <!-- =======================
+            Back Button
+            ======================== -->
 
+            <div class="top-buttons">
 
-    <!-- ================================================= -->
-    <!--                    NAVIGATION                     -->
-    <!-- ================================================= -->
+                <button onclick="history.back()">
 
-    <header>
+                    Back
 
-        <nav class="navbar">
-
-
-            <!-- Logo -->
-
-            <div class="logo">
-
-                <h2>
-                    Inventory System
-                </h2>
+                </button>
 
             </div>
 
 
-            <!-- Navigation Links -->
 
-            <ul class="nav-links">
+    <!-- =====================================================
+         TOP PROFILE ICON
+         ===================================================== -->
 
-                <li>
-                    <a href="index.html">
-                        Home
-                    </a>
-                </li>
+    <a href="profile.html"
+       class="profile-top-icon"
+       title="My Profile">
 
-                <li>
-                    <a href="dashboard.html">
-                        Dashboard
-                    </a>
-                </li>
+        👤
 
-                <li>
-                    <a href="products.html">
-                        Products
-                    </a>
-                </li>
-
-                <li>
-                    <a href="suppliers.html">
-                        Suppliers
-                    </a>
-                </li>
-
-                <li>
-                    <a href="inventory.html">
-                        Inventory
-                    </a>
-                </li>
-
-                <li>
-                    <a href="sales.html">
-                        Sales
-                    </a>
-                </li>
-
-                <li>
-                    <a href="reports.html">
-                        Reports
-                    </a>
-                </li>
-
-            </ul>
-
-
-            <!-- Profile Icon -->
-
-            <div class="profile-top-right">
-
-                <a href="profile.html"
-                   class="profile-circle"
-                   title="My Profile">
-
-                    👤
-
-                </a>
-
-            </div>
-
-        </nav>
-
-    </header>
+    </a>
 
 
 
-    <!-- ================================================= -->
-    <!--                    BACK BUTTON                    -->
-    <!-- ================================================= -->
+    <!-- =====================================================
+         MAIN PROFILE CONTAINER
+         ===================================================== -->
 
-    <div class="top-buttons">
-
-        <button onclick="history.back()">
-
-            ← Back
-
-        </button>
-
-    </div>
+    <main class="profile-container">
 
 
+        <!-- =================================================
+             PROFILE HEADER
+             ================================================= -->
 
-    <!-- ================================================= -->
-    <!--                  PROFILE SECTION                  -->
-    <!-- ================================================= -->
+        <section class="profile-header">
 
-    <main class="profile-page">
+            <!-- Profile Avatar -->
 
-
-        <div class="profile-card">
-
-
-            <!-- ========================================= -->
-            <!--             ROUND PROFILE ICON            -->
-            <!-- ========================================= -->
-
-            <div class="profile-logo">
+            <div class="profile-avatar">
 
                 👤
 
             </div>
 
 
-            <!-- ========================================= -->
-            <!--                  TITLE                    -->
-            <!-- ========================================= -->
+            <!-- Profile Information -->
 
-            <h1>
-
-                My Profile
-
-            </h1>
+            <div class="profile-header-info">
 
 
-            <p class="subtitle">
+                <h1 id="displayName">
 
-                Advanced Inventory & Supplier
-                Management System
+                    My Profile
 
-            </p>
-
+                </h1>
 
 
-            <!-- ========================================= -->
-            <!--              LOADING MESSAGE              -->
-            <!-- ========================================= -->
+                <p>
 
-            <p id="loadingMessage">
+                    Advanced Inventory & Supplier
+                    Management System
 
-                Loading profile...
-
-            </p>
+                </p>
 
 
-            <!-- ========================================= -->
-            <!--              ERROR MESSAGE                -->
-            <!-- ========================================= -->
+                <p id="displayEmail">
 
-            <p id="errorMessage"></p>
+                    Loading account information...
 
-
-
-            <!-- ========================================= -->
-            <!--              PROFILE INFORMATION          -->
-            <!-- ========================================= -->
-
-            <div class="profile-info"
-                 id="profileInfo"
-                 style="display: none;">
+                </p>
 
 
-                <!-- Username -->
+                <span class="role-badge"
+                      id="displayRole">
 
-                <div class="profile-row">
+                    User
 
-                    <span class="profile-label">
-
-                        Username
-
-                    </span>
-
-                    <span class="profile-value"
-                          id="username">
-
-                        -
-
-                    </span>
-
-                </div>
+                </span>
 
 
-                <!-- Role -->
+            </div>
 
-                <div class="profile-row">
 
-                    <span class="profile-label">
+        </section>
 
-                        Role
 
-                    </span>
 
-                    <span class="profile-value">
+        <!-- =================================================
+             LOADING
+             ================================================= -->
 
-                        <span class="role-badge"
+        <div id="loading">
+
+            Loading profile information...
+
+        </div>
+
+
+        <!-- =================================================
+             ERROR
+             ================================================= -->
+
+        <div id="error">
+
+            Unable to load profile information.
+
+        </div>
+
+
+
+        <!-- =================================================
+             PROFILE CONTENT
+             ================================================= -->
+
+        <div id="profileContent"
+             style="display:none;">
+
+
+
+            <!-- =================================================
+                 TWO COLUMN GRID
+                 ================================================= -->
+
+            <div class="profile-grid">
+
+
+                <!-- =============================================
+                     ACCOUNT INFORMATION
+                     ============================================= -->
+
+                <section class="profile-section">
+
+
+                    <h2>
+
+                        👤 Account Information
+
+                    </h2>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            Full Name
+
+                        </span>
+
+                        <span class="info-value"
+                              id="fullName">
+
+                            -
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            Username
+
+                        </span>
+
+                        <span class="info-value"
+                              id="username">
+
+                            -
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            Email
+
+                        </span>
+
+                        <span class="info-value"
+                              id="email">
+
+                            -
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            Role
+
+                        </span>
+
+                        <span class="info-value"
                               id="role">
 
                             -
 
                         </span>
 
-                    </span>
-
-                </div>
+                    </div>
 
 
-                <!-- Account Status -->
+                    <div class="info-row">
 
-                <div class="profile-row">
+                        <span class="info-label">
 
-                    <span class="profile-label">
+                            User ID
 
-                        Account Status
+                        </span>
 
-                    </span>
+                        <span class="info-value"
+                              id="userId">
 
-                    <span class="profile-value active-status">
+                            -
 
-                        Active
+                        </span>
 
-                    </span>
-
-                </div>
+                    </div>
 
 
-                <!-- Authentication -->
+                </section>
 
-                <div class="profile-row">
 
-                    <span class="profile-label">
 
-                        Authentication
+                <!-- =============================================
+                     ACCOUNT STATUS
+                     ============================================= -->
 
-                    </span>
+                <section class="profile-section">
 
-                    <span class="profile-value">
 
-                        JWT Secured
+                    <h2>
 
-                    </span>
+                        🛡 Account Security
 
-                </div>
+                    </h2>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            Account Status
+
+                        </span>
+
+                        <span class="info-value status-active">
+
+                            Active
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            Authentication
+
+                        </span>
+
+                        <span class="info-value status-secure">
+
+                            JWT Secured
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            Password
+
+                        </span>
+
+                        <span class="info-value">
+
+                            Encrypted
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            Authorization
+
+                        </span>
+
+                        <span class="info-value">
+
+                            Role Based Access
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+
+                            Session
+
+                        </span>
+
+                        <span class="info-value status-secure">
+
+                            Protected
+
+                        </span>
+
+                    </div>
+
+
+                </section>
 
 
             </div>
 
+            <!-- =================================================
+                 TECHNICAL DETAILS
+                 ================================================= -->
+
+            <section class="profile-section"
+                     style="margin-top:20px;">
 
 
-            <!-- ========================================= -->
-            <!--                  BUTTONS                  -->
-            <!-- ========================================= -->
+                <h2>
 
-            <div class="profile-buttons">
+                    ⚙ Technical Information
+
+                </h2>
 
 
-                <!-- Dashboard -->
+                <div class="technical-list">
+
+
+                    <div class="technical-item">
+
+                        <span>
+                            Frontend
+                        </span>
+
+                        <strong>
+                            HTML / CSS / JavaScript
+                        </strong>
+
+                    </div>
+
+
+                    <div class="technical-item">
+
+                        <span>
+                            Backend
+                        </span>
+
+                        <strong>
+                            FastAPI
+                        </strong>
+
+                    </div>
+
+
+                    <div class="technical-item">
+
+                        <span>
+                            Database
+                        </span>
+
+                        <strong>
+                            MySQL
+                        </strong>
+
+                    </div>
+
+
+                    <div class="technical-item">
+
+                        <span>
+                            Authentication
+                        </span>
+
+                        <strong>
+                            JWT
+                        </strong>
+
+                    </div>
+
+
+                    <div class="technical-item">
+
+                        <span>
+                            API Architecture
+                        </span>
+
+                        <strong>
+                            REST API
+                        </strong>
+
+                    </div>
+
+
+                    <div class="technical-item">
+
+                        <span>
+                            Authorization
+                        </span>
+
+                        <strong>
+                            Role Based Access
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- API Status -->
+
+                <div class="api-status">
+
+                    <span>
+
+                        Backend API Status
+
+                    </span>
+
+                    <span class="api-online">
+
+                        Connected
+
+                    </span>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SECURITY FEATURES
+                 ================================================= -->
+
+            <section class="profile-section security-card"
+                     style="margin-top:20px;">
+
+
+                <h2>
+
+                    🔐 Security Features
+
+                </h2>
+
+
+                <div class="security-item">
+
+
+                    <div class="security-icon">
+
+                        🔑
+
+                    </div>
+
+
+                    <div class="security-text">
+
+                        <strong>
+                            JWT Authentication
+                        </strong>
+
+                        <span>
+                            Secure token-based authentication
+                            for protected API requests.
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="security-item">
+
+
+                    <div class="security-icon">
+
+                        🔒
+
+                    </div>
+
+
+                    <div class="security-text">
+
+                        <strong>
+                            Password Hashing
+                        </strong>
+
+                        <span>
+                            User passwords are stored using
+                            secure password hashing.
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="security-item">
+
+
+                    <div class="security-icon">
+
+                        🛡
+
+                    </div>
+
+
+                    <div class="security-text">
+
+                        <strong>
+                            Role-Based Authorization
+                        </strong>
+
+                        <span>
+                            Access to protected operations
+                            depends on the user's role.
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="security-item">
+
+
+                    <div class="security-icon">
+
+                        🌐
+
+                    </div>
+
+
+                    <div class="security-text">
+
+                        <strong>
+                            Protected REST APIs
+                        </strong>
+
+                        <span>
+                            Authorized requests use a Bearer
+                            token to access backend resources.
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 TECHNOLOGY STACK
+                 ================================================= -->
+
+            <section class="technology-section">
+
+
+                <h2>
+
+                    💻 Technology Stack
+
+                </h2>
+
+
+                <div class="technology-tags">
+
+
+                    <span class="technology-tag">
+                        FastAPI
+                    </span>
+
+
+                    <span class="technology-tag">
+                        MySQL
+                    </span>
+
+
+                    <span class="technology-tag">
+                        Python
+                    </span>
+
+
+                    <span class="technology-tag">
+                        HTML5
+                    </span>
+
+
+                    <span class="technology-tag">
+                        CSS3
+                    </span>
+
+
+                    <span class="technology-tag">
+                        JavaScript
+                    </span>
+
+
+                    <span class="technology-tag">
+                        JWT
+                    </span>
+
+
+                    <span class="technology-tag">
+                        Kafka
+                    </span>
+
+
+                    <span class="technology-tag">
+                        Docker
+                    </span>
+
+
+                    <span class="technology-tag">
+                        GitHub Actions
+                    </span>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 ACTION BUTTONS
+                 ================================================= -->
+
+            <div class="profile-actions">
+
 
                 <a href="dashboard.html"
-                   class="profile-btn dashboard-btn">
+                   class="profile-action dashboard-button">
 
-                    Dashboard
+                    📊 Dashboard
 
                 </a>
 
-
-                <!-- Home -->
 
                 <a href="index.html"
-                   class="profile-btn home-btn">
+                   class="profile-action home-button">
 
-                    Home
+                    🏠 Home
 
                 </a>
 
 
-                <!-- Logout -->
-
                 <button onclick="logoutUser()"
-                        class="profile-btn logout-btn">
+                        class="profile-action logout-button">
 
-                    Logout
+                    🚪 Logout
 
                 </button>
 
@@ -644,9 +1476,9 @@
 
 
 
-    <!-- ================================================= -->
-    <!--                       FOOTER                      -->
-    <!-- ================================================= -->
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
 
     <footer>
 
@@ -661,38 +1493,39 @@
 
 
 
-    <!-- ================================================= -->
-    <!--                 MAIN JAVASCRIPT                  -->
-    <!-- ================================================= -->
-
-    <script src="../static/script.js"></script>
-
-
-
-    <!-- ================================================= -->
-    <!--                 PROFILE JAVASCRIPT               -->
-    <!-- ================================================= -->
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
 
     <script>
 
-        const BASE_URL = "http://127.0.0.1:8000";
+        /* =====================================================
+           API URL
+           ===================================================== */
+
+        const BASE_URL =
+            "http://127.0.0.1:8000";
 
 
-        /*
-         * ================================================
-         * LOAD PROFILE
-         * ================================================
-         */
+
+        /* =====================================================
+           LOAD PROFILE
+           ===================================================== */
 
         async function loadProfile() {
 
+
+            /* Get JWT token */
+
             const token =
-                localStorage.getItem("access_token");
+                localStorage.getItem(
+                    "access_token"
+                );
 
 
-            /*
-             * No token
-             */
+            /* ================================================
+               NO TOKEN
+               ================================================ */
 
             if (!token) {
 
@@ -707,9 +1540,9 @@
             try {
 
 
-                /*
-                 * Call FastAPI /auth/me
-                 */
+                /* ============================================
+                   CALL /auth/me
+                   ============================================ */
 
                 const response =
                     await fetch(
@@ -728,9 +1561,9 @@
                     );
 
 
-                /*
-                 * Token invalid / expired
-                 */
+                /* ============================================
+                   UNAUTHORIZED
+                   ============================================ */
 
                 if (response.status === 401) {
 
@@ -750,63 +1583,113 @@
                 }
 
 
-                /*
-                 * Other error
-                 */
+                /* ============================================
+                   OTHER ERROR
+                   ============================================ */
 
                 if (!response.ok) {
 
                     throw new Error(
-                        "Unable to load profile."
+                        "Profile request failed"
                     );
 
                 }
 
 
-                /*
-                 * Convert response to JSON
-                 */
+                /* Get JSON */
 
                 const data =
                     await response.json();
 
 
-                /*
-                 * Display username
-                 */
+                /* ============================================
+                   DISPLAY USER DATA
+                   ============================================ */
+
+                const username =
+                    data.username || "-";
+
+                const role =
+                    data.role || "User";
+
+                const fullName =
+                    data.full_name ||
+                    username;
+
+                const email =
+                    data.Email ||
+                    data.email ||
+                    "-";
+
+                const userId =
+                    data.user_id ||
+                    "-";
+
+
+                /* Header */
+
+                document.getElementById(
+                    "displayName"
+                ).innerText =
+                    fullName;
+
+
+                document.getElementById(
+                    "displayEmail"
+                ).innerText =
+                    email;
+
+
+                document.getElementById(
+                    "displayRole"
+                ).innerText =
+                    role;
+
+
+                /* Account */
+
+                document.getElementById(
+                    "fullName"
+                ).innerText =
+                    fullName;
+
 
                 document.getElementById(
                     "username"
                 ).innerText =
-                    data.username || "-";
+                    username;
 
 
-                /*
-                 * Display role
-                 */
+                document.getElementById(
+                    "email"
+                ).innerText =
+                    email;
+
 
                 document.getElementById(
                     "role"
                 ).innerText =
-                    data.role || "User";
+                    role;
 
-
-                /*
-                 * Hide loading message
-                 */
 
                 document.getElementById(
-                    "loadingMessage"
+                    "userId"
+                ).innerText =
+                    userId;
+
+
+                /* ============================================
+                   SHOW PROFILE
+                   ============================================ */
+
+                document.getElementById(
+                    "loading"
                 ).style.display =
                     "none";
 
 
-                /*
-                 * Show profile information
-                 */
-
                 document.getElementById(
-                    "profileInfo"
+                    "profileContent"
                 ).style.display =
                     "block";
 
@@ -814,26 +1697,21 @@
             } catch (error) {
 
 
-                console.error(error);
+                console.error(
+                    "Profile Error:",
+                    error
+                );
 
 
                 document.getElementById(
-                    "loadingMessage"
+                    "loading"
                 ).style.display =
                     "none";
 
 
-                const errorMessage =
-                    document.getElementById(
-                        "errorMessage"
-                    );
-
-
-                errorMessage.innerText =
-                    "Unable to connect to the server.";
-
-
-                errorMessage.style.display =
+                document.getElementById(
+                    "error"
+                ).style.display =
                     "block";
 
             }
@@ -842,36 +1720,22 @@
 
 
 
-        /*
-         * ================================================
-         * LOGOUT
-         * ================================================
-         */
+        /* =====================================================
+           LOGOUT
+           ===================================================== */
 
         function logoutUser() {
 
-
-            /*
-             * Remove JWT token
-             */
 
             localStorage.removeItem(
                 "access_token"
             );
 
 
-            /*
-             * Message
-             */
-
             alert(
                 "Logged out successfully."
             );
 
-
-            /*
-             * Return to home page
-             */
 
             window.location.href =
                 "index.html";
@@ -880,11 +1744,9 @@
 
 
 
-        /*
-         * ================================================
-         * RUN WHEN PAGE LOADS
-         * ================================================
-         */
+        /* =====================================================
+           PAGE LOAD
+           ===================================================== */
 
         document.addEventListener(
             "DOMContentLoaded",

@@ -2,228 +2,312 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sales</title>
+    <title>Sales Management - Inventory System</title>
 
     <link rel="stylesheet" href="../static/style.css">
-
 </head>
 
 <body>
 
-    <!-- =======================
-         Navigation Bar
-    ======================== -->
+<header>
+    <nav class="navbar">
 
-    <header>
+        <!-- Logo -->
+        <div class="logo">
+            <h2>Inventory System</h2>
+        </div>
 
-        <nav class="navbar">
+        <!-- Navigation -->
+        <ul class="nav-links">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
 
-            <div class="logo">
-                <h2>Inventory System</h2>
+            <li id="loginLink">
+                <a href="login.html">Login</a>
+            </li>
+
+            <li id="registerLink">
+                <a href="register.html">Register</a>
+            </li>
+
+            <li>
+                <a href="dashboard.html">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="products.html">Products</a>
+            </li>
+
+            <li>
+                <a href="suppliers.html">Suppliers</a>
+            </li>
+
+            <li>
+                <a href="inventory.html">Inventory</a>
+            </li>
+
+            <li>
+                <a href="sales.html">Sales</a>
+            </li>
+
+            <li>
+                <a href="reports.html">Reports</a>
+            </li>
+        </ul>
+
+        <!-- Profile Icon -->
+        <div id="profileIcon"
+             class="profile-icon-container"
+             style="display: none;">
+
+            <a href="profile.html"
+               title="View Profile"
+               class="profile-circle">
+                👤
+            </a>
+
+        </div>
+
+    </nav>
+</header>
+
+
+<!-- Back Button -->
+<div class="top-buttons">
+    <button onclick="history.back()">Back</button>
+</div>
+
+
+<!-- Main Content -->
+<main>
+
+    <section class="page-header">
+
+        <h1>Sales Management</h1>
+
+        <p>
+            Record and manage product sales.
+            Stock is automatically reduced when a sale is added.
+        </p>
+
+    </section>
+
+
+    <!-- Add Sale Section -->
+    <section class="form-section">
+
+        <h2>Add New Sale</h2>
+
+        <form id="saleForm">
+
+            <!-- Product -->
+            <div class="form-group">
+
+                <label for="product_id">
+                    Product
+                </label>
+
+                <select id="product_id"
+                        name="product_id"
+                        required>
+
+                    <option value="">
+                        Select Product
+                    </option>
+
+                </select>
+
             </div>
 
-            <ul class="nav-links">
 
-                <li><a href="index.html">Home</a></li>
+            <!-- Quantity -->
+            <div class="form-group">
 
-                <li><a href="dashboard.html">Dashboard</a></li>
+                <label for="quantity">
+                    Quantity
+                </label>
 
-                <li><a href="products.html">Products</a></li>
+                <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="1"
+                    required
+                >
 
-                <li><a href="suppliers.html">Suppliers</a></li>
-
-                <li><a href="inventory.html">Inventory</a></li>
-
-                <li><a href="sales.html">Sales</a></li>
-
-                <li><a href="reports.html">Reports</a></li>
-
-            </ul>
-
-        </nav>
-
-    </header>
+            </div>
 
 
-     <!-- =======================
-         Back Button
-    ======================== -->
+            <!-- Selling Price -->
+            <div class="form-group">
 
-    <div class="top-buttons">
+                <label for="selling_price">
+                    Selling Price
+                </label>
 
-        <button onclick="history.back()">
+                <input
+                    type="number"
+                    id="selling_price"
+                    name="selling_price"
+                    min="0"
+                    step="0.01"
+                    required
+                >
 
-             Back
+            </div>
 
-        </button>
 
-    </div>
+            <!-- Sale Date -->
+            <div class="form-group">
 
-    <h1>Sales Management</h1>
+                <label for="sale_date">
+                    Sale Date
+                </label>
 
-    <form id="saleForm">
+                <input
+                    type="date"
+                    id="sale_date"
+                    name="sale_date"
+                    required
+                >
 
-        <input
-            type="number"
-            id="product_id"
-            placeholder="Product ID"
-            required
-        >
+            </div>
 
-        <input
-            type="number"
-            id="quantity"
-            placeholder="Quantity"
-            required
-        >
 
-        <input
-            type="number"
-            step="0.01"
-            id="selling_price"
-            placeholder="Selling Price"
-            required
-        >
+            <!-- Submit -->
+            <div class="form-buttons">
 
-        <input
-            type="date"
-            id="sale_date"
-            required
-        >
+                <button
+                    type="submit"
+                    class="btn">
+                    Add Sale
+                </button>
 
-        <button type="submit">
-            Add Sale
-        </button>
+                <button
+                    type="reset"
+                    class="btn btn-secondary">
+                    Clear
+                </button>
 
-    </form>
+            </div>
 
-    <br>
+        </form>
 
-    <table border="1">
+    </section>
 
-        <thead>
 
-            <tr>
+    <!-- Sales Table -->
+    <section class="table-section">
 
-                <th>Sale ID</th>
-                <th>Product ID</th>
-                <th>Quantity</th>
-                <th>Selling Price</th>
-                <th>Sale Date</th>
+        <h2>Sales Details</h2>
 
-            </tr>
+        <div class="table-container">
 
-        </thead>
+            <table>
 
-        <tbody id="salesTable">
+                <thead>
 
-        </tbody>
+                    <tr>
 
-    </table>
+                        <th>Sale ID</th>
+
+                        <th>Product ID</th>
+
+                        <th>Quantity</th>
+
+                        <th>Selling Price</th>
+
+                        <th>Sale Date</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="salesTable">
+
+                    <!-- Sales records will be loaded here -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- Footer -->
+<footer>
+
+    <p>
+        © 2026 Advanced Inventory & Supplier Management System
+    </p>
+
+</footer>
+
+
+<!-- JavaScript -->
+<script src="../static/script.js"></script>
+
 
 <script>
 
-const API = "http://127.0.0.1:8000/sales";
+document.addEventListener("DOMContentLoaded", async function () {
 
-const token = localStorage.getItem("access_token");
+    /*
+     * Check whether the user is logged in
+     */
+    const user = await checkLogin();
 
-loadSales();
+    if (!user) {
+        return;
+    }
 
-function loadSales(){
 
-    fetch(API,{
+    /*
+     * Apply role-based UI
+     */
+    applyRoleBasedUI(user);
 
-        headers:{
-            "Authorization":"Bearer " + token
-        }
 
-    })
+    /*
+     * Load products into product dropdown
+     */
+    await loadProductDropdown("product_id");
 
-    .then(response => response.json())
 
-    .then(data=>{
+    /*
+     * Load existing sales
+     */
+    await loadSales();
 
-        let rows="";
 
-        data.forEach(sale=>{
+    /*
+     * Sales form submission
+     */
+    const saleForm = document.getElementById("saleForm");
 
-            rows +=`
+    if (saleForm) {
 
-            <tr>
+        saleForm.addEventListener("submit", async function (event) {
 
-                <td>${sale.sale_id}</td>
+            event.preventDefault();
 
-                <td>${sale.product_id}</td>
-
-                <td>${sale.quantity}</td>
-
-                <td>${sale.selling_price}</td>
-
-                <td>${sale.sale_date}</td>
-
-            </tr>
-
-            `;
+            await addSale();
 
         });
 
-        document.getElementById("salesTable").innerHTML=rows;
+    }
 
-    });
-
-}
-
-document.getElementById("saleForm").onsubmit=function(e){
-
-    e.preventDefault();
-
-    let sale={
-
-        product_id:Number(document.getElementById("product_id").value),
-
-        quantity:Number(document.getElementById("quantity").value),
-
-        selling_price:Number(document.getElementById("selling_price").value),
-
-        sale_date:document.getElementById("sale_date").value
-
-    };
-
-    fetch(API,{
-
-        method:"POST",
-
-        headers:{
-
-            "Content-Type":"application/json",
-
-            "Authorization":"Bearer " + token
-
-        },
-
-        body:JSON.stringify(sale)
-
-    })
-
-    .then(response=>response.json())
-
-    .then(()=>{
-
-        document.getElementById("saleForm").reset();
-
-        loadSales();
-
-    });
-
-};
+});
 
 </script>
 
 </body>
-
 </html>
