@@ -73,7 +73,7 @@ def purchase_history(user=Depends(verify_token)):
     FROM purchases
     JOIN products
     ON purchases.product_id = products.product_id
-    ORDER BY purchase_date DESC
+    ORDER BY purchase_date ASC
     """
 
     return fetch_all(query)

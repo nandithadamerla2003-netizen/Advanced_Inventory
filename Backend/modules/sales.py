@@ -80,7 +80,7 @@ def sales_history(user=Depends(verify_token)):
     FROM sales
     JOIN products
     ON sales.product_id = products.product_id
-    ORDER BY sale_date DESC
+    ORDER BY sale_date ASC
     """
 
     return fetch_all(query)

@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Sales | Advanced Inventory System</title>
+    <title>Purchases | Advanced Inventory System</title>
 
     <link rel="stylesheet"
           href="../static/style.css">
@@ -27,18 +27,18 @@
             font-size: 14px;
         }
 
-        /* ==========================================
-           MAIN LAYOUT
-        ========================================== */
+        /* ================================
+           LAYOUT
+        ================================= */
 
         .dashboard-layout {
             display: flex;
             min-height: 100vh;
         }
 
-        /* ==========================================
+        /* ================================
            SIDEBAR
-        ========================================== */
+        ================================= */
 
         .dashboard-sidebar {
             width: 240px;
@@ -46,7 +46,7 @@
             left: 0;
             top: 0;
             bottom: 0;
-            background: white;
+            background: #ffffff;
             border-right: 1px solid #e1e6ee;
             z-index: 100;
         }
@@ -120,9 +120,9 @@
             font-size: 17px;
         }
 
-        /* ==========================================
+        /* ================================
            MAIN
-        ========================================== */
+        ================================= */
 
         .dashboard-main {
             margin-left: 240px;
@@ -130,9 +130,9 @@
             min-height: 100vh;
         }
 
-        /* ==========================================
+        /* ================================
            HEADER
-        ========================================== */
+        ================================= */
 
         .dashboard-header {
             height: 75px;
@@ -155,7 +155,7 @@
         .header-right {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 18px;
         }
 
         .refresh-status {
@@ -170,26 +170,17 @@
             border: 1px solid #d5deeb;
             background: #1769d1;
             color: white;
-            font-weight: bold;
             cursor: pointer;
             font-size: 17px;
         }
 
-        .profile-button:hover {
-            background: #0f59b8;
-        }
-
-        /* ==========================================
+        /* ================================
            CONTENT
-        ========================================== */
+        ================================= */
 
         .dashboard-content {
             padding: 20px 30px 35px;
         }
-
-        /* ==========================================
-           BACK BUTTON
-        ========================================== */
 
         .back-button-container {
             margin-bottom: 20px;
@@ -210,9 +201,9 @@
             background: #edf4ff;
         }
 
-        /* ==========================================
-           PAGE TITLE
-        ========================================== */
+        /* ================================
+           TITLE
+        ================================= */
 
         .page-title {
             margin-bottom: 25px;
@@ -229,13 +220,13 @@
             font-size: 15px;
         }
 
-        /* ==========================================
+        /* ================================
            SUMMARY
-        ========================================== */
+        ================================= */
 
         .summary-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 18px;
             margin-bottom: 25px;
         }
@@ -257,104 +248,193 @@
         .summary-value {
             font-size: 27px;
             font-weight: bold;
-            color: #18243a;
         }
 
-        .money-value {
+        .blue {
             color: #1769d1;
         }
 
-        /* ==========================================
-           FORM
-        ========================================== */
+        .green {
+            color: #16865a;
+        }
 
-        .sales-form-card {
+        .orange {
+            color: #c77700;
+        }
+
+        /* ================================
+           FORM CARD
+        ================================= */
+
+        .form-card {
             background: white;
             border: 1px solid #e0e6ee;
             border-radius: 12px;
-            padding: 25px;
             margin-bottom: 25px;
+            padding: 25px;
         }
 
-        .section-title {
-            margin: 0 0 20px;
+        .form-title {
+            margin-bottom: 20px;
+        }
+
+        .form-title h3 {
+            margin: 0 0 5px;
             font-size: 18px;
         }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
+        .form-title p {
+            margin: 0;
+            color: #8994a5;
+            font-size: 13px;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
+        .purchase-form {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            align-items: end;
         }
 
         .form-group label {
+            display: block;
             margin-bottom: 7px;
-            color: #526071;
-            font-size: 13px;
+            color: #475467;
+            font-size: 12px;
             font-weight: bold;
         }
 
         .form-group input {
-            height: 43px;
+            width: 100%;
+            height: 42px;
             padding: 0 12px;
-            border: 1px solid #d9e0e8;
+            border: 1px solid #d8dee7;
             border-radius: 7px;
             outline: none;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .form-group input:focus {
             border-color: #1769d1;
-            box-shadow: 0 0 0 3px rgba(23,105,209,0.08);
         }
 
-        .form-actions {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .primary-button {
-            height: 43px;
-            padding: 0 22px;
+        .add-button {
+            height: 42px;
             border: none;
             border-radius: 7px;
             background: #1769d1;
             color: white;
-            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
         }
 
-        .primary-button:hover {
+        .add-button:hover {
             background: #0f59b8;
         }
 
-        .secondary-button {
-            height: 43px;
-            padding: 0 22px;
+        /* ================================
+           TABLE CARD
+        ================================= */
+
+        .table-card {
+            background: white;
+            border: 1px solid #e0e6ee;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            min-height: 75px;
+            padding: 15px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .table-header h3 {
+            margin: 0 0 5px;
+            font-size: 17px;
+        }
+
+        .table-header span {
+            color: #8994a5;
+            font-size: 12px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-input {
+            width: 270px;
+            height: 40px;
+            padding: 0 12px;
+            border: 1px solid #d9e0e8;
+            border-radius: 7px;
+            outline: none;
+        }
+
+        .refresh-button {
+            height: 40px;
+            padding: 0 16px;
             border: 1px solid #d9e0e8;
             border-radius: 7px;
             background: white;
-            color: #526071;
-            font-size: 14px;
+            color: #1769d1;
             font-weight: bold;
             cursor: pointer;
         }
 
-        /* ==========================================
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 14px 18px;
+            background: #f8fafc;
+            color: #697586;
+            font-size: 11px;
+            text-align: left;
+            text-transform: uppercase;
+            border-bottom: 1px solid #e5e9ef;
+        }
+
+        td {
+            padding: 14px 18px;
+            border-bottom: 1px solid #edf0f4;
+            color: #475467;
+            font-size: 13px;
+        }
+
+        tr:hover {
+            background: #fafcff;
+        }
+
+        .id-column {
+            color: #1769d1;
+            font-weight: bold;
+        }
+
+        .amount {
+            color: #16865a;
+            font-weight: bold;
+        }
+
+        /* ================================
            MESSAGE
-        ========================================== */
+        ================================= */
 
         #message {
             display: none;
-            margin-bottom: 20px;
             padding: 12px 15px;
+            margin-bottom: 20px;
             border-radius: 7px;
             font-weight: bold;
         }
@@ -373,133 +453,9 @@
             border: 1px solid #f0caca;
         }
 
-        /* ==========================================
-           TABLE
-        ========================================== */
-
-        .table-card {
-            background: white;
-            border: 1px solid #e0e6ee;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .table-header {
-            min-height: 75px;
-            padding: 0 22px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #edf0f4;
-        }
-
-        .table-header h3 {
-            margin: 0 0 4px;
-            font-size: 17px;
-        }
-
-        .table-header span {
-            color: #8994a5;
-            font-size: 12px;
-        }
-
-        .search-input {
-            width: 280px;
-            height: 40px;
-            padding: 0 12px;
-            border: 1px solid #d9e0e8;
-            border-radius: 7px;
-            outline: none;
-            font-size: 13px;
-        }
-
-        .search-input:focus {
-            border-color: #1769d1;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        .sales-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .sales-table th {
-            padding: 15px 18px;
-            background: #f8fafc;
-            color: #697586;
-            font-size: 11px;
-            text-align: left;
-            text-transform: uppercase;
-            border-bottom: 1px solid #e5e9ef;
-        }
-
-        .sales-table td {
-            padding: 15px 18px;
-            border-bottom: 1px solid #edf0f4;
-            color: #475467;
-            font-size: 13px;
-        }
-
-        .sales-table tr:hover {
-            background: #fafcff;
-        }
-
-        .sale-id {
-            color: #1769d1;
-            font-weight: bold;
-        }
-
-        .price {
-            font-weight: bold;
-            color: #243148;
-        }
-
-        .total {
-            font-weight: bold;
-            color: #16865a;
-        }
-
-        /* ==========================================
-           ACTION BUTTONS
-        ========================================== */
-
-        .edit-button {
-            padding: 7px 12px;
-            border: 1px solid #d9e0e8;
-            border-radius: 6px;
-            background: white;
-            color: #1769d1;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
-            margin-right: 5px;
-        }
-
-        .edit-button:hover {
-            background: #edf4ff;
-        }
-
-        .delete-button {
-            padding: 7px 12px;
-            border: 1px solid #f0caca;
-            border-radius: 6px;
-            background: white;
-            color: #c53c3c;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .delete-button:hover {
-            background: #fff4f4;
-        }
-
-        /* ==========================================
+        /* ================================
            PROFILE DRAWER
-        ========================================== */
+        ================================= */
 
         .drawer-overlay {
             display: none;
@@ -540,7 +496,6 @@
 
         .drawer-header h2 {
             margin: 0;
-            font-size: 20px;
         }
 
         .close-drawer {
@@ -570,18 +525,15 @@
             align-items: center;
             justify-content: center;
             font-size: 28px;
-            font-weight: bold;
         }
 
         .profile-section h3 {
             margin: 12px 0 5px;
-            font-size: 19px;
         }
 
         .profile-section p {
             margin: 0;
             color: #8994a5;
-            font-size: 13px;
         }
 
         .drawer-section {
@@ -593,15 +545,13 @@
             margin: 0 0 15px;
             color: #8994a5;
             font-size: 11px;
-            text-transform: uppercase;
         }
 
         .drawer-link {
             display: block;
-            padding: 12px 0;
+            padding: 11px 0;
             color: #344054;
             text-decoration: none;
-            font-size: 14px;
             font-weight: 600;
         }
 
@@ -618,25 +568,20 @@
             color: #c53c3c;
             font-weight: bold;
             cursor: pointer;
-            font-size: 14px;
         }
 
-        .logout-button:hover {
-            background: #fff4f4;
-        }
-
-        /* ==========================================
+        /* ================================
            RESPONSIVE
-        ========================================== */
+        ================================= */
 
         @media (max-width: 1100px) {
 
-            .summary-grid {
+            .purchase-form {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .form-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .summary-grid {
+                grid-template-columns: 1fr;
             }
 
         }
@@ -666,24 +611,22 @@
                 padding: 18px;
             }
 
-            .summary-grid,
-            .form-grid {
+            .purchase-form {
                 grid-template-columns: 1fr;
             }
 
             .table-header {
-                align-items: flex-start;
                 flex-direction: column;
-                padding: 18px;
+                align-items: flex-start;
                 gap: 12px;
+            }
+
+            .header-actions {
+                width: 100%;
             }
 
             .search-input {
                 width: 100%;
-            }
-
-            .refresh-status {
-                display: none;
             }
 
             .profile-drawer {
@@ -767,10 +710,19 @@
 
 
             <a href="sales.html"
-               class="sidebar-link active">
+               class="sidebar-link">
 
                 <span class="sidebar-icon">⌁</span>
                 <span>Sales</span>
+
+            </a>
+
+
+            <a href="purchase.html"
+               class="sidebar-link active">
+
+                <span class="sidebar-icon">▱</span>
+                <span>Purchases</span>
 
             </a>
 
@@ -790,7 +742,7 @@
 
 
     <!-- =====================================================
-         MAIN
+         MAIN CONTENT
     ====================================================== -->
 
     <main class="dashboard-main">
@@ -802,9 +754,7 @@
 
 
             <div class="header-title">
-
-                Sales
-
+                Purchases
             </div>
 
 
@@ -827,8 +777,7 @@
 
                 <button
                     class="profile-button"
-                    onclick="openProfile()"
-                    title="Profile">
+                    onclick="openProfile()">
 
                     👤
 
@@ -861,17 +810,17 @@
 
 
 
-            <!-- PAGE TITLE -->
+            <!-- TITLE -->
 
             <div class="page-title">
 
                 <h1>
-                    Sales Management
+                    Purchase Management
                 </h1>
 
                 <p>
-                    Record product sales and monitor
-                    sales transactions.
+                    Record supplier purchases and monitor
+                    incoming inventory stock.
                 </p>
 
             </div>
@@ -885,7 +834,7 @@
 
 
             <!-- =================================================
-                 SUMMARY CARDS
+                 SUMMARY
             ================================================== -->
 
             <div class="summary-grid">
@@ -894,12 +843,12 @@
                 <div class="summary-card">
 
                     <div class="summary-title">
-                        TOTAL SALES
+                        TOTAL PURCHASES
                     </div>
 
                     <div
-                        class="summary-value"
-                        id="totalSales">
+                        class="summary-value blue"
+                        id="totalPurchases">
 
                         0
 
@@ -911,12 +860,12 @@
                 <div class="summary-card">
 
                     <div class="summary-title">
-                        TOTAL UNITS SOLD
+                        TOTAL QUANTITY
                     </div>
 
                     <div
-                        class="summary-value"
-                        id="totalUnits">
+                        class="summary-value green"
+                        id="totalQuantity">
 
                         0
 
@@ -928,29 +877,12 @@
                 <div class="summary-card">
 
                     <div class="summary-title">
-                        TOTAL REVENUE
+                        TOTAL PURCHASE VALUE
                     </div>
 
                     <div
-                        class="summary-value money-value"
-                        id="totalRevenue">
-
-                        ₹0.00
-
-                    </div>
-
-                </div>
-
-
-                <div class="summary-card">
-
-                    <div class="summary-title">
-                        AVERAGE SALE VALUE
-                    </div>
-
-                    <div
-                        class="summary-value"
-                        id="averageSale">
+                        class="summary-value orange"
+                        id="totalValue">
 
                         ₹0.00
 
@@ -964,119 +896,117 @@
 
 
             <!-- =================================================
-                 ADD SALE FORM
+                 ADD PURCHASE
             ================================================== -->
 
-            <div class="sales-form-card">
+            <div class="form-card">
 
 
-                <h2
-                    class="section-title"
-                    id="formTitle">
+                <div class="form-title">
 
-                    Add Sale
+                    <h3>
+                        Add New Purchase
+                    </h3>
 
-                </h2>
+                    <p>
+                        Enter the product, supplier,
+                        quantity and purchase details.
+                    </p>
 
-
-                <form id="saleForm">
-
-
-                    <div class="form-grid">
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Product ID
-                            </label>
-
-                            <input
-                                type="number"
-                                id="product_id"
-                                min="1"
-                                placeholder="Enter product ID"
-                                required>
-
-                        </div>
+                </div>
 
 
-                        <div class="form-group">
-
-                            <label>
-                                Quantity
-                            </label>
-
-                            <input
-                                type="number"
-                                id="quantity"
-                                min="1"
-                                placeholder="Enter quantity"
-                                required>
-
-                        </div>
+                <form
+                    id="purchaseForm"
+                    class="purchase-form">
 
 
-                        <div class="form-group">
+                    <div class="form-group">
 
-                            <label>
-                                Selling Price
-                            </label>
+                        <label>
+                            Product ID
+                        </label>
 
-                            <input
-                                type="number"
-                                id="selling_price"
-                                min="0"
-                                step="0.01"
-                                placeholder="Enter selling price"
-                                required>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label>
-                                Sale Date
-                            </label>
-
-                            <input
-                                type="date"
-                                id="sale_date"
-                                required>
-
-                        </div>
-
+                        <input
+                            type="number"
+                            id="product_id"
+                            min="1"
+                            placeholder="Product ID"
+                            required>
 
                     </div>
 
 
-                    <div class="form-actions">
+                    <div class="form-group">
 
+                        <label>
+                            Supplier ID
+                        </label>
 
-                        <button
-                            type="submit"
-                            class="primary-button"
-                            id="submitButton">
-
-                            Add Sale
-
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="secondary-button"
-                            id="cancelButton"
-                            onclick="cancelEdit()"
-                            style="display:none;">
-
-                            Cancel
-
-                        </button>
-
+                        <input
+                            type="number"
+                            id="supplier_id"
+                            min="1"
+                            placeholder="Supplier ID"
+                            required>
 
                     </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            id="quantity"
+                            min="1"
+                            placeholder="Quantity"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Purchase Price
+                        </label>
+
+                        <input
+                            type="number"
+                            id="purchase_price"
+                            min="0"
+                            step="0.01"
+                            placeholder="₹ Price"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Purchase Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="purchase_date"
+                            required>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="add-button">
+
+                        + Add Purchase
+
+                    </button>
 
 
                 </form>
@@ -1086,7 +1016,7 @@
 
 
             <!-- =================================================
-                 SALES TABLE
+                 PURCHASE TABLE
             ================================================== -->
 
             <div class="table-card">
@@ -1098,21 +1028,36 @@
                     <div>
 
                         <h3>
-                            Sales Transactions
+                            Purchase Records
                         </h3>
 
                         <span>
-                            Product sales and transaction history
+                            Supplier purchase transaction history
                         </span>
 
                     </div>
 
 
-                    <input
-                        type="text"
-                        class="search-input"
-                        id="searchSales"
-                        placeholder="Search sales...">
+                    <div class="header-actions">
+
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            class="search-input"
+                            placeholder="Search purchases...">
+
+
+                        <button
+                            class="refresh-button"
+                            onclick="loadPurchases()">
+
+                            ↻ Refresh
+
+                        </button>
+
+
+                    </div>
 
                 </div>
 
@@ -1121,7 +1066,7 @@
                 <div class="table-wrapper">
 
 
-                    <table class="sales-table">
+                    <table>
 
 
                         <thead>
@@ -1129,7 +1074,7 @@
                             <tr>
 
                                 <th>
-                                    Sale ID
+                                    Purchase ID
                                 </th>
 
                                 <th>
@@ -1137,23 +1082,23 @@
                                 </th>
 
                                 <th>
+                                    Supplier ID
+                                </th>
+
+                                <th>
                                     Quantity
                                 </th>
 
                                 <th>
-                                    Selling Price
+                                    Purchase Price
                                 </th>
 
                                 <th>
-                                    Total Amount
+                                    Purchase Date
                                 </th>
 
                                 <th>
-                                    Sale Date
-                                </th>
-
-                                <th>
-                                    Actions
+                                    Total Cost
                                 </th>
 
                             </tr>
@@ -1161,7 +1106,8 @@
                         </thead>
 
 
-                        <tbody id="salesTable">
+                        <tbody
+                            id="purchaseTable">
 
                             <tr>
 
@@ -1169,10 +1115,10 @@
                                     colspan="7"
                                     style="
                                         text-align:center;
-                                        padding:35px;
+                                        padding:30px;
                                     ">
 
-                                    Loading sales...
+                                    Loading purchases...
 
                                 </td>
 
@@ -1229,85 +1175,80 @@
     </div>
 
 
-
     <div class="profile-section">
-
 
         <div class="profile-avatar">
             👤
         </div>
 
-
         <h3>
             User
         </h3>
-
 
         <p>
             Inventory System User
         </p>
 
-
     </div>
 
 
-
     <div class="drawer-section">
-
 
         <h4>
             Workspace
         </h4>
 
 
-        <a
-            href="dashboard.html"
-            class="drawer-link">
+        <a href="dashboard.html"
+           class="drawer-link">
 
             📊 Dashboard
 
         </a>
 
 
-        <a
-            href="products.html"
-            class="drawer-link">
+        <a href="products.html"
+           class="drawer-link">
 
             📦 Products
 
         </a>
 
 
-        <a
-            href="suppliers.html"
-            class="drawer-link">
+        <a href="suppliers.html"
+           class="drawer-link">
 
             👥 Suppliers
 
         </a>
 
 
-        <a
-            href="inventory.html"
-            class="drawer-link">
+        <a href="inventory.html"
+           class="drawer-link">
 
             🏬 Inventory
 
         </a>
 
 
-        <a
-            href="sales.html"
-            class="drawer-link">
+        <a href="sales.html"
+           class="drawer-link">
 
             💰 Sales
 
         </a>
 
 
-        <a
-            href="reports.html"
-            class="drawer-link">
+        <a href="purchase.html"
+           class="drawer-link">
+
+            🛒 Purchases
+
+        </a>
+
+
+        <a href="reports.html"
+           class="drawer-link">
 
             📈 Reports
 
@@ -1316,39 +1257,32 @@
     </div>
 
 
-
     <div class="drawer-section">
-
 
         <h4>
             Account
         </h4>
 
 
-        <a
-            href="profile.html"
-            class="drawer-link">
+        <a href="profile.html"
+           class="drawer-link">
 
             👤 My Profile
 
         </a>
 
 
-        <a
-            href="#"
-            class="drawer-link">
+        <a href="#"
+           class="drawer-link">
 
             ⚙ Settings
 
         </a>
 
-
     </div>
 
 
-
     <div class="drawer-section">
-
 
         <button
             class="logout-button"
@@ -1357,7 +1291,6 @@
             🚪 Logout
 
         </button>
-
 
     </div>
 
@@ -1381,17 +1314,6 @@
         "http://127.0.0.1:8000";
 
 
-    let sales =
-        [];
-
-    let editingSaleId =
-        null;
-
-
-    /* =====================================================
-       TOKEN
-    ====================================================== */
-
     const token =
         localStorage.getItem(
             "access_token"
@@ -1406,24 +1328,15 @@
     }
 
 
-    /* =====================================================
-       DEFAULT DATE
-    ====================================================== */
-
-    document.getElementById(
-        "sale_date"
-    ).value =
-        new Date()
-        .toISOString()
-        .split("T")[0];
+    let purchaseData = [];
 
 
 
     /* =====================================================
-       LOAD SALES
+       LOAD PURCHASES
     ====================================================== */
 
-    async function loadSales() {
+    async function loadPurchases() {
 
 
         try {
@@ -1431,7 +1344,7 @@
 
             const response =
                 await fetch(
-                    API + "/sales/",
+                    API + "/purchases/",
                     {
 
                         method: "GET",
@@ -1440,7 +1353,10 @@
 
                             "Authorization":
                                 "Bearer " +
-                                token
+                                token,
+
+                            "Content-Type":
+                                "application/json"
 
                         }
 
@@ -1460,22 +1376,24 @@
             if (!response.ok) {
 
                 throw new Error(
-                    "Failed to load sales"
+                    "Failed to load purchases"
                 );
 
             }
 
 
-            sales =
+            purchaseData =
                 await response.json();
 
 
-            displaySales(
-                sales
+            displayPurchases(
+                purchaseData
             );
 
 
-            updateSummary();
+            updateSummary(
+                purchaseData
+            );
 
 
             updateRefreshStatus();
@@ -1485,18 +1403,33 @@
 
         catch (error) {
 
-
             console.error(
-                "Sales error:",
+                "Purchase error:",
                 error
             );
 
 
-            showMessage(
-                "Unable to load sales. Make sure FastAPI is running.",
-                "error"
-            );
+            document.getElementById(
+                "purchaseTable"
+            ).innerHTML = `
 
+                <tr>
+
+                    <td
+                        colspan="7"
+                        style="
+                            text-align:center;
+                            padding:30px;
+                            color:#c53c3c;
+                        ">
+
+                        Unable to load purchase records.
+
+                    </td>
+
+                </tr>
+
+            `;
 
         }
 
@@ -1505,21 +1438,24 @@
 
 
     /* =====================================================
-       DISPLAY SALES
+       DISPLAY PURCHASES
     ====================================================== */
 
-    function displaySales(data) {
+    function displayPurchases(
+        data
+    ) {
 
 
         const table =
             document.getElementById(
-                "salesTable"
+                "purchaseTable"
             );
 
 
-        if (!data ||
-            data.length === 0) {
-
+        if (
+            !data ||
+            data.length === 0
+        ) {
 
             table.innerHTML = `
 
@@ -1529,11 +1465,10 @@
                         colspan="7"
                         style="
                             text-align:center;
-                            padding:35px;
-                            color:#8994a5;
+                            padding:30px;
                         ">
 
-                        No sales records found.
+                        No purchase records found.
 
                     </td>
 
@@ -1541,55 +1476,55 @@
 
             `;
 
-
             return;
 
         }
 
 
-        let html =
-            "";
+        let html = "";
 
 
         data.forEach(
-            sale => {
+            purchase => {
 
 
                 const quantity =
                     Number(
-                        sale.quantity
-                    ) || 0;
+                        purchase.quantity || 0
+                    );
 
 
-                const sellingPrice =
+                const price =
                     Number(
-                        sale.selling_price
-                    ) || 0;
+                        purchase.purchase_price || 0
+                    );
 
 
                 const total =
-                    quantity *
-                    sellingPrice;
+                    quantity * price;
 
 
                 html += `
 
                     <tr>
 
+                        <td class="id-column">
 
-                        <td class="sale-id">
-
-                            ${sale.sale_id}
+                            ${purchase.purchase_id ?? "-"}
 
                         </td>
-
 
                         <td>
 
-                            ${sale.product_id}
+                            ${purchase.product_id ?? "-"}
 
                         </td>
 
+                        <td>
+
+                            ${purchase.supplier_id ?? "-"}
+
+                        </td>
 
                         <td>
 
@@ -1597,57 +1532,23 @@
 
                         </td>
 
+                        <td>
 
-                        <td class="price">
-
-                            ₹${sellingPrice.toFixed(2)}
+                            ₹${price.toFixed(2)}
 
                         </td>
 
+                        <td>
 
-                        <td class="total">
+                            ${purchase.purchase_date ?? "-"}
+
+                        </td>
+
+                        <td class="amount">
 
                             ₹${total.toFixed(2)}
 
                         </td>
-
-
-                        <td>
-
-                            ${formatDate(
-                                sale.sale_date
-                            )}
-
-                        </td>
-
-
-                        <td>
-
-
-                            <button
-                                class="edit-button"
-                                onclick="editSale(
-                                    ${sale.sale_id}
-                                )">
-
-                                Edit
-
-                            </button>
-
-
-                            <button
-                                class="delete-button"
-                                onclick="deleteSale(
-                                    ${sale.sale_id}
-                                )">
-
-                                Delete
-
-                            </button>
-
-
-                        </td>
-
 
                     </tr>
 
@@ -1665,45 +1566,75 @@
 
 
     /* =====================================================
-       DATE FORMAT
+       UPDATE SUMMARY
     ====================================================== */
 
-    function formatDate(value) {
+    function updateSummary(
+        data
+    ) {
 
 
-        if (!value) {
+        let totalQuantity = 0;
 
-            return "-";
-
-        }
+        let totalValue = 0;
 
 
-        const date =
-            new Date(value);
+        data.forEach(
+            purchase => {
 
 
-        if (isNaN(date)) {
+                const quantity =
+                    Number(
+                        purchase.quantity || 0
+                    );
 
-            return value;
 
-        }
+                const price =
+                    Number(
+                        purchase.purchase_price || 0
+                    );
 
 
-        return date.toLocaleDateString(
-            "en-IN"
+                totalQuantity +=
+                    quantity;
+
+
+                totalValue +=
+                    quantity * price;
+
+            }
         );
+
+
+        document.getElementById(
+            "totalPurchases"
+        ).textContent =
+            data.length;
+
+
+        document.getElementById(
+            "totalQuantity"
+        ).textContent =
+            totalQuantity;
+
+
+        document.getElementById(
+            "totalValue"
+        ).textContent =
+            "₹" +
+            totalValue.toFixed(2);
 
     }
 
 
 
     /* =====================================================
-       ADD / UPDATE SALE
+       ADD PURCHASE
     ====================================================== */
 
     document
         .getElementById(
-            "saleForm"
+            "purchaseForm"
         )
         .addEventListener(
             "submit",
@@ -1713,8 +1644,7 @@
                 event.preventDefault();
 
 
-                const saleData = {
-
+                const purchase = {
 
                     product_id:
                         Number(
@@ -1725,6 +1655,14 @@
                             .value
                         ),
 
+                    supplier_id:
+                        Number(
+                            document
+                            .getElementById(
+                                "supplier_id"
+                            )
+                            .value
+                        ),
 
                     quantity:
                         Number(
@@ -1735,21 +1673,19 @@
                             .value
                         ),
 
-
-                    selling_price:
+                    purchase_price:
                         Number(
                             document
                             .getElementById(
-                                "selling_price"
+                                "purchase_price"
                             )
                             .value
                         ),
 
-
-                    sale_date:
+                    purchase_date:
                         document
                         .getElementById(
-                            "sale_date"
+                            "purchase_date"
                         )
                         .value
 
@@ -1759,39 +1695,13 @@
                 try {
 
 
-                    let url =
-                        API +
-                        "/sales/";
-
-
-                    let method =
-                        "POST";
-
-
-                    if (
-                        editingSaleId
-                    ) {
-
-
-                        url =
-                            API +
-                            "/sales/" +
-                            editingSaleId;
-
-
-                        method =
-                            "PUT";
-
-                    }
-
-
                     const response =
                         await fetch(
-                            url,
+                            API +
+                            "/purchases/",
                             {
 
-                                method:
-                                    method,
+                                method: "POST",
 
                                 headers: {
 
@@ -1806,307 +1716,72 @@
 
                                 body:
                                     JSON.stringify(
-                                        saleData
+                                        purchase
                                     )
 
                             }
                         );
 
 
-                    const data =
+                    const result =
                         await response.json();
+
+
+                    if (
+                        response.status === 401
+                    ) {
+
+                        logout();
+
+                        return;
+
+                    }
 
 
                     if (!response.ok) {
 
-
                         throw new Error(
-                            data.detail ||
-                            "Sale operation failed"
+                            result.detail ||
+                            "Unable to add purchase"
                         );
-
 
                     }
 
 
-                    if (
-                        editingSaleId
-                    ) {
+                    showMessage(
+                        "Purchase added successfully.",
+                        "success"
+                    );
 
 
-                        showMessage(
-                            "Sale updated successfully.",
-                            "success"
-                        );
+                    document
+                        .getElementById(
+                            "purchaseForm"
+                        )
+                        .reset();
 
 
-                    }
-
-                    else {
+                    setToday();
 
 
-                        showMessage(
-                            "Sale added successfully.",
-                            "success"
-                        );
-
-
-                    }
-
-
-                    cancelEdit();
-
-
-                    await loadSales();
+                    await loadPurchases();
 
 
                 }
 
                 catch (error) {
 
-
-                    console.error(
-                        error
-                    );
-
+                    console.error(error);
 
                     showMessage(
                         error.message,
                         "error"
                     );
 
-
                 }
 
-
             }
         );
-
-
-
-    /* =====================================================
-       EDIT SALE
-    ====================================================== */
-
-    function editSale(id) {
-
-
-        const sale =
-            sales.find(
-                record =>
-                Number(
-                    record.sale_id
-                ) === Number(id)
-            );
-
-
-        if (!sale) {
-
-            return;
-
-        }
-
-
-        editingSaleId =
-            id;
-
-
-        document.getElementById(
-            "product_id"
-        ).value =
-            sale.product_id || "";
-
-
-        document.getElementById(
-            "quantity"
-        ).value =
-            sale.quantity || "";
-
-
-        document.getElementById(
-            "selling_price"
-        ).value =
-            sale.selling_price || "";
-
-
-        document.getElementById(
-            "sale_date"
-        ).value =
-            sale.sale_date
-            ? String(
-                sale.sale_date
-            ).substring(0, 10)
-            : "";
-
-
-        document.getElementById(
-            "formTitle"
-        ).textContent =
-            "Edit Sale";
-
-
-        document.getElementById(
-            "submitButton"
-        ).textContent =
-            "Update Sale";
-
-
-        document.getElementById(
-            "cancelButton"
-        ).style.display =
-            "inline-block";
-
-
-        window.scrollTo(
-            {
-                top: 0,
-                behavior: "smooth"
-            }
-        );
-
-
-    }
-
-
-
-    /* =====================================================
-       CANCEL EDIT
-    ====================================================== */
-
-    function cancelEdit() {
-
-
-        editingSaleId =
-            null;
-
-
-        document
-            .getElementById(
-                "saleForm"
-            )
-            .reset();
-
-
-        document.getElementById(
-            "sale_date"
-        ).value =
-            new Date()
-            .toISOString()
-            .split("T")[0];
-
-
-        document.getElementById(
-            "formTitle"
-        ).textContent =
-            "Add Sale";
-
-
-        document.getElementById(
-            "submitButton"
-        ).textContent =
-            "Add Sale";
-
-
-        document.getElementById(
-            "cancelButton"
-        ).style.display =
-            "none";
-
-    }
-
-
-
-    /* =====================================================
-       DELETE SALE
-    ====================================================== */
-
-    async function deleteSale(id) {
-
-
-        const confirmDelete =
-            confirm(
-                "Are you sure you want to delete Sale ID " +
-                id +
-                "?"
-            );
-
-
-        if (!confirmDelete) {
-
-            return;
-
-        }
-
-
-        try {
-
-
-            const response =
-                await fetch(
-                    API +
-                    "/sales/" +
-                    id,
-                    {
-
-                        method:
-                            "DELETE",
-
-                        headers: {
-
-                            "Authorization":
-                                "Bearer " +
-                                token
-
-                        }
-
-                    }
-                );
-
-
-            const data =
-                await response.json();
-
-
-            if (!response.ok) {
-
-
-                throw new Error(
-                    data.detail ||
-                    "Unable to delete sale"
-                );
-
-
-            }
-
-
-            showMessage(
-                "Sale deleted successfully.",
-                "success"
-            );
-
-
-            await loadSales();
-
-
-        }
-
-        catch (error) {
-
-
-            console.error(
-                error
-            );
-
-
-            showMessage(
-                error.message,
-                "error"
-            );
-
-
-        }
-
-    }
 
 
 
@@ -2116,7 +1791,7 @@
 
     document
         .getElementById(
-            "searchSales"
+            "searchInput"
         )
         .addEventListener(
             "input",
@@ -2125,158 +1800,52 @@
 
                 const search =
                     this.value
-                    .toLowerCase()
-                    .trim();
+                    .toLowerCase();
 
 
                 const filtered =
-                    sales.filter(
-                        sale => {
+                    purchaseData.filter(
+                        purchase =>
 
+                            String(
+                                purchase.purchase_id
+                            )
+                            .toLowerCase()
+                            .includes(search)
 
-                            return (
+                            ||
 
-                                String(
-                                    sale.sale_id
-                                )
-                                .includes(
-                                    search
-                                )
+                            String(
+                                purchase.product_id
+                            )
+                            .toLowerCase()
+                            .includes(search)
 
-                                ||
+                            ||
 
-                                String(
-                                    sale.product_id
-                                )
-                                .includes(
-                                    search
-                                )
+                            String(
+                                purchase.supplier_id
+                            )
+                            .toLowerCase()
+                            .includes(search)
 
-                                ||
+                            ||
 
-                                String(
-                                    sale.quantity
-                                )
-                                .includes(
-                                    search
-                                )
+                            String(
+                                purchase.purchase_date
+                            )
+                            .toLowerCase()
+                            .includes(search)
 
-                                ||
-
-                                String(
-                                    sale.selling_price
-                                )
-                                .includes(
-                                    search
-                                )
-
-                                ||
-
-                                String(
-                                    sale.sale_date
-                                )
-                                .includes(
-                                    search
-                                )
-
-                            );
-
-                        }
                     );
 
 
-                displaySales(
+                displayPurchases(
                     filtered
                 );
 
-
             }
         );
-
-
-
-    /* =====================================================
-       SUMMARY
-    ====================================================== */
-
-    function updateSummary() {
-
-
-        const totalSales =
-            sales.length;
-
-
-        let totalUnits =
-            0;
-
-
-        let totalRevenue =
-            0;
-
-
-        sales.forEach(
-            sale => {
-
-
-                const quantity =
-                    Number(
-                        sale.quantity
-                    ) || 0;
-
-
-                const price =
-                    Number(
-                        sale.selling_price
-                    ) || 0;
-
-
-                totalUnits +=
-                    quantity;
-
-
-                totalRevenue +=
-                    quantity *
-                    price;
-
-
-            }
-        );
-
-
-        const averageSale =
-            totalSales > 0
-            ? totalRevenue /
-              totalSales
-            : 0;
-
-
-        document.getElementById(
-            "totalSales"
-        ).textContent =
-            totalSales;
-
-
-        document.getElementById(
-            "totalUnits"
-        ).textContent =
-            totalUnits;
-
-
-        document.getElementById(
-            "totalRevenue"
-        ).textContent =
-            "₹" +
-            totalRevenue.toFixed(2);
-
-
-        document.getElementById(
-            "averageSale"
-        ).textContent =
-            "₹" +
-            averageSale.toFixed(2);
-
-
-    }
 
 
 
@@ -2285,41 +1854,60 @@
     ====================================================== */
 
     function showMessage(
-        message,
+        text,
         type
     ) {
 
 
-        const element =
+        const message =
             document.getElementById(
                 "message"
             );
 
 
-        element.textContent =
-            message;
+        message.textContent =
+            text;
 
 
-        element.className =
+        message.className =
             type === "success"
             ? "success-message"
             : "error-message";
 
 
-        element.style.display =
-            "block";
-
-
         setTimeout(
             function() {
 
-                element.style.display =
+                message.className = "";
+
+                message.style.display =
                     "none";
 
             },
             4000
         );
 
+    }
+
+
+
+    /* =====================================================
+       DATE
+    ====================================================== */
+
+    function setToday() {
+
+
+        const today =
+            new Date()
+            .toISOString()
+            .split("T")[0];
+
+
+        document.getElementById(
+            "purchase_date"
+        ).value =
+            today;
 
     }
 
@@ -2336,7 +1924,8 @@
             "refreshStatus"
         ).textContent =
             "Last updated: " +
-            new Date().toLocaleTimeString(
+            new Date()
+            .toLocaleTimeString(
                 "en-IN"
             );
 
@@ -2345,12 +1934,10 @@
 
 
     /* =====================================================
-       AUTO REFRESH
-       Every 30 seconds
+       AUTO REFRESH EVERY 30 SECONDS
     ====================================================== */
 
     setInterval(function () {window.location.reload();}, 30000);
-
 
 
 
@@ -2453,10 +2040,12 @@
 
 
     /* =====================================================
-       INITIAL LOAD
+       INITIALIZE
     ====================================================== */
 
-    loadSales();
+    setToday();
+
+    loadPurchases();
 
 
 </script>
