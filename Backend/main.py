@@ -2,7 +2,6 @@ from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from modules.auth_routes import router as auth_router
@@ -31,12 +30,6 @@ app.add_middleware(
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_DIR = BASE_DIR / "Frontend"
 
-# Mount the Static Folder
-app.mount(
-    "/static",
-    StaticFiles(directory=str(FRONTEND_DIR / "static")),
-    name="static"
-)
 
 # Configure the Templates Folder
 templates = Jinja2Templates(

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,198 +8,1087 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Create Account</title>
+    <title>Register | Inventory System</title>
 
-    <link rel="stylesheet"
-          href="../static/style.css">
+    <style>
+
+        /* ==========================
+           GENERAL
+        =========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8eece4 0%,
+                    #1a63a4 50%,
+                    #25ebc3 100%
+                );
+
+        }
+
+
+        /* ==========================
+           NAVIGATION BAR
+        =========================== */
+
+        .navbar {
+
+            width: 100%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 15px 45px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f4c81,
+                    #1769d1
+                );
+
+            box-shadow:
+                0 3px 12px
+                rgba(0, 0, 0, 0.18);
+
+        }
+
+
+        .logo h2 {
+
+            color: white;
+
+            font-size: 23px;
+
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            list-style: none;
+
+            gap: 25px;
+
+        }
+
+
+        .nav-links a {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            padding: 8px 12px;
+
+            border-radius: 6px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .nav-links a:hover {
+
+            background: rgba(255,255,255,0.15);
+
+            color: #ffd54f;
+
+        }
+
+
+        /* Active Register */
+
+        .nav-links .active {
+
+            background: #ffffff;
+
+            color: #0f4c81;
+
+        }
+
+
+        .nav-links .active:hover {
+
+            color: #0f4c81;
+
+            background: white;
+
+        }
+
+
+        /* ==========================
+           BACK BUTTON
+        =========================== */
+
+        .top-buttons {
+
+            position: relative;
+
+            z-index: 5;
+
+            padding: 18px 30px;
+
+        }
+
+
+        .top-buttons button {
+
+            background: #2a6bc7;
+
+            color: white;
+
+            padding: 10px 18px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+        }
+
+
+        .top-buttons button:hover {
+
+            background: #0f4c81;
+
+        }
+
+
+        /* ==========================
+           REGISTER PAGE
+        =========================== */
+
+        .register-page {
+
+            width: 100%;
+
+            min-height:
+                calc(100vh - 115px);
+
+            padding: 5px 20px 45px;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        /* Decorative Circle */
+
+        .register-page::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+
+            height: 300px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            top: -120px;
+
+            left: -100px;
+
+        }
+
+
+        .register-page::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+
+            height: 350px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            right: -120px;
+
+            bottom: -150px;
+
+        }
+
+
+        /* ==========================
+           PROJECT TITLE
+        =========================== */
+
+        .register-title {
+
+            position: relative;
+
+            z-index: 2;
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .register-title h1 {
+
+            color: white;
+
+            font-size: 34px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .register-title p {
+
+            color: white;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==========================
+           REGISTER CARD
+        =========================== */
+
+        .register-card {
+
+            position: relative;
+
+            z-index: 3;
+
+            width: 550px;
+
+            max-width: 95%;
+
+            margin: auto;
+
+            padding: 35px 40px;
+
+            background: rgba(255,255,255,0.98);
+
+            border-radius: 20px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.5);
+
+            box-shadow:
+                0 18px 45px
+                rgba(0,0,0,0.20);
+
+        }
+
+
+        .card-heading {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .card-heading .icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            margin: auto;
+
+            margin-bottom: 10px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0f4c81
+                );
+
+            color: white;
+
+            font-size: 23px;
+
+        }
+
+
+        .card-heading h2 {
+
+            color: #0f4c81;
+
+            font-size: 27px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .card-heading p {
+
+            color: #667085;
+
+            font-size: 13px;
+
+        }
+
+
+        /* ==========================
+           INPUT
+        =========================== */
+
+        .input-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            color: #344054;
+
+        }
+
+
+        .input-group input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border:
+                1px solid #d0d5dd;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.3s;
+
+        }
+
+
+        .input-group input:focus {
+
+            border:
+                2px solid #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37,99,235,0.10);
+
+        }
+
+
+        .input-group input::placeholder {
+
+            color: #98a2b3;
+
+        }
+
+
+        /* ==========================
+           REGISTER BUTTON
+        =========================== */
+
+        .register-card button {
+
+            width: 100%;
+
+            margin-top: 8px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0f4c81
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .register-card button:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 7px 18px
+                rgba(37,99,235,0.30);
+
+        }
+
+
+        .register-card button:disabled {
+
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+        }
+
+
+        /* ==========================
+           MESSAGE
+        =========================== */
+
+        #message {
+
+            min-height: 20px;
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* ==========================
+           LOGIN LINK
+        =========================== */
+
+        .register-footer {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid #eaecf0;
+
+            font-size: 13px;
+
+            color: #667085;
+
+        }
+
+
+        .register-footer a {
+
+            color: #0f4c81;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+        }
+
+
+        .register-footer a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ==========================
+           SECURITY
+        =========================== */
+
+        .security-info {
+
+            margin-top: 18px;
+
+            padding: 10px;
+
+            background: #f2f8ff;
+
+            border:
+                1px solid #d8e9ff;
+
+            border-radius: 7px;
+
+            text-align: center;
+
+            color: #475467;
+
+            font-size: 11px;
+
+        }
+
+
+        /* ==========================
+           RESPONSIVE
+        =========================== */
+
+        @media(max-width:700px) {
+
+            .navbar {
+
+                padding: 14px 20px;
+
+                flex-direction: column;
+
+                gap: 10px;
+
+            }
+
+
+            .nav-links {
+
+                gap: 8px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+            }
+
+
+            .register-title h1 {
+
+                font-size: 27px;
+
+            }
+
+
+            .register-card {
+
+                padding: 28px 22px;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-<!-- Navigation -->
 
-<header>
+    <!-- ==========================
+         NAVIGATION BAR
+    =========================== -->
 
-    <nav class="navbar">
+    <header>
 
-        <div class="logo">
-
-            <h1>Inventory System</h1>
-
-        </div>
-
-        <ul class="nav-links">
-
-            <li><a href="index.html">Home</a></li>
-
-            <li><a href="login.html">Login</a></li>
-
-            <li><a href="register.html">Register</a></li>
-
-        </ul>
-
-    </nav>
-
-</header>
+        <nav class="navbar">
 
 
-<!-- Back Button -->
+            <div class="logo">
 
-<div class="top-buttons">
+                <h2>
+                    Inventory System
+                </h2>
 
-    <button onclick="history.back()">
+            </div>
 
-         Back
 
-    </button>
+            <ul class="nav-links">
 
-</div>
+                <li>
 
-<div class="title">
+                    <a href="index.html">
+                        Home
+                    </a>
 
-    <h2>Advanced Inventory & Supplier Management System</h2>
+                </li>
 
-</div>
 
-<!-- Register Container -->
+                <li>
 
-<section class="register-page">
+                    <a href="login.html">
+                        Login
+                    </a>
 
-    <div class="register-title">
+                </li>
 
-        <h3>
 
-            Create Your Account
+                <li>
 
-        </h3>
+                    <a href="register.html"
+                       class="active">
 
-        <p>
+                        Register
 
-            Register to access the
-            Advanced Inventory & Supplier Management System.
+                    </a>
 
-        </p>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ==========================
+         BACK BUTTON
+    =========================== -->
+
+    <div class="top-buttons">
+
+        <button
+            type="button"
+            onclick="history.back()">
+
+            Back
+
+        </button>
 
     </div>
 
 
-    <div class="register-card">
+    <!-- ==========================
+         REGISTER PAGE
+    =========================== -->
 
-        <form id="registerForm">
+    <main class="register-page">
 
-            <div class="input-group">
 
-                <label>
+        <!-- PAGE TITLE -->
 
-                    Full Name
+        <div class="register-title">
 
-                </label>
+            <h1>
+                Create Your Account
+            </h1>
 
-                <input
-                    type="text"
-                    id="full_name"
-                    placeholder="Enter Full Name"
-                    required
-                >
-
-            </div>
-
-            <div class="input-group">
-
-                <label>
-
-                    Username
-
-                </label>
-
-                <input
-                    type="text"
-                    id="username"
-                    placeholder="Enter Username"
-                    required
-                >
-
-            </div>
-
-            <div class="input-group">
-
-                <label>
-
-                    Email
-
-                </label>
-
-                <input
-                    type="email"
-                    id="Email"
-                    placeholder="Enter Email Address"
-                    required
-                >
-
-            </div>
-
-            <div class="input-group">
-
-                <label>
-
-                    Password
-
-                </label>
-
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter Password"
-                    required
-                >
-
-            </div>
-
-            <div class="input-group">
-
-                <label>
-
-                    Confirm Password
-
-                </label>
-
-                <input
-                    type="password"
-                    id="confirm_password"
-                    placeholder="Confirm Password"
-                    required
-                >
-
-            </div>
-
-            <button type="submit">
-
-                Register Account
-
-            </button>
-
-        </form>
-
-        <div class="register-footer">
-
-            Already have an account?
-
-            <a href="login.html">
-
-                Login
-
-            </a>
+            <p>
+                Register to access the
+                Advanced Inventory &
+                Supplier Management System
+            </p>
 
         </div>
 
-    </div>
 
-</section>
+        <!-- ==========================
+             REGISTER CARD
+        =========================== -->
 
-<script src="../static/script.js"></script>
+        <div class="register-card">
+
+
+            <div class="card-heading">
+
+                <div class="icon">
+                    👤
+                </div>
+
+                <h2>
+                    Account Registration
+                </h2>
+
+                <p>
+                    Enter your details to create
+                    a new account
+                </p>
+
+            </div>
+
+
+            <!-- REGISTER FORM -->
+
+            <form id="registerForm">
+
+
+                <!-- USERNAME -->
+
+                <div class="input-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="input-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Confirm your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- REGISTER -->
+
+                <button type="submit">
+
+                    Create Account
+
+                </button>
+
+
+            </form>
+
+
+            <!-- MESSAGE -->
+
+            <div id="message"></div>
+
+
+            <!-- LOGIN LINK -->
+
+            <div class="register-footer">
+
+                Already have an account?
+
+                <a href="login.html">
+
+                    Login
+
+                </a>
+
+            </div>
+
+
+            <!-- SECURITY -->
+
+            <div class="security-info">
+
+                🔒 Your account information is
+                protected by secure authentication.
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+    <!-- ==========================
+         JAVASCRIPT
+    =========================== -->
+
+    <script>
+
+        const registerForm =
+            document.getElementById(
+                "registerForm"
+            );
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        registerForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const username =
+                    document
+                    .getElementById("username")
+                    .value
+                    .trim();
+
+
+                const email =
+                    document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+                const password =
+                    document
+                    .getElementById("password")
+                    .value;
+
+
+                const confirmPassword =
+                    document
+                    .getElementById(
+                        "confirmPassword"
+                    )
+                    .value;
+
+
+                message.textContent = "";
+
+
+                /* Password validation */
+
+                if (
+                    password !==
+                    confirmPassword
+                ) {
+
+                    message.textContent =
+                        "Passwords do not match.";
+
+                    message.style.color =
+                        "red";
+
+                    return;
+
+                }
+
+
+                if (password.length < 6) {
+
+                    message.textContent =
+                        "Password must contain at least 6 characters.";
+
+                    message.style.color =
+                        "red";
+
+                    return;
+
+                }
+
+
+                const button =
+                    registerForm.querySelector(
+                        "button[type='submit']"
+                    );
+
+
+                button.disabled = true;
+
+                button.textContent =
+                    "Creating Account...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "http://127.0.0.1:8000/register",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json"
+
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        username:
+                                            username,
+
+                                        email:
+                                            email,
+
+                                        password:
+                                            password
+
+                                    })
+
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.detail ||
+                            "Registration failed."
+                        );
+
+                    }
+
+
+                    message.textContent =
+                        "Registration successful! Redirecting to login...";
+
+                    message.style.color =
+                        "green";
+
+
+                    registerForm.reset();
+
+
+                    setTimeout(
+                        function() {
+
+                            window.location.href =
+                                "login.html";
+
+                        },
+                        1200
+                    );
+
+
+                }
+
+                catch(error) {
+
+                    console.error(
+                        "Registration Error:",
+                        error
+                    );
+
+
+                    message.textContent =
+                        error.message ||
+                        "Registration failed.";
+
+                    message.style.color =
+                        "red";
+
+
+                    button.disabled =
+                        false;
+
+                    button.textContent =
+                        "Create Account";
+
+                }
+
+            }
+
+        );
+
+    </script>
+
 
 </body>
 
 </html>
-

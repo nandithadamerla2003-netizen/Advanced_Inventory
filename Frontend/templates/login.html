@@ -8,16 +8,851 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Login | Advanced Inventory System</title>
-    <title>User Login</title>
+    <title>Login | Inventory System</title>
 
-    <link rel="stylesheet" href="../static/style.css">
+
+    <style>
+
+        /* ==========================
+           GENERAL
+        =========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8eece4 0%,
+                    #1a63a4 50%,
+                    #25ebc3 100%
+                );
+
+            font-family: Arial, Helvetica, sans-serif;
+        }       
+
+
+        /* ==========================
+           NAVBAR
+        =========================== */
+
+        .navbar {
+
+            width: 100%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f4c81,
+                    #1769d1
+                );
+
+            padding: 15px 50px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0, 0, 0, 0.15);
+
+        }
+
+
+        .logo h2 {
+
+            color: white;
+
+            font-size: 23px;
+
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            list-style: none;
+
+            gap: 25px;
+
+        }
+
+
+        .nav-links a {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .nav-links a:hover {
+
+            color: #ffd54f;
+
+        }
+
+
+        /* ==========================
+           BACK BUTTON
+        =========================== */
+
+        .top-buttons {
+
+            padding: 18px 30px;
+
+        }
+
+
+        .top-buttons button {
+
+            background: #2a6bc7;
+
+            color: white;
+
+            padding: 10px 18px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+
+        }
+
+
+        .top-buttons button:hover {
+
+            background: #1565c0;
+
+        }
+
+
+        /* ==========================
+           LOGIN CONTAINER
+        =========================== */
+
+        .login-container {
+
+            width: 100%;
+
+            min-height:
+                calc(100vh - 145px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        /* ==========================
+           LEFT PANEL
+        =========================== */
+
+        .login-left {
+
+            width: 45%;
+
+            background: transparent;
+
+            color: white;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 50px;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .login-left::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+
+            height: 300px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            top: -100px;
+
+            left: -100px;
+
+        }
+
+
+        .login-left::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+
+            height: 250px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            bottom: -80px;
+
+            right: -70px;
+
+        }
+
+
+        .login-left-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            text-align: center;
+
+        }
+
+
+        .login-left h1 {
+
+            font-size: 42px;
+
+            line-height: 1.3;
+
+            color: white;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .login-left p {
+
+            color: white;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            max-width: 520px;
+
+        }
+
+
+        .system-badge {
+
+            display: inline-block;
+
+            padding: 8px 15px;
+
+            margin-bottom: 20px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.18);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.35);
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        /* ==========================
+           RIGHT PANEL
+        =========================== */
+
+        .login-right {
+
+            width: 55%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 40px;
+
+            background: transparent;
+
+        }
+
+
+        /* ==========================
+           LOGIN CARD
+        =========================== */
+
+        .login-card {
+
+            width: 450px;
+
+            max-width: 100%;
+
+            background: white;
+
+            padding: 42px;
+
+            border-radius: 20px;
+
+            border:
+                1px solid #e1e6ee;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0, 0, 0, 0.18);
+
+        }
+
+
+        /* ==========================
+           LOGIN HEADER
+        =========================== */
+
+        .login-header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .login-icon {
+
+            width: 65px;
+
+            height: 65px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1769d1,
+                    #0f4c81
+                );
+
+            color: white;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 27px;
+
+            box-shadow:
+                0 6px 15px
+                rgba(23,105,209,0.25);
+
+        }
+
+
+        .login-header h2 {
+
+            color: #0f4c81;
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .login-header p {
+
+            color: #667085;
+
+            font-size: 14px;
+
+        }
+
+
+        /* ==========================
+           INPUT GROUP
+        =========================== */
+
+        .input-group {
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+
+            color: #344054;
+
+            font-size: 13px;
+
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .input-wrapper span {
+
+            position: absolute;
+
+            left: 13px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #98a2b3;
+
+            font-size: 15px;
+
+        }
+
+
+        .input-group input {
+
+            width: 100%;
+
+            padding: 13px 14px 13px 40px;
+
+            border:
+                1px solid #d0d5dd;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            color: #101828;
+
+            transition: 0.3s;
+
+            outline: none;
+
+        }
+
+
+        .input-group input:focus {
+
+            border:
+                2px solid #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37,99,235,0.10);
+
+        }
+
+
+        .input-group input::placeholder {
+
+            color: #98a2b3;
+
+        }
+
+
+        /* ==========================
+           OPTIONS
+        =========================== */
+
+        .options {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+
+            font-size: 13px;
+
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #475467;
+
+        }
+
+
+        .remember input {
+
+            width: 15px;
+
+            height: 15px;
+
+            cursor: pointer;
+
+        }
+
+
+        .options a {
+
+            text-decoration: none;
+
+            color: #2563eb;
+
+            font-weight: 600;
+
+        }
+
+
+        .options a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ==========================
+           LOGIN BUTTON
+        =========================== */
+
+        .login-card button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0f4c81
+                );
+
+            color: white;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .login-card button:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 6px 15px
+                rgba(37,99,235,0.25);
+
+        }
+
+
+        .login-card button:disabled {
+
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+        }
+
+
+        /* ==========================
+           MESSAGE
+        =========================== */
+
+        #message {
+
+            text-align: center;
+
+            min-height: 20px;
+
+            margin-top: 18px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* ==========================
+           REGISTER
+        =========================== */
+
+        .register-link {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid #eaecf0;
+
+            color: #667085;
+
+            font-size: 13px;
+
+        }
+
+
+        .register-link a {
+
+            color: #8802b5;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+        }
+
+
+        .register-link a:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ==========================
+           SECURITY INFORMATION
+        =========================== */
+
+        .security-info {
+
+            margin-top: 20px;
+
+            padding: 11px;
+
+            background: #f2f8ff;
+
+            border:
+                1px solid #d8e9ff;
+
+            border-radius: 7px;
+
+            text-align: center;
+
+            color: #475467;
+
+            font-size: 11px;
+
+        }
+
+
+        /* ==========================
+           RESPONSIVE
+        =========================== */
+
+        @media(max-width: 900px) {
+
+            .navbar {
+
+                padding:
+                    14px 20px;
+
+            }
+
+
+            .nav-links {
+
+                gap: 12px;
+
+            }
+
+
+            .login-container {
+
+                flex-direction: column;
+
+            }
+
+
+            .login-left {
+
+                width: 100%;
+
+                min-height: 280px;
+
+                padding: 35px 20px;
+
+            }
+
+
+            .login-left h1 {
+
+                font-size: 30px;
+
+            }
+
+
+            .login-right {
+
+                width: 100%;
+
+                padding: 30px 20px;
+
+            }
+
+        }
+
+
+        @media(max-width: 500px) {
+
+            .navbar {
+
+                flex-direction: column;
+
+                gap: 10px;
+
+            }
+
+
+            .nav-links {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+            }
+
+
+            .login-left {
+
+                min-height: 230px;
+
+            }
+
+
+            .login-left h1 {
+
+                font-size: 25px;
+
+            }
+
+
+            .login-left p {
+
+                font-size: 13px;
+
+            }
+
+
+            .login-card {
+
+                padding: 28px 22px;
+
+            }
+
+
+            .login-header h2 {
+
+                font-size: 25px;
+
+            }
+
+
+            .options {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 10px;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-    <!-- Navigation Bar -->
+
+    <!-- ==========================
+         NAVIGATION
+    =========================== -->
 
     <header>
 
@@ -25,17 +860,32 @@
 
             <div class="logo">
 
-                <h2>Inventory System</h2>
+                <h2>
+                    Inventory System
+                </h2>
 
             </div>
 
+
             <ul class="nav-links">
 
-                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
 
-                <li><a href="login.html">Login</a></li>
+                <li>
+                    <a href="login.html">
+                        Login
+                    </a>
+                </li>
 
-                <li><a href="register.html">Register</a></li>
+                <li>
+                    <a href="register.html">
+                        Register
+                    </a>
+                </li>
 
             </ul>
 
@@ -43,11 +893,16 @@
 
     </header>
 
-    <!-- Back Button -->
+
+    <!-- ==========================
+         BACK BUTTON
+    =========================== -->
 
     <div class="top-buttons">
 
-        <button onclick="history.back()">
+        <button
+            type="button"
+            onclick="history.back()">
 
             Back
 
@@ -55,158 +910,446 @@
 
     </div>
 
-    <!-- Left Side -->
 
-    <div class="login-left">
+    <!-- ==========================
+         LOGIN PAGE
+    =========================== -->
 
-        <h1>
+    <main class="login-container">
 
-            Advanced Inventory &
-            Supplier Management
-            System
 
-        </h1>
+        <!-- LEFT SIDE -->
 
-    <!-- Login Form -->
+        <section class="login-left">
 
-    <div class="login-card">
+            <div class="login-left-content">
 
-        <div class="login-header">
+                <div class="system-badge">
 
-            <h2>
+                    SECURE INVENTORY PLATFORM
 
-                User Login
+                </div>
 
-            </h2>
 
-            <p>
+                <h1>
 
-                Sign in to continue
+                    Advanced Inventory
+                    <br>
 
-            </p>
+                    & Supplier
+                    <br>
 
-        </div>
+                    Management System
 
-        <form id="loginForm">
+                </h1>
 
-            <div class="input-group">
 
-                <label>
+                <p>
 
-                    Email
+                    Manage products, suppliers,
+                    inventory, sales and purchases
+                    through a centralized and secure
+                    management platform.
 
-                </label>
-
-                <input
-                    type="email"
-                    id="Email"
-                    placeholder="Enter your Email"
-                    required
-                >
+                </p>
 
             </div>
 
-            <div class="input-group">
+        </section>
 
-                <label>
 
-                    Password
+        <!-- RIGHT SIDE -->
 
-                </label>
+        <section class="login-right">
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    required
-                >
+
+            <div class="login-card">
+
+
+                <!-- LOGIN HEADER -->
+
+                <div class="login-header">
+
+
+                    <div class="login-icon">
+
+                        🔐
+
+                    </div>
+
+
+                    <h2>
+
+                        Welcome Back
+
+                    </h2>
+
+
+                    <p>
+
+                        Sign in to access your
+                        inventory dashboard
+
+                    </p>
+
+
+                </div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form id="loginForm">
+
+
+                    <!-- USERNAME -->
+
+                    <div class="input-group">
+
+                        <label for="username">
+
+                            Username
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span>👤</span>
+
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="Enter your username"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="password">
+
+                            Password
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span>🔒</span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="options">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="rememberMe"
+                            >
+
+                            Remember me
+
+                        </label>
+
+
+                        <a href="#">
+
+                            Forgot Password?
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit">
+
+                        Login
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- MESSAGE -->
+
+                <div id="message"></div>
+
+
+                <!-- REGISTER -->
+
+                <div class="register-link">
+
+                    Don't have an account?
+
+                    <a href="register.html">
+
+                        Create Account
+
+                    </a>
+
+                </div>
+
+
+                <!-- SECURITY -->
+
+                <div class="security-info">
+
+                    🔒 Your login session is
+                    protected using secure
+                    authentication.
+
+                </div>
+
 
             </div>
 
-            <div class="options">
+        </section>
 
-                <label>
 
-                    <input type="checkbox">
+    </main>
 
-                    Remember Me
 
-                </label>
+    <!-- ==========================
+         LOGIN JAVASCRIPT
+    =========================== -->
 
-                <a href="*">
-
-                    Forgot Password?
-
-                </a>
-
-            </div>
-
-            <button type="submit">
-
-                Login
-
-            </button>
-
-        </form>
-
-        <p id="message"></p>
-
-        <div class="register-link">
-
-            Don't have an account?
-
-            <a href="register.html">
-
-                Register
-
-            </a>
-
-        </div>
-
-    </div>
-    
     <script>
 
-    document
-    .getElementById("loginForm")
-    .addEventListener("submit", login);
-
-    async function login(e){
-
-        e.preventDefault();
-
-        const Email = document.getElementById("Email").value;
-        const password = document.getElementById("password").value;
-
-        try {
-            const response = await fetch(
-                "http://127.0.0.1:8000/auth/login",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        Email,
-                        password
-                    })
-                }
+        const loginForm =
+            document.getElementById(
+                "loginForm"
             );
 
-            const data = await response.json();
+        const message =
+            document.getElementById(
+                "message"
+            );
 
-            if (response.ok) {
-                localStorage.setItem("access_token", data.access_token);
-                alert("Login Successful");
-                window.location.href = "dashboard.html";
-            } else {
-                document.getElementById("message").innerHTML = data.detail || "Login failed.";
+
+        loginForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const username =
+                    document
+                    .getElementById("username")
+                    .value
+                    .trim();
+
+
+                const password =
+                    document
+                    .getElementById("password")
+                    .value;
+
+
+                const loginButton =
+                    loginForm.querySelector(
+                        "button[type='submit']"
+                    );
+
+
+                message.textContent = "";
+
+
+                if (
+                    !username ||
+                    !password
+                ) {
+
+                    message.textContent =
+                        "Please enter username and password.";
+
+                    message.style.color =
+                        "#c53c3c";
+
+                    return;
+
+                }
+
+
+                loginButton.disabled =
+                    true;
+
+                loginButton.textContent =
+                    "Signing in...";
+
+
+                try {
+
+
+                    const formData =
+                        new URLSearchParams();
+
+
+                    formData.append(
+                        "username",
+                        username
+                    );
+
+
+                    formData.append(
+                        "password",
+                        password
+                    );
+
+
+                    const response =
+                        await fetch(
+                            "http://127.0.0.1:8000/login",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/x-www-form-urlencoded"
+
+                                },
+
+                                body:
+                                    formData
+
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.detail ||
+                            "Invalid username or password."
+                        );
+
+                    }
+
+
+                    /* ==========================
+                       SAVE TOKEN
+                    =========================== */
+
+                    if (data.access_token) {
+
+                        localStorage.setItem(
+                            "access_token",
+                            data.access_token
+                        );
+
+                    }
+
+
+                    /* SAVE USER INFORMATION */
+
+                    localStorage.setItem(
+                        "username",
+                        username
+                    );
+
+
+                    if (data.email) {
+
+                        localStorage.setItem(
+                            "email",
+                            data.email
+                        );
+
+                    }
+
+
+                    if (data.role) {
+
+                        localStorage.setItem(
+                            "user_role",
+                            data.role
+                        );
+
+                    }
+
+
+                    /* SUCCESS */
+
+                    message.textContent =
+                        "Login successful. Redirecting...";
+
+                    message.style.color =
+                        "#16865a";
+
+
+                    setTimeout(
+                        function() {
+
+                            window.location.href =
+                                "dashboard.html";
+
+                        },
+                        800
+                    );
+
+
+                }
+
+                catch(error) {
+
+                    console.error(
+                        "Login Error:",
+                        error
+                    );
+
+
+                    message.textContent =
+                        error.message ||
+                        "Login failed.";
+
+                    message.style.color =
+                        "#c53c3c";
+
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Login";
+
+                }
+
             }
-        } catch (error) {
-            document.getElementById("message").innerHTML = "Unable to connect to server.";
-            console.error(error);
-        }
-    }
+
+        );
 
     </script>
 

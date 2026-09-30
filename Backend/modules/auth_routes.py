@@ -5,7 +5,6 @@ from auth import create_access_token, get_current_user
 from schemas import Register
 
 router = APIRouter(
-    prefix="/auth",
     tags=["Authentication"]
 )
 

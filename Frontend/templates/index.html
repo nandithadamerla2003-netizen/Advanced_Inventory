@@ -8,178 +8,813 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>
-        Advanced Inventory & Supplier Management System
-    </title>
-
-    <link rel="stylesheet"
-          href="../static/style.css">
-
+    <title>Advanced Inventory & Supplier Management System</title>
 
     <style>
 
-        /* =========================================
-           PROFILE LOGO - TOP RIGHT
-           ========================================= */
+        /* =====================================================
+           GLOBAL
+        ===================================================== */
 
-        .profile-top {
-
-            position: fixed;
-
-            top: 5px;
-
-            right: 10px;
-
-            z-index: 9999;
-
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
         }
 
-        .profile-logo {
+        body {
+            min-height: 100vh;
+            background: 
+                    linear-gradient(
+                    135deg,
+                    #8eece4 0%,
+                    #409fd6 10%,
+                    #25ebc3 100%
+                );
+            color: #172033;
+        }
 
-            width: 45px;
+        a {
+            text-decoration: none;
+        }
 
-            height: 45px;
+
+        /* =====================================================
+           NAVIGATION BAR
+        ===================================================== */
+
+        .topbar {
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 30px;
+
+            background: #0f4c81;
+
+            border-bottom: 3px solid #083b63;
+
+            box-shadow:
+                0 4px 12px rgba(15, 76, 129, 0.25);
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+
+        /* =====================================================
+           BRAND
+        ===================================================== */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #ffffff;
+            color: #000408;
+
+            border-radius: 8px;
+
+            font-size: 20px;
+            font-weight: bold;
+
+            box-shadow:
+                0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .brand-text h2 {
+            color: #ffffff;
+            font-size: 15px;
+            letter-spacing: .5px;
+        }
+
+        .brand-text span {
+            color: #031525;
+            font-size: 8px;
+            letter-spacing: 1.5px;
+        }
+
+
+        /* =====================================================
+           NAVIGATION LINKS
+        ===================================================== */
+
+        .top-nav {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .top-nav a {
+            color: #ffffff;
+
+            font-size: 11px;
+            font-weight: 600;
+
+            padding: 9px 9px;
+
+            border-radius: 5px;
+
+            transition: .2s;
+        }
+
+        .top-nav a:hover {
+            background: #17639d;
+            box-shadow: inset 0 -2px 0 #ffffff;
+        }
+
+
+        /* =====================================================
+           USER AREA
+        ===================================================== */
+
+        .user-area {
+            display: flex;
+            align-items: center;
+        }
+
+        #authArea {
+            display: flex;
+            gap: 7px;
+        }
+
+        .auth-btn {
+            padding: 8px 14px;
+
+            border-radius: 5px;
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .login {
+            color: #ffffff;
+
+            border: 1px solid #ffffff;
+
+            background: transparent;
+        }
+
+        .login:hover {
+            background: #ffffff;
+            color: #0f4c81;
+        }
+
+        .register {
+            color: #0f4c81;
+            background: #ffffff;
+
+            border: 1px solid #ffffff;
+        }
+
+        .register:hover {
+            background: #eaf3fa;
+        }
+
+
+        /* =====================================================
+           PROFILE
+        ===================================================== */
+
+        .profile-area {
+            display: none;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .profile-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: #ffffff;
+        }
+
+        .profile-circle {
+            width: 38px;
+            height: 38px;
 
             border-radius: 50%;
 
-            background-color: white;
-
-            border: 2px solid #333;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
-            text-decoration: none;
+            background: #ffffff;
+            color: #010e19;
 
-            font-size: 23px;
+            border: 2px solid #d9e9f5;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .profile-name {
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .logout {
+            border: 1px solid #ffffff;
+
+            background: transparent;
+
+            color: #ffffff;
+
+            padding: 7px 10px;
+
+            border-radius: 5px;
 
             cursor: pointer;
 
-            box-shadow: 0 3px 10px rgba(0,0,0,0.20);
-
-            transition: 0.3s;
-
+            font-size: 9px;
+            font-weight: 600;
         }
 
-        .profile-logo:hover {
-
-            transform: scale(1.1);
-
+        .logout:hover {
+            background: #c0392b;
+            border-color: #c0392b;
         }
 
 
-        /* =========================================
-           LOGIN AND REGISTER BUTTONS
-           ========================================= */
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
 
-        .auth-buttons {
+        .back-container {
+            max-width: 1450px;
 
-            display: flex;
+            margin: 18px auto 0;
 
-            justify-content: center;
-
-            align-items: center;
-
-            gap: 15px;
-
-            margin-top: 25px;
-
+            padding: 0 40px;
         }
 
+        .back-button {
+            background: #0f4c81;
 
-        .auth-buttons a {
+            color: #ffffff;
 
-            display: inline-block;
+            border: 1px solid #083b63;
 
-            padding: 12px 30px;
+            padding: 10px 18px;
 
             border-radius: 6px;
 
-            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
 
-            font-size: 16px;
+            cursor: pointer;
 
-            font-weight: bold;
+            box-shadow:
+                0 3px 8px
+                rgba(15, 76, 129, 0.18);
 
-            transition: 0.3s;
+            transition: .2s;
+        }
 
+        .back-button:hover {
+            background: #17639d;
+
+            transform: translateX(-2px);
+
+            box-shadow:
+                0 5px 12px
+                rgba(15, 76, 129, 0.25);
         }
 
 
-        /* Login */
+        /* =====================================================
+           MAIN
+        ===================================================== */
 
-        .login-button {
+        .main {
+            max-width: 1450px;
 
-            background-color: #1379de;
+            margin: auto;
 
-            color: white;
-
+            padding: 28px 40px 50px;
         }
 
 
-        /* Register */
+        /* =====================================================
+           SYSTEM HEADER
+        ===================================================== */
 
-        .register-button {
+        .system-header {
+            display: flex;
 
-            background-color: #0ee42e;
+            justify-content: space-between;
 
-            color: white;
+            align-items: flex-end;
 
+            margin-bottom: 25px;
+        }
+
+        .system-title h1 {
+            color: #ffffff;
+
+            font-size: 28px;
+
+            margin-bottom: 7px;
+        }
+
+        .system-title p {
+            color: #ffffff;
+
+            font-size: 13px;
+        }
+
+        .system-time {
+            text-align: right;
+        }
+
+        .system-time span {
+            display: block;
+
+            color: #030d1f;
+
+            font-size: 8px;
+
+            letter-spacing: 1px;
+        }
+
+        #clock {
+            color: #032039;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            margin-top: 5px;
         }
 
 
-        /* Hover */
+        /* =====================================================
+           STATUS CARDS
+        ===================================================== */
 
-        .auth-buttons a:hover {
+        .status-strip {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 14px;
+
+            margin-bottom: 28px;
+        }
+
+        .status-card {
+            background: #f4f9fd;
+
+            border: 1px solid #9fc4df;
+
+            border-left: 5px solid #0f4c81;
+
+            border-radius: 8px;
+
+            padding: 17px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow:
+                0 4px 12px
+                rgba(15, 76, 129, 0.10);
+
+            transition: .2s;
+        }
+
+        .status-card:hover {
+            border-color: #0f4c81;
+
+            box-shadow:
+                0 7px 18px
+                rgba(15, 76, 129, 0.16);
 
             transform: translateY(-2px);
+        }
 
-            opacity: 0.85;
+        .status-info span {
+            display: block;
 
+            color: #000814;
+
+            font-size: 8px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 6px;
+        }
+
+        .status-info strong {
+            color: #344054;
+
+            font-size: 13px;
+        }
+
+        .status-light {
+            width: 9px;
+            height: 9px;
+
+            background: #20a66a;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 7px
+                rgba(32, 166, 106, .45);
         }
 
 
-        /* =========================================
-           MOBILE
-           ========================================= */
+        /* =====================================================
+           SECTION TITLE
+        ===================================================== */
 
-        @media (max-width: 700px) {
+        .section-title {
+            display: flex;
 
-            .profile-top {
+            align-items: center;
 
-                top: 8px;
+            gap: 9px;
 
-                right: 8px;
+            margin-bottom: 15px;
+        }
 
+        .section-title .line {
+            width: 4px;
+
+            height: 19px;
+
+            background: #0f4c81;
+
+            border-radius: 3px;
+        }
+
+        .section-title h2 {
+            color: #031b31;
+
+            font-size: 15px;
+
+            letter-spacing: .3px;
+        }
+
+        .section-title span {
+            margin-left: auto;
+
+            color: #010c1e;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           MANAGEMENT MODULES
+        ===================================================== */
+
+        .module-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+        }
+
+        .module {
+            background: #ffffff;
+
+            border: 1px solid #a9c7df;
+
+            border-top: 4px solid #0f4c81;
+
+            border-radius: 8px;
+
+            padding: 22px;
+
+            min-height: 175px;
+
+            transition: .25s;
+
+            box-shadow:
+                0 4px 14px
+                rgba(15, 76, 129, 0.08);
+        }
+
+        .module:hover {
+            transform: translateY(-4px);
+
+            border-color: #0f4c81;
+
+            box-shadow:
+                0 9px 24px
+                rgba(15, 76, 129, 0.18);
+        }
+
+        .module-top {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 16px;
+        }
+
+        .module-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 7px;
+
+            background: #e8f2fa;
+
+            color: #010e19;
+
+            border: 1px solid #b6d1e5;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+        .module-code {
+            color: #020d21;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+        }
+
+        .module h3 {
+            color: #1d2939;
+
+            font-size: 15px;
+
+            margin-bottom: 8px;
+        }
+
+        .module p {
+            color: #667085;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        .module-link {
+            display: inline-block;
+
+            margin-top: 14px;
+
+            color: #0f4c81;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+        .module-link:hover {
+            color: #17639d;
+
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           LOWER PANELS
+        ===================================================== */
+
+        .lower-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr;
+
+            gap: 15px;
+        }
+
+        .panel {
+            background: #ffffff;
+
+            border: 1px solid #a9c7df;
+
+            border-top: 4px solid #0f4c81;
+
+            border-radius: 8px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 4px 14px
+                rgba(15, 76, 129, 0.08);
+        }
+
+
+        /* =====================================================
+           TECHNOLOGY
+        ===================================================== */
+
+        .tech-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 10px;
+        }
+
+        .tech {
+            padding: 14px;
+
+            background: #f1f7fc;
+
+            border: 1px solid #c0d7e8;
+
+            border-left: 3px solid #0f4c81;
+
+            border-radius: 6px;
+
+            transition: .2s;
+        }
+
+        .tech:hover {
+            background: #e7f2fa;
+
+            border-color: #0f4c81;
+        }
+
+        .tech span {
+            display: block;
+
+            color: #98a2b3;
+
+            font-size: 8px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 6px;
+        }
+
+        .tech strong {
+            color: #344054;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           SYSTEM INFORMATION
+        ===================================================== */
+
+        .info-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 12px 0;
+
+            border-bottom:
+                1px solid #edf0f3;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-row span {
+            color: #667085;
+
+            font-size: 10px;
+        }
+
+        .info-row strong {
+            color: #344054;
+
+            font-size: 10px;
+        }
+
+        .online {
+            color: #15945d !important;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            border-top:
+                1px solid #dce3eb;
+
+            padding: 20px;
+
+            text-align: center;
+
+            color: #98a2b3;
+
+            font-size: 9px;
+
+            background: #f8fafc;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .top-nav {
+                display: none;
             }
 
-            .profile-logo {
+            .module-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
 
-                width: 40px;
 
-                height: 40px;
+        @media (max-width: 750px) {
 
-                font-size: 20px;
-
+            .topbar {
+                padding: 0 15px;
             }
 
-            .auth-buttons {
+            .brand-text {
+                display: none;
+            }
 
+            .back-container {
+                padding: 0 15px;
+            }
+
+            .main {
+                padding:
+                    25px 15px 40px;
+            }
+
+            .system-header {
                 flex-direction: column;
 
+                align-items: flex-start;
+
+                gap: 12px;
             }
 
-            .auth-buttons a {
-
-                width: 180px;
-
-                text-align: center;
-
+            .system-time {
+                text-align: left;
             }
 
+            .status-strip {
+                grid-template-columns: 1fr;
+            }
+
+            .module-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .lower-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-list {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-name {
+                display: none;
+            }
         }
 
     </style>
@@ -190,188 +825,667 @@
 <body>
 
 
-    <!-- =========================================
-         PROFILE LOGO
-         ========================================= -->
+<!-- =====================================================
+     NAVIGATION BAR
+===================================================== -->
 
-    <div class="profile-top">
+<header class="topbar">
 
-        <a href="profile.html"
-           class="profile-logo"
-           title="My Profile">
 
-            👤
+    <div class="brand">
 
-        </a>
+        <div class="brand-icon">
+            ⬡
+        </div>
+
+        <div class="brand-text">
+
+            <h2>
+                ADVANCED INVENTORY
+            </h2>
+
+            <span>
+                SUPPLIER MANAGEMENT SYSTEM
+            </span>
+
+        </div>
 
     </div>
 
 
+    <!-- NAVIGATION -->
 
-    <!-- =========================================
-         NAVIGATION BAR
-         ========================================= -->
+    <nav class="top-nav">
 
-    <header>
+        <a href="index.html">
+            Home
+        </a>
 
-        <nav class="navbar">
+        <a href="dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="products.html">
+            Products
+        </a>
+
+        <a href="suppliers.html">
+            Suppliers
+        </a>
+
+        <a href="inventory.html">
+            Inventory
+        </a>
+
+        <a href="sales.html">
+            Sales
+        </a>
+
+        <a href="purchases.html">
+            Purchases
+        </a>
+
+        <a href="reports.html">
+            Reports
+        </a>
+
+    </nav>
 
 
-            <!-- Logo -->
+    <!-- USER AREA -->
 
-            <div class="logo">
+    <div class="user-area">
+
+
+        <!-- LOGIN / REGISTER -->
+
+        <div id="authArea">
+
+            <a
+                href="login.html"
+                class="auth-btn login">
+
+                LOGIN
+
+            </a>
+
+            <a
+                href="register.html"
+                class="auth-btn register">
+
+                REGISTER
+
+            </a>
+
+        </div>
+
+
+        <!-- PROFILE / LOGOUT -->
+
+        <div
+            class="profile-area"
+            id="profileArea">
+
+
+            <a
+                href="profile.html"
+                class="profile-link">
+
+
+                <div
+                    class="profile-circle"
+                    id="profileCircle">
+
+                    U
+
+                </div>
+
+
+                <span
+                    class="profile-name"
+                    id="profileName">
+
+                    User
+
+                </span>
+
+
+            </a>
+
+
+            <button
+                class="logout"
+                onclick="logout()">
+
+                LOGOUT
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     BACK BUTTON
+===================================================== -->
+
+<div class="back-container">
+
+    <button
+        class="back-button"
+        onclick="history.back()">
+
+        Back
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- SYSTEM HEADER -->
+
+    <section class="system-header">
+
+
+        <div class="system-title">
+
+            <h1>
+                System Control Center
+            </h1>
+
+            <p>
+                Advanced inventory and supplier
+                management platform
+            </p>
+
+        </div>
+
+
+        <div class="system-time">
+
+            <span>
+                SYSTEM TIME
+            </span>
+
+            <div id="clock">
+                Loading...
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         STATUS
+    ================================================== -->
+
+    <section class="status-strip">
+
+
+        <div class="status-card">
+
+            <div class="status-info">
+
+                <span>
+                    API SERVICE
+                </span>
+
+                <strong>
+                    FastAPI
+                </strong>
+
+            </div>
+
+            <div class="status-light"></div>
+
+        </div>
+
+
+        <div class="status-card">
+
+            <div class="status-info">
+
+                <span>
+                    DATABASE
+                </span>
+
+                <strong>
+                    MySQL 8.0
+                </strong>
+
+            </div>
+
+            <div class="status-light"></div>
+
+        </div>
+
+
+        <div class="status-card">
+
+            <div class="status-info">
+
+                <span>
+                    AUTHENTICATION
+                </span>
+
+                <strong>
+                    JWT
+                </strong>
+
+            </div>
+
+            <div class="status-light"></div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         MANAGEMENT MODULES
+    ================================================== -->
+
+    <div class="section-title">
+
+        <div class="line"></div>
+
+        <h2>
+            MANAGEMENT MODULES
+        </h2>
+
+        <span>
+            06 MODULES
+        </span>
+
+    </div>
+
+
+    <section class="module-grid">
+
+
+        <!-- PRODUCTS -->
+
+        <div class="module">
+
+            <div class="module-top">
+
+                <div class="module-icon">
+                    ▣
+                </div>
+
+                <div class="module-code">
+                    MOD-001
+                </div>
+
+            </div>
+
+            <h3>
+                Product Management
+            </h3>
+
+            <p>
+                Create, update and manage
+                product records and pricing.
+            </p>
+
+            <a
+                href="products.html"
+                class="module-link">
+
+                ACCESS MODULE →
+
+            </a>
+
+        </div>
+
+
+        <!-- SUPPLIERS -->
+
+        <div class="module">
+
+            <div class="module-top">
+
+                <div class="module-icon">
+                    ◈
+                </div>
+
+                <div class="module-code">
+                    MOD-002
+                </div>
+
+            </div>
+
+            <h3>
+                Supplier Management
+            </h3>
+
+            <p>
+                Manage supplier information,
+                contacts and relationships.
+            </p>
+
+            <a
+                href="suppliers.html"
+                class="module-link">
+
+                ACCESS MODULE →
+
+            </a>
+
+        </div>
+
+
+        <!-- INVENTORY -->
+
+        <div class="module">
+
+            <div class="module-top">
+
+                <div class="module-icon">
+                    ▥
+                </div>
+
+                <div class="module-code">
+                    MOD-003
+                </div>
+
+            </div>
+
+            <h3>
+                Inventory Control
+            </h3>
+
+            <p>
+                Monitor stock quantities and
+                identify low-stock conditions.
+            </p>
+
+            <a
+                href="inventory.html"
+                class="module-link">
+
+                ACCESS MODULE →
+
+            </a>
+
+        </div>
+
+
+        <!-- SALES -->
+
+        <div class="module">
+
+            <div class="module-top">
+
+                <div class="module-icon">
+                    $
+                </div>
+
+                <div class="module-code">
+                    MOD-004
+                </div>
+
+            </div>
+
+            <h3>
+                Sales Processing
+            </h3>
+
+            <p>
+                Record sales transactions and
+                monitor sales activity.
+            </p>
+
+            <a
+                href="sales.html"
+                class="module-link">
+
+                ACCESS MODULE →
+
+            </a>
+
+        </div>
+
+
+        <!-- PURCHASES -->
+
+        <div class="module">
+
+            <div class="module-top">
+
+                <div class="module-icon">
+                    +
+                </div>
+
+                <div class="module-code">
+                    MOD-005
+                </div>
+
+            </div>
+
+            <h3>
+                Purchase Processing
+            </h3>
+
+            <p>
+                Manage purchase transactions
+                and supplier stock updates.
+            </p>
+
+            <a
+                href="purchases.html"
+                class="module-link">
+
+                ACCESS MODULE →
+
+            </a>
+
+        </div>
+
+
+        <!-- REPORTS -->
+
+        <div class="module">
+
+            <div class="module-top">
+
+                <div class="module-icon">
+                    ≡
+                </div>
+
+                <div class="module-code">
+                    MOD-006
+                </div>
+
+            </div>
+
+            <h3>
+                Analytics & Reports
+            </h3>
+
+            <p>
+                View inventory, sales and
+                purchase reports.
+            </p>
+
+            <a
+                href="reports.html"
+                class="module-link">
+
+                ACCESS MODULE →
+
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =================================================
+         LOWER PANELS
+    ================================================== -->
+
+    <section class="lower-grid">
+
+
+        <!-- TECHNOLOGY -->
+
+        <div class="panel">
+
+
+            <div class="section-title">
+
+                <div class="line"></div>
 
                 <h2>
-                    Inventory System
+                    SYSTEM TECHNOLOGY
                 </h2>
 
             </div>
 
 
-
-            <!-- Navigation Links -->
-
-            <ul class="nav-links">
+            <div class="tech-list">
 
 
-                <li>
-                    <a href="index.html">
-                        Home
-                    </a>
-                </li>
+                <div class="tech">
+
+                    <span>
+                        Backend Framework
+                    </span>
+
+                    <strong>
+                        FastAPI / Python
+                    </strong>
+
+                </div>
 
 
-                <li>
-                    <a href="login.html">
-                        Login
-                    </a>
-                </li>
+                <div class="tech">
+
+                    <span>
+                        Database
+                    </span>
+
+                    <strong>
+                        MySQL 8.0
+                    </strong>
+
+                </div>
 
 
-                <li>
-                    <a href="register.html">
-                        Register
-                    </a>
-                </li>
+                <div class="tech">
+
+                    <span>
+                        Authentication
+                    </span>
+
+                    <strong>
+                        JWT / Bearer Token
+                    </strong>
+
+                </div>
 
 
-                <li>
-                    <a href="dashboard.html">
-                        Dashboard
-                    </a>
-                </li>
+                <div class="tech">
+
+                    <span>
+                        Frontend
+                    </span>
+
+                    <strong>
+                        HTML / CSS / JavaScript
+                    </strong>
+
+                </div>
 
 
-                <li>
-                    <a href="products.html">
-                        Products
-                    </a>
-                </li>
+            </div>
+
+        </div>
 
 
-                <li>
-                    <a href="suppliers.html">
-                        Suppliers
-                    </a>
-                </li>
+        <!-- SYSTEM INFORMATION -->
+
+        <div class="panel">
 
 
-                <li>
-                    <a href="inventory.html">
-                        Inventory
-                    </a>
-                </li>
+            <div class="section-title">
+
+                <div class="line"></div>
+
+                <h2>
+                    SYSTEM INFORMATION
+                </h2>
+
+            </div>
 
 
-                <li>
-                    <a href="sales.html">
-                        Sales
-                    </a>
-                </li>
+            <div class="info-row">
+
+                <span>
+                    API Endpoint
+                </span>
+
+                <strong>
+                    127.0.0.1:8000
+                </strong>
+
+            </div>
 
 
-                <li>
-                    <a href="reports.html">
-                        Reports
-                    </a>
-                </li>
+            <div class="info-row">
 
-                <li>
-                    <a href="purchases.html">Purchases</a>
-                </li>
+                <span>
+                    API Status
+                </span>
 
+                <strong class="online">
+                    ● ONLINE
+                </strong>
 
-            </ul>
-
-        </nav>
-
-    </header>
+            </div>
 
 
+            <div class="info-row">
 
-    <!-- =========================================
-         BACK BUTTON
-         ========================================= -->
+                <span>
+                    Authentication
+                </span>
 
-    <div class="top-buttons">
+                <strong>
+                    JWT
+                </strong>
 
-        <button onclick="history.back()">
-
-            Back
-
-        </button>
-
-    </div>
+            </div>
 
 
+            <div class="info-row">
 
-    <!-- =========================================
-         HERO SECTION
-         ========================================= -->
+                <span>
+                    System Version
+                </span>
 
-    <section class="hero">
+                <strong>
+                    1.0
+                </strong>
 
-
-        <h1>
-
-            Advanced Inventory & Supplier
-            Management System
-
-        </h1>
-
-
-        <p>
-
-            Manage Products, Suppliers, Inventory,
-            Sales, Purchases and Reports through a
-            secure web application built using
-            FastAPI, MySQL and JWT Authentication.
-
-        </p>
-
-
-
-        <!-- =====================================
-             LOGIN AND REGISTER
-             ===================================== -->
-
-        <div class="auth-buttons">
-
-
-            <a href="login.html"
-               class="login-button">
-
-                Login
-
-            </a>
-
-
-            <a href="register.html"
-               class="register-button">
-
-                Register
-
-            </a>
+            </div>
 
 
         </div>
@@ -380,238 +1494,192 @@
     </section>
 
 
+</main>
 
-    <!-- =========================================
-         FEATURES SECTION
-         ========================================= -->
 
-    <section class="features">
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
+<footer>
 
-        <!-- Products -->
+    ADVANCED INVENTORY & SUPPLIER MANAGEMENT SYSTEM
 
-        <div class="card">
+    &nbsp; | &nbsp;
 
-            <h3>
-                Products
-            </h3>
+    VERSION 1.0
 
-            <p>
-                Add, Update, View and Delete Products.
-            </p>
+    &nbsp; | &nbsp;
 
-            <a href="products.html">
-                Open
-            </a>
+    © 2026
 
-        </div>
+</footer>
 
 
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
-        <!-- Suppliers -->
+<script>
 
-        <div class="card">
 
-            <h3>
-                Suppliers
-            </h3>
+/* =====================================================
+   CHECK LOGIN STATUS
+===================================================== */
 
-            <p>
-                Manage Supplier Details.
-            </p>
+function checkLoginStatus() {
 
-            <a href="suppliers.html">
-                Open
-            </a>
+    const token =
+        localStorage.getItem("access_token");
 
-        </div>
+    const username =
+        localStorage.getItem("username");
 
 
+    const authArea =
+        document.getElementById("authArea");
 
-        <!-- Inventory -->
+    const profileArea =
+        document.getElementById("profileArea");
 
-        <div class="card">
+    const profileCircle =
+        document.getElementById("profileCircle");
 
-            <h3>
-                Inventory
-            </h3>
+    const profileName =
+        document.getElementById("profileName");
 
-            <p>
-                Monitor Stock and Low Stock Alerts.
-            </p>
 
-            <a href="inventory.html">
-                Open
-            </a>
+    if (token) {
 
-        </div>
+        /* Hide login/register */
 
+        authArea.style.display = "none";
 
 
-        <!-- Sales -->
+        /* Show profile */
 
-        <div class="card">
+        profileArea.style.display = "flex";
 
-            <h3>
-                Sales
-            </h3>
 
-            <p>
-                Record Product Sales.
-            </p>
+        if (username) {
 
-            <a href="sales.html">
-                Open
-            </a>
+            profileName.textContent =
+                username;
 
-        </div>
+            profileCircle.textContent =
+                username
+                    .charAt(0)
+                    .toUpperCase();
 
+        }
 
+    }
 
-        <!-- Purchases -->
+    else {
 
-        <div class="card">
+        /* Show login/register */
 
-            <h3>
-                Purchases
-            </h3>
+        authArea.style.display = "flex";
 
-            <p>
-                Record purchases and automatically
-                update stock.
-            </p>
 
-            <a href="purchases.html">
-                Open
-            </a>
+        /* Hide profile */
 
-        </div>
+        profileArea.style.display = "none";
 
+    }
 
+}
 
-        <!-- Reports -->
 
-        <div class="card">
+/* =====================================================
+   LOGOUT
+===================================================== */
 
-            <h3>
-                Reports
-            </h3>
+function logout() {
 
-            <p>
-                Generate Inventory, Sales and
-                Purchase Reports.
-            </p>
+    localStorage.removeItem(
+        "access_token"
+    );
 
-            <a href="reports.html">
-                Open
-            </a>
+    localStorage.removeItem(
+        "username"
+    );
 
-        </div>
+    localStorage.removeItem(
+        "email"
+    );
 
+    localStorage.removeItem(
+        "user_role"
+    );
 
-    </section>
 
+    window.location.href =
+        "index.html";
+}
 
 
-    <!-- =========================================
-         ABOUT PROJECT
-         ========================================= -->
+/* =====================================================
+   LIVE CLOCK
+===================================================== */
 
-    <section class="about">
+function updateClock() {
 
+    const now = new Date();
 
-        <h2>
-            About the Project
-        </h2>
 
+    const date =
+        now.toLocaleDateString(
+            "en-IN",
+            {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }
+        );
 
-        <p>
 
-            The Advanced Inventory & Supplier Management
-            System is a web-based application designed to
-            manage products, suppliers, inventory, purchases,
-            sales and reports in one centralized system.
+    const time =
+        now.toLocaleTimeString(
+            "en-IN",
+            {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false
+            }
+        );
 
-        </p>
 
+    document.getElementById(
+        "clock"
+    ).textContent =
+        date + " | " + time;
 
-        <p>
+}
 
-            The backend is developed using
-            <strong>FastAPI</strong> and
-            <strong>MySQL</strong>, while the frontend
-            uses <strong>HTML</strong>,
-            <strong>CSS</strong> and
-            <strong>JavaScript</strong>.
 
-        </p>
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-        <p>
+        checkLoginStatus();
 
-            <strong>JWT Authentication</strong> is used
-            to secure protected operations.
+        updateClock();
 
-        </p>
+        setInterval(
+            updateClock,
+            1000
+        );
 
+    }
+);
 
-    </section>
-
-
-
-    <!-- =========================================
-         TECHNOLOGY STACK
-         ========================================= -->
-
-    <section class="about">
-
-
-        <h2>
-            Technology Stack
-        </h2>
-
-
-        <p>
-
-            FastAPI |
-            MySQL |
-            HTML |
-            CSS |
-            JavaScript |
-            JWT |
-            Kafka |
-            Docker |
-            GitHub Actions
-
-        </p>
-
-
-    </section>
-
-
-
-    <!-- =========================================
-         FOOTER
-         ========================================= -->
-
-    <footer>
-
-        <p>
-
-            © 2026 Advanced Inventory & Supplier
-            Management System
-
-        </p>
-
-    </footer>
-
-
-
-    <!-- =========================================
-         MAIN JAVASCRIPT
-         ========================================= -->
-
-    <script src="../static/script.js"></script>
+</script>
 
 
 </body>
