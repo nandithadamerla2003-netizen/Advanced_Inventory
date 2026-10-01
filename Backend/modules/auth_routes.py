@@ -124,14 +124,21 @@ async def login(
     email = None
     pwd = None
 
+    # -------------------------
+    # JSON Login
+    # -------------------------
+
     if "application/json" in content_type:
         body = await request.json()
         email = body.get("Email") or body.get("username")
         pwd = body.get("password")
+
+    # Form Login    
     else:
         email = username
         pwd = password
 
+    # Check Login Fields   
     if not email or not pwd:
         raise HTTPException(
             status_code=422,
@@ -149,7 +156,12 @@ async def login(
         (email, email)
     )
 
-    if db_user is None or not verify_password(
+    if db_user is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid email or password"
+        )
+    if not verify_password(
         pwd,
         db_user["password"]
     ):
@@ -159,6 +171,16 @@ async def login(
             detail="Invalid email or password"
         )
 
+    
+    # Check Role
+    if db_user["role"] not in ["Admin", "User"]:
+
+        raise HTTPException(
+            status_code=403,
+            detail="Invalid user role"
+        )
+
+    # Create JWT
     access_token = create_access_token(
         data={
             "sub": db_user["username"],
@@ -166,9 +188,23 @@ async def login(
         }
     )
 
+    # Return Current User Data
     return {
+
         "access_token": access_token,
-        "token_type": "bearer"
+
+        "token_type": "bearer",
+
+        "user_id": db_user["user_id"],
+
+        "full_name": db_user["full_name"],
+
+        "username": db_user["username"],
+
+        "email": db_user["Email"],
+
+        "role": db_user["role"]
+
     }
 
 # Current Logged-in User
@@ -177,7 +213,45 @@ def current_user(
     user=Depends(get_current_user)
 ):
 
+    username = user["sub"]
+
+
+    query = """
+    SELECT
+        user_id,
+        full_name,
+        Email,
+        username,
+        role
+    FROM users
+    WHERE username = %s
+    """
+
+
+    db_user = fetch_one(
+        query,
+        (username,)
+    )
+
+
+    if db_user is None:
+
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+
     return {
-        "username": user["sub"],
-        "role": user["role"]
+
+        "user_id": db_user["user_id"],
+
+        "full_name": db_user["full_name"],
+
+        "username": db_user["username"],
+
+        "email": db_user["Email"],
+
+        "role": db_user["role"]
+
     }

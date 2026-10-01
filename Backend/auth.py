@@ -9,7 +9,7 @@ from config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 
 
 # JWT Authentication Scheme
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 # Create JWT Access Token
 def create_access_token(data: dict):
