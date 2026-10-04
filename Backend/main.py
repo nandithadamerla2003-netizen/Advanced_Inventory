@@ -36,6 +36,7 @@ templates = Jinja2Templates(
     directory=str(FRONTEND_DIR / "templates")
 )
 
+# Browser displays login/home page
 @app.get("/")
 def home(request: Request):
 
